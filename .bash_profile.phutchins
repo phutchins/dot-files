@@ -11,13 +11,15 @@ export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # ... or force ignoredups and ignorespace
 export HISTCONTROL=ignoreboth
 export EDITOR=vim
-export JAVA_HOME=$(/usr/libexec/java_home)
+#doesn't work on ubuntu?
+#export JAVA_HOME=$(/usr/libexec/java_home)
 
 export AWS_CREDENTIAL_FILE=~/aws/.credentials/aws.credentials
 export AWS_ACCESS_KEY=AKIAJLJDFRSMRGHW24SA
 export AWS_SECRET_KEY=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
 
-export PATH=~/bin:/usr/local/bin:/Users/phutchins/Library/Python/2.7/bin:$PATH
+#make conditional for linux and osx
+export PATH=~/bin:/usr/local/bin:~/.local/bin:/Users/phutchins/Library/Python/2.7/bin:$PATH
 export PATH=/usr/local/git/bin:$PATH
 export PATH=$AWS_AUTO_SCALING_HOME:$PATH
 export PATH=$AWS_CLOUDWATCH_HOME:$PATH
@@ -183,7 +185,11 @@ On_IWhite='\e[0;107m'   # White
 
 # If running interactively, then:
 if [ -f ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh ]; then
-    source ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh
+  export TERM=screen-256color
+  source ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh
+elif [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
+  export TERM=screen-256color
+  source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 else
 	if [ "$PS1" ]; then
 
@@ -194,15 +200,15 @@ else
 		# eval `dircolors -b`
 
 		# some more ls aliases
-	    TYPE=`uname -a|cut -d " " -f 1`
-	    if [ $TYPE == "Linux" ]; then
-		alias ls="ls --color=auto"
+	  TYPE=`uname -a|cut -d " " -f 1`
+	  if [ $TYPE == "Linux" ]; then
+		  alias ls="ls --color=auto"
 		      PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
-	    else
-		    alias ls="ls -F"
-		      PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
-		    export TERM=xterm
-	    fi
+	  else
+		  alias ls="ls -F"
+		  PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
+		  export TERM=xterm
+	  fi
 		if [ -f /etc/bash_completion ]; then
 			. /etc/bash_completion
 		fi
