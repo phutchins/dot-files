@@ -5,36 +5,60 @@ python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" Setting up Vundle - the vim plugin bundler
+    let iCanHazVundle=1
+    let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+    if !filereadable(vundle_readme)
+        echo "Installing Vundle.."
+        echo ""
+        silent !mkdir -p ~/.vim/bundle
+        silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+        let iCanHazVundle=0
+    endif
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
+    Bundle 'gmarik/vundle'
+    "Add your bundles here
+    "Bundle 'Syntastic' "uber awesome syntax and errors highlighter
+    "Bundle 'altercation/vim-colors-solarized' "T-H-E colorscheme
+    "Bundle 'https://github.com/tpope/vim-fugitive' "So awesome, it should be illegal
+    "...All your other bundles...
+    if iCanHazVundle == 0
+        echo "Installing Bundles, please ignore key map error messages"
+        echo ""
+        :BundleInstall
+    endif
+" Setting up Vundle - the vim plugin bundler end
 
-Bundle 'gmarik/vundle'
+    Bundle 'flazz/vim-colorschemes'
+    Bundle 'tpope/vim-fugitive'
+    Bundle 'Lokaltog/vim-easymotion'
+    Bundle 'tpope/vim-rails'
+    Bundle 'tpope/vim-cucumber'
+    Bundle 'tpope/vim-endwise'
+    Bundle 'scrooloose/nerdtree'
+    Bundle 'godlygeek/tabular'
+    Bundle 'kchmck/vim-coffee-script'
+    Bundle 'scrooloose/syntastic'
+    Bundle 'kien/ctrlp.vim'
+    Bundle 'briancollins/vim-jst'
+    Bundle 'nelstrom/vim-visual-star-search'
+    Bundle 'tomasr/molokai'
+    Bundle 'tpope/vim-commentary'
+    Bundle 'tpope/vim-haml'
+    Bundle 'tpope/vim-surround'
+    Bundle 'vim-javascript'
+    Bundle 'vim-ruby/vim-ruby'
+    Bundle 'vim-scripts/HTML-AutoCloseTag'
+    Bundle 'jgdavey/vim-blockle'
+    Bundle 'ngmy/vim-rubocop'
+    Bundle 'rking/ag.vim'
+    Bundle 'nathanaelkane/vim-indent-guides'
+    Bundle 'thoughtbot/vim-rspec'
 
-Bundle 'flazz/vim-colorschemes'
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-cucumber'
-Bundle 'tpope/vim-endwise'
-Bundle 'scrooloose/nerdtree'
-Bundle 'godlygeek/tabular'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'scrooloose/syntastic'
-Bundle 'kien/ctrlp.vim'
-Bundle 'briancollins/vim-jst'
-Bundle 'nelstrom/vim-visual-star-search'
-Bundle 'tomasr/molokai'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-surround'
-Bundle 'vim-javascript'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'vim-scripts/HTML-AutoCloseTag'
-Bundle 'jgdavey/vim-blockle'
-Bundle 'ngmy/vim-rubocop'
-Bundle 'rking/ag.vim'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'thoughtbot/vim-rspec'
+    "set rtp+=~/.vim/bundle/vundle/
+    "call vundle#rc()
+
 
 
 let vimrubocop_config='config/rubocop/rubocop.yml'
