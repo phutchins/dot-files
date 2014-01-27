@@ -20,6 +20,10 @@ bind k select-pane -U
 bind l select-pane -R
 bind h select-pane -L
 
+# Moving windows
+bind-key -n C-S-Left swap-window -t -1
+bind-key -n C-S-Right swap-window -t +1
+
 # Sane scrolling
 set -g mode-mouse on
 
@@ -29,7 +33,7 @@ set -g mode-mouse on
 
 # colors
 setw -g mode-bg black
-set-option -g default-terminal "xterm-256color" #"screen-256color" #"xterm-256color" # "screen-256color"
+set-option -g default-terminal "screen-256color" #"xterm-256color" # "screen-256color"
 set-option -g pane-active-border-fg blue
 
 # Titles (window number, program name, active (or not)
@@ -38,7 +42,7 @@ set-option -g set-titles-string '#H:#S.#I.#P #W #T'
 #set -g status-bg colour240
 
 # disable mouse control by default - change 'off' to 'on' to enable by default.
-setw -g mode-mouse off
+setw -g mode-mouse on
 set-option -g mouse-resize-pane off
 set-option -g mouse-select-pane off
 set-option -g mouse-select-window off
