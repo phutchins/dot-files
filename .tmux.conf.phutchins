@@ -7,12 +7,17 @@ setw -g mode-keys vi
 #bind C-a send-prefix
 
 # force a reload of the config file
-#unbind r
-#bind r source-file ~/.tmux.conf
+unbind r
+bind r source-file ~/.tmux.conf
 
 # quick pane cycling with Ctrl-a
 #unbind ^A
 #bind ^A select-pane -t :.+
+
+# move x clipboard into tmux paste buffer
+bind C-p run "tmux set-buffer \"$(xclip -o)\"; tmux paste-buffer"
+# move tmux copy buffer into x clipboard
+bind C-y run "tmux show-buffer | xclip -i"
 
 # move around panes like in vim (only in tmux 1.6)
 bind j select-pane -D
