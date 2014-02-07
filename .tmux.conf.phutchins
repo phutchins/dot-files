@@ -1,28 +1,50 @@
 # use vi mode
 setw -g mode-keys vi
 
-# remap prefix to Control + a
-#set -g prefix C-a
-#unbind C-b
-#bind C-a send-prefix
-
 # force a reload of the config file
-#unbind r
-#bind r source-file ~/.tmux.conf
+unbind r
+bind r source-file ~/.tmux.conf
 
-# quick pane cycling with Ctrl-a
-#unbind ^A
-#bind ^A select-pane -t :.+
+# tmux prefix
+unbind C-b
+set -g prefix C-j
 
-# move x clipboard into tmux paste buffer
-# Requires xclip and XQuartz (on osx)
-bind C-p run "tmux set-buffer \"$(xclip -o)\"; tmux paste-buffer"
-# move tmux copy buffer into x clipboard
-bind C-y run "tmux show-buffer | xclip -i"
+# re-number windows when one is closed
+set -g renumber-windows on
+
+# highlight window when it has new activity
+setw -g monitor-activity on
+set -g visual-activity on
+
+# paste from buffer
+unbind C-p
+bind C-p paste-buffer
+
+# enable pbcopy and pbpaste # https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard/blob/master/README.md
+set-option -g default-command "reattach-to-user-namespace -l zsh"
+
+# copy with 'enter' or 'y' and send to mac os clipboard: http://goo.gl/2Bfn8
+unbind -t vi-copy Enter
+bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
+bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+
+# create 'v' alias for selecting text
+bind-key -t vi-copy v begin-selection
+
+# paste
+unbind C-p
+bind C-p paste-buffer
+
+# resize panes
+# (HOW DOES THIS WORK)
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
 
 #set-option -g default-command "reattach-to-user-namespace -l zsh" # or bash...
-#bind C-y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
-#bind C-p run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
+bind C-y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+bind C-p run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
 
 # move around panes like in vim (only in tmux 1.6)
 bind j select-pane -D
@@ -33,9 +55,6 @@ bind h select-pane -L
 # Moving windows
 bind-key -n C-S-Left swap-window -t -1
 bind-key -n C-S-Right swap-window -t +1
-
-# Sane scrolling
-set -g mode-mouse on
 
 # color options
 #set-window-option -g utf8 on
@@ -53,9 +72,9 @@ set-option -g set-titles-string '#H:#S.#I.#P #W #T'
 
 # disable mouse control by default - change 'off' to 'on' to enable by default.
 setw -g mode-mouse on
-set-option -g mouse-resize-pane off
-set-option -g mouse-select-pane off
-set-option -g mouse-select-window off
+set-option -g mouse-resize-pane on
+set-option -g mouse-select-pane on
+set-option -g mouse-select-window on
 # toggle mouse mode to allow mouse copy/paste
 # set mouse on with prefix m
 bind m \
