@@ -57,8 +57,6 @@ bind h select-pane -L
 bind-key -n C-S-Left swap-window -t -1
 bind-key -n C-S-Right swap-window -t +1
 
-# prompt options
-# source ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/tmux/powerline.conf
 # color options
 set-window-option -g utf8 on
 set -g default-terminal "screen-256color"
