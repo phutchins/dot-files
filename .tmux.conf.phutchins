@@ -47,7 +47,7 @@ set-option -g set-titles-string '#H:#S.#I.#P #W #T'
 #set -g status-bg colour240
 
 # disable mouse control by default - change 'off' to 'on' to enable by default.
-setw -g mode-mouse on
+setw -g mode-mouse off
 set-option -g mouse-resize-pane off
 set-option -g mouse-select-pane off
 set-option -g mouse-select-window off
