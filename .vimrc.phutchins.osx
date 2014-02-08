@@ -178,6 +178,7 @@ au BufRead,BufNewFile *.hamlc setf haml
 
 let g:EasyMotion_leader_key = ','
 nmap <leader>v :tabedit $MYVIMRC<CR>
+nmap <leader>n :set invnumber<CR>
 
 nnoremap <Leader>h :h <C-r><C-w><CR>
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
@@ -213,18 +214,18 @@ map! <D-9> :tablast<CR>
 
 map <F3> :source $MYVIMRC<CR>:echoerr ".vimrc reloaded"<CR>
 
-"set showtabline=2
+set showtabline=2
 
 "" Search for visual selection
-"xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
-"xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
-"
-"function! s:VSetSearch()
-"  let temp = @s
-"  norm! gv"sy
-"  let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
-"  let @s = temp
-"endfunction
+xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
+
+function! s:VSetSearch()
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
+  let @s = temp
+endfunction
 
 if has("gui_running")
   set background=dark
