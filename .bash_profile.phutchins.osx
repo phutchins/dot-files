@@ -17,7 +17,7 @@ export AWS_CREDENTIAL_FILE=~/aws/.credentials/aws.credentials
 export AWS_ACCESS_KEY=AKIAJLJDFRSMRGHW24SA
 export AWS_SECRET_KEY=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
 
-export PATH=~/bin:/usr/local/bin:/Users/phutchins/Library/Python/2.7/bin:$PATH
+export PATH=/bin:/usr/local/bin:/Users/phutchins/Library/Python/2.7/bin:$PATH
 export PATH=/usr/local/git/bin:$PATH
 export PATH=$AWS_AUTO_SCALING_HOME:$PATH
 export PATH=$AWS_CLOUDWATCH_HOME:$PATH
@@ -209,17 +209,17 @@ else
 	fi
 fi
 
-function gitup {
-  CURR_DIR=${PWD}
-  for i in $(\ls -d /home/phutchins/io20/*); do
-    if [ -d ${i}/.git ]; then
-      echo "Updating $i"
-      cd $i
-      git up
-    fi
-  done
-  cd $CURR_DIR
-}
+#function gitup {
+#  CURR_DIR=${PWD}
+#  for i in $(\ls -d /home/phutchins/io20/*); do
+#    if [ -d ${i}/.git ]; then
+#      echo "Updating $i"
+#      cd $i
+#      git up
+#    fi
+#  done
+#  cd $CURR_DIR
+#}
 
 # SSH Agent Setup
 

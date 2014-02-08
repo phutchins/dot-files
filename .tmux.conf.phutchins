@@ -20,9 +20,6 @@ set -g visual-activity on
 unbind C-p
 bind C-p paste-buffer
 
-# enable pbcopy and pbpaste # https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard/blob/master/README.md
-set-option -g default-command "reattach-to-user-namespace -l zsh"
-
 # copy with 'enter' or 'y' and send to mac os clipboard: http://goo.gl/2Bfn8
 unbind -t vi-copy Enter
 bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
@@ -42,7 +39,8 @@ bind -r J resize-pane -D 5
 bind -r K resize-pane -U 5
 bind -r L resize-pane -R 5
 
-#set-option -g default-command "reattach-to-user-namespace -l zsh" # or bash...
+# enable pbcopy and pbpaste # https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard/blob/master/README.md
+set-option -g default-command "reattach-to-user-namespace -l bash" # or zsh...
 bind C-y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
 bind C-p run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
 
@@ -56,13 +54,15 @@ bind h select-pane -L
 bind-key -n C-S-Left swap-window -t -1
 bind-key -n C-S-Right swap-window -t +1
 
+# prompt options
+source ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/tmux/powerline.conf
 # color options
-#set-window-option -g utf8 on
-#set -g default-terminal screen-256color
+set-window-option -g utf8 on
+set -g default-terminal "screen-256color"
 
 # colors
 setw -g mode-bg black
-set-option -g default-terminal "screen-256color" #"xterm-256color" # "screen-256color"
+#set-option -g default-terminal "screen-256color" #"xterm-256color" # "screen-256color"
 set-option -g pane-active-border-fg blue
 
 # Titles (window number, program name, active (or not)
