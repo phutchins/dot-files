@@ -27,6 +27,10 @@ export PATH=$AWS_CLOUDWATCH_HOME:$PATH
 export AWS_AUTO_SCALING_HOME=~/aws/AutoScaling
 export AWS_CLOUDWATCH_HOME=~/aws/CloudWatch
 
+# Eclipse
+export PATH=${PATH}:~/android-sdk/tools
+export PATH=${PATH}:~/android-sdk/platform-tools
+
 # append to the history file, don't overwrite it
 shopt -s histappend
 
@@ -240,3 +244,5 @@ function gitup {
 # Fun stuff here...
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

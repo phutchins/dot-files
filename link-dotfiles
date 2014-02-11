@@ -1,0 +1,16 @@
+#!/bin/bash
+# Link all dotfiles for appropriate OS to home directory
+
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+   platform='linux'
+elif [[ "$unamestr" == 'FreeBSD' ]]; then
+   platform='freebsd'
+fi
+
+if [[ $platform == 'linux' ]]; then
+  # Do Linux type things
+elif [[ $platform == 'Darwin' ]]; then
+  # Do OSX type things
+fi
