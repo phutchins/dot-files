@@ -3,7 +3,7 @@ filetype off
 
 let os = substitute(system("uname"), "\n", "", "")
 if os == "Linux"
-  set rtp+=/opt/git/powerline/powerline/bindings/vim
+  set rtp+=/opt/powerline/powerline/bindings/vim
 elseif os == "Darwin"
   python from powerline.vim import setup as powerline_setup
   python powerline_setup()
