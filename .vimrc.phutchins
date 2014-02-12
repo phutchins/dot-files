@@ -8,7 +8,7 @@ if os == "Linux"
   if !filereadable(powerline_readme)
     echo "Installing Powerline"
     echo ""
-    silent !mkdir ~/.git
+    mkdir("~/.git")
     silent !git clone git@github.com:Lokaltog/powerline.git ~/.git/powerline
     let powerlineInstalled=0
   endif
