@@ -19,9 +19,10 @@ if os == "Linux"
   endif
   set rtp+=/opt/powerline/powerline/bindings/vim
 elseif os == "Darwin"
-  python from powerline.vim import setup as powerline_setup
-  python powerline_setup()
-  python del powerline_setup
+  set rtp+=/opt/powerline/powerline/bindings/vim
+  " python from powerline.vim import setup as powerline_setup
+  " python powerline_setup()
+  " python del powerline_setup
 endif
 
 " Setting up Vundle - the vim plugin bundler

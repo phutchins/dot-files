@@ -5,8 +5,8 @@ platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
    platform='linux'
-elif [[ "$unamestr" == 'FreeBSD' ]]; then
-   platform='freebsd'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+   platform='osx'
 fi
 
 if [[ $platform == 'linux' ]]; then
@@ -25,7 +25,7 @@ if [[ $platform == 'linux' ]]; then
   ln -s $CWD/.tmux-linux $HOME/.tmux-linux
   ln -s $CWD/.vimrc.phutchins $HOME/.vimrc
   ln -s $CWD/.bash_profile.phutchins $HOME/.bashrc
-elif [[ $platform == 'Darwin' ]]; then
+elif [[ $platform == 'osx' ]]; then
   # Do OSX type things
   echo "Linking DotFiles for OSX..."
   echo ""
@@ -43,4 +43,7 @@ elif [[ $platform == 'Darwin' ]]; then
   ln -s $CWD/.vimrc.phutchins $HOME/.vimrc
   ln -s $CWD/.bashrc.phutchins.osx $HOME/.bashrc
   ln -s $CWD/.bash_profile.phutchins $HOME/.bash_profile
+else
+  echo "Unable to detect OS or OS not supported..."
+  echo ""
 fi
