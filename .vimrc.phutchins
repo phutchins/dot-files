@@ -16,11 +16,14 @@ if os == "Linux"
     echo "Building Powerline..."
     echo ""
     silent !cd ~/.git/powerline && python ~/.git/powerline/setup.py build
-    silent !cd ~/.git/powerline && python ~/.git/powerline/setup.py install
+    silent !cd ~/.git/powerline && python ~/.git/powerline/setup.py install --root="~/.git/powerline"
   endif
+  let g:Powerline_symbols = 'fancy'
   set rtp+=~/.git/powerline/powerline/bindings/vim
 elseif os == "Darwin"
+  let g:Powerline_symbols = 'fancy'
   set rtp+=~/.git/powerline/powerline/bindings/vim
+  " Loads powerline from pip install
   " python from powerline.vim import setup as powerline_setup
   " python powerline_setup()
   " python del powerline_setup
@@ -153,7 +156,6 @@ let g:indent_guides_guide_size = 1
 colorscheme molokai
 set guifont=Monaco:h15
 
-let g:Powerline_symbols = 'fancy'
 "set guioptions-=T guioptions-=e guioptions-=L guioptions-=r
 set shell=bash
 
