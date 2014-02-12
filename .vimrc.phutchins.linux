@@ -3,6 +3,20 @@ filetype off
 
 let os = substitute(system("uname"), "\n", "", "")
 if os == "Linux"
+  let powerlineInstalled=1
+  let powerline_readme=expand('/opt/powerline/README.rst')
+  if !filereadable(powerline_readme)
+    echo "Installing Powerline"
+    echo ""
+    silent !git clone git@github.com:Lokaltog/powerline.git /opt/powerline
+    let powerlineInstalled=0
+  endif
+  if powerlineInstalled == 0
+    echo "Building Powerline..."
+    echo ""
+    silent !cd /opt/powerline && sudo python /opt/powerline/setup.py build
+    silent !cd /opt/powerline && sudo python /opt/powerline/setup.py install
+  endif
   set rtp+=/opt/powerline/powerline/bindings/vim
 elseif os == "Darwin"
   python from powerline.vim import setup as powerline_setup
