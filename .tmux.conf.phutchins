@@ -1,6 +1,6 @@
 #if-shell "uname | grep -q Darwin" "source-file .tmux-osx" "source-file .tmux-linux"
-if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux-osx.conf'
-if-shell 'test "$(uname)" = "Linux"' 'source ~/.tmux-linux.conf'
+if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux-osx'
+if-shell 'test "$(uname)" = "Linux"' 'source ~/.tmux-linux'
 # use vi mode
 setw -g mode-keys vi
 
