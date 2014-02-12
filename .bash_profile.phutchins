@@ -1,52 +1,61 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+# Philip Hutchins .bashrc and .bash_profile
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# Determine what OS we're running on
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+   platform='linux'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+   platform='osx'
+fi
+
+### History ###
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # ... or force ignoredups and ignorespace
 export HISTCONTROL=ignoreboth
-export EDITOR=vim
-#doesn't work on ubuntu?
-#export JAVA_HOME=$(/usr/libexec/java_home)
+# append to the history file, don't overwrite it
+shopt -s histappend
 
+### Editor ###
+export EDITOR=vim
+
+### Amazon Credentials for DealerMatch ###
 export AWS_CREDENTIAL_FILE=~/aws/.credentials/aws.credentials
 export AWS_ACCESS_KEY=AKIAJLJDFRSMRGHW24SA
 export AWS_SECRET_KEY=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
 
-#make conditional for linux and osx
-export PATH=~/bin:/usr/local/bin:~/.local/bin:/Users/phutchins/Library/Python/2.7/bin:$PATH
-export PATH=/usr/local/git/bin:$PATH
-export PATH=$AWS_AUTO_SCALING_HOME:$PATH
-export PATH=$AWS_CLOUDWATCH_HOME:$PATH
+### PATH ###
+if [[ $platform == 'linux' ]]; then
+   alias ls='ls --color=auto'
+  export PATH=~/bin:/usr/local/bin:~/.local/bin:$PATH
+elif [[ $platform == 'osx' ]]; then
+  export JAVA_HOME=$(/usr/libexec/java_home)
+  export PATH=~/bin:/usr/local/bin:/Users/phutchins/Library/Python/2.7/bin:$PATH
+  alias ls='ls -G'
+fi
 
 export AWS_AUTO_SCALING_HOME=~/aws/AutoScaling
 export AWS_CLOUDWATCH_HOME=~/aws/CloudWatch
+export PATH=/usr/local/git/bin:$PATH
+export PATH=$AWS_AUTO_SCALING_HOME:$PATH
+export PATH=$AWS_CLOUDWATCH_HOME:$PATH
 
 # Eclipse
 export PATH=${PATH}:~/android-sdk/tools
 export PATH=${PATH}:~/android-sdk/platform-tools
 
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-
+### Visual Settings ###
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# set variable identifying the chroot you work in (used in the prompt below)
-#if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
-#    debian_chroot=$(cat /etc/debian_chroot)
-#fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 #case "$TERM" in
@@ -85,11 +94,7 @@ shopt -s checkwinsize
 #    ;;
 #esac
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
+### Include Files ###
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -187,7 +192,7 @@ On_IPurple='\e[10;95m'  # Purple
 On_ICyan='\e[0;106m'    # Cyan
 On_IWhite='\e[0;107m'   # White
 
-# If running interactively, then:
+### Prompt ###
 if [ -f ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh ]; then
   export TERM=screen-256color
   source ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh
@@ -196,32 +201,22 @@ elif [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline
   source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 else
 	if [ "$PS1" ]; then
-
-		# don"t put duplicate lines in the history. See bash(1) for more options
-		export HISTCONTROL=ignoredups
-
-		# enable color support of ls and also add handy aliases
-		# eval `dircolors -b`
-
-		# some more ls aliases
-	  TYPE=`uname -a|cut -d " " -f 1`
-	  if [ $TYPE == "Linux" ]; then
-		  alias ls="ls --color=auto"
-		      PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
-	  else
-		  alias ls="ls -F"
-		  PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
-		  export TERM=xterm
-	  fi
-		if [ -f /etc/bash_completion ]; then
-			. /etc/bash_completion
-		fi
-	fi
+    if [[ $platform == 'linux' ]]; then
+      alias ls='ls --color=auto'
+      PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
+    elif [[ $platform == 'osx' ]]; then
+      export JAVA_HOME=$(/usr/libexec/java_home)
+      export PATH=~/bin:/usr/local/bin:/Users/phutchins/Library/Python/2.7/bin:$PATH
+      PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
+      alias ls="ls -F"
+    fi
+  fi
 fi
 
+### Update all git repos in github directory at once ###
 function gitup {
   CURR_DIR=${PWD}
-  for i in $(\ls -d /home/phutchins/io20/*); do
+  for i in $(\ls -d /home/phutchins/github/*); do
     if [ -d ${i}/.git ]; then
       echo "Updating $i"
       cd $i
@@ -231,18 +226,6 @@ function gitup {
   cd $CURR_DIR
 }
 
-# SSH Agent Setup
-
-#if [ -f /home/phutchins/.aliases ]; then
-#    . /home/phutchins/.aliases
-#fi
-#
-#if [ -f $HOME/.ssh/agent ]; then
-#  source $HOME/.ssh/agent
-#fi
-
-# Fun stuff here...
-
+### RVM ###
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
