@@ -8,18 +8,19 @@ if os == "Linux"
   if !filereadable(powerline_readme)
     echo "Installing Powerline"
     echo ""
-    silent !sudo git clone git@github.com:Lokaltog/powerline.git /opt/powerline
+    silent !mkdir ~/.git
+    silent !git clone git@github.com:Lokaltog/powerline.git ~/.git/powerline
     let powerlineInstalled=0
   endif
   if powerlineInstalled == 0
     echo "Building Powerline..."
     echo ""
-    silent !cd /opt/powerline && sudo python /opt/powerline/setup.py build
-    silent !cd /opt/powerline && sudo python /opt/powerline/setup.py install
+    silent !cd ~/.git/powerline && python ~/.git/powerline/setup.py build
+    silent !cd ~/.git/powerline && python ~/.git/powerline/setup.py install
   endif
-  set rtp+=/opt/powerline/powerline/bindings/vim
+  set rtp+=~/.git/powerline/powerline/bindings/vim
 elseif os == "Darwin"
-  set rtp+=/opt/powerline/powerline/bindings/vim
+  set rtp+=~/.git/powerline/powerline/bindings/vim
   " python from powerline.vim import setup as powerline_setup
   " python powerline_setup()
   " python del powerline_setup
