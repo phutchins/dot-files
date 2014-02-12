@@ -11,27 +11,36 @@ fi
 
 if [[ $platform == 'linux' ]]; then
   # Do Linux type things
+  echo "Linking DotFiles for Linux..."
+  echo ""
   CWD=$(pwd)
-  if [ -h "~/.tmux.conf" ] ; then rm ~/.tmux.conf ; else  mv ~/.tmux.conf ~/.tmux.conf.bak ; fi
-  if [ -h "~/.tmux-linux" ] ; then rm ~/.tmux-linux ; else  mv ~/.tmux-linux ~/.tmux-linux.bak ; fi
-  if [ -h "~/.vimrc" ] ; then rm ~/.vimrc ; else  mv ~/.vimrc ~/.vimrc.bak ; fi
-  if [ -h "~/.bashrc" ] ; then rm ~/.bashrc ; else  mv ~/.bashrc ~/.bashrc.bak ; fi
-  
-  ln -s $CWD/.tmux.conf.phutchins ~/.tmux.conf
-  ln -s $CWD/.tmux-linux ~/.tmux-linux
-  ln -s $CWD/.vimrc.phutchins ~/.vimrc
-  ln -s $CWD/.bash_profile.phutchins ~/.bashrc
+  echo "Removing old links and backing up non links..."
+  if [ -h "$HOME/.tmux.conf" ] ; then rm $HOME/.tmux.conf ; else  mv $HOME/.tmux.conf $HOME/.tmux.conf.bak ; fi
+  if [ -h "$HOME/.tmux-linux" ] ; then rm $HOME/.tmux-linux ; else  mv $HOME/.tmux-linux $HOME/.tmux-linux.bak ; fi
+  if [ -h "$HOME/.vimrc" ] ; then rm $HOME/.vimrc ; else  mv $HOME/.vimrc $HOME/.vimrc.bak ; fi
+  if [ -h "$HOME/.bashrc" ] ; then rm $HOME/.bashrc ; else  mv $HOME/.bashrc $HOME/.bashrc.bak ; fi
+
+  echo "Creating new links..."
+  ln -s $CWD/.tmux.conf.phutchins $HOME/.tmux.conf
+  ln -s $CWD/.tmux-linux $HOME/.tmux-linux
+  ln -s $CWD/.vimrc.phutchins $HOME/.vimrc
+  ln -s $CWD/.bash_profile.phutchins $HOME/.bashrc
 elif [[ $platform == 'Darwin' ]]; then
   # Do OSX type things
+  echo "Linking DotFiles for OSX..."
+  echo ""
   CWD=$(pwd)
-  if [ -h "~/.tmux.conf" ] ; then rm ~/.tmux.conf ; else  mv ~/.tmux.conf ~/.tmux.conf.bak ; fi
-  if [ -h "~/.tmux-osx" ] ; then rm ~/.tmux-osx ; else  mv ~/.tmux-osx ~/.tmux-osx.bak ; fi
-  if [ -h "~/.vimrc" ] ; then rm ~/.vimrc ; else  mv ~/.vimrc ~/.vimrc.bak ; fi
-  if [ -h "~/.bashrc" ] ; then rm ~/.bashrc ; else  mv ~/.bashrc ~/.bashrc.bak ; fi
-  if [ -h "~/.bash_profile" ] ; then rm ~/.bash_profile ; else  mv ~/.bash_profile ~/.bash_profile.bak ; fi
-  ln -s $CWD/.tmux.conf.phutchins ~/.tmux.conf
-  ln -s $CWD/.tmux-osx ~/.tmux-osx
-  ln -s $CWD/.vimrc.phutchins ~/.vimrc
-  ln -s $CWD/.bashrc.phutchins.osx ~/.bashrc
-  ln -s $CWD/.bash_profile.phutchins ~/.bash_profile
+  echo "Removing old links and backing up non links..."
+  if [ -h "$HOME/.tmux.conf" ] ; then rm $HOME/.tmux.conf ; else  mv $HOME/.tmux.conf $HOME/.tmux.conf.bak ; fi
+  if [ -h "$HOME/.tmux-osx" ] ; then rm $HOME/.tmux-osx ; else  mv $HOME/.tmux-osx $HOME/.tmux-osx.bak ; fi
+  if [ -h "$HOME/.vimrc" ] ; then rm $HOME/.vimrc ; else  mv $HOME/.vimrc $HOME/.vimrc.bak ; fi
+  if [ -h "$HOME/.bashrc" ] ; then rm $HOME/.bashrc ; else  mv $HOME/.bashrc $HOME/.bashrc.bak ; fi
+  if [ -h "$HOME/.bash_profile" ] ; then rm $HOME/.bash_profile ; else  mv $HOME/.bash_profile $HOME/.bash_profile.bak ; fi
+
+  echo "Creating new links..."
+  ln -s $CWD/.tmux.conf.phutchins $HOME/.tmux.conf
+  ln -s $CWD/.tmux-osx $HOME/.tmux-osx
+  ln -s $CWD/.vimrc.phutchins $HOME/.vimrc
+  ln -s $CWD/.bashrc.phutchins.osx $HOME/.bashrc
+  ln -s $CWD/.bash_profile.phutchins $HOME/.bash_profile
 fi
