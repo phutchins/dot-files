@@ -1,9 +1,28 @@
 set nocompatible
 filetype off
 
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+let os = substitute(system("uname"), "\n", "", "")
+if os == "Linux"
+  let powerlineInstalled=1
+  let powerline_readme=expand('/opt/powerline/README.rst')
+  if !filereadable(powerline_readme)
+    echo "Installing Powerline"
+    echo ""
+    silent !git clone git@github.com:Lokaltog/powerline.git /opt/powerline
+    let powerlineInstalled=0
+  endif
+  if powerlineInstalled == 0
+    echo "Building Powerline..."
+    echo ""
+    silent !cd /opt/powerline && sudo python /opt/powerline/setup.py build
+    silent !cd /opt/powerline && sudo python /opt/powerline/setup.py install
+  endif
+  set rtp+=/opt/powerline/powerline/bindings/vim
+elseif os == "Darwin"
+  python from powerline.vim import setup as powerline_setup
+  python powerline_setup()
+  python del powerline_setup
+endif
 
 " Setting up Vundle - the vim plugin bundler
     let iCanHazVundle=1
@@ -211,22 +230,20 @@ map! <D-7> 7gt
 map! <D-8> 8gt
 map! <D-9> :tablast<CR>
 
-"map $a <ESC>0 :echoerr "Anti pattern Alert!: Use A instead of $a"<CR>
-
 map <F3> :source $MYVIMRC<CR>:echoerr ".vimrc reloaded"<CR>
 
 set showtabline=2
 
 "" Search for visual selection
-xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
-xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
-
-function! s:VSetSearch()
-  let temp = @s
-  norm! gv"sy
-  let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
-  let @s = temp
-endfunction
+"xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
+"xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
+"
+"function! s:VSetSearch()
+"  let temp = @s
+"  norm! gv"sy
+"  let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
+"  let @s = temp
+"endfunction
 
 if has("gui_running")
   set background=dark

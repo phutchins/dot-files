@@ -19,7 +19,7 @@ if [[ $platform == 'linux' ]]; then
   
   ln -s $CWD/.tmux.conf.phutchins ~/.tmux.conf
   ln -s $CWD/.tmux-linux ~/.tmux-linux
-  ln -s $CWD/.vimrc.phutchins.linux ~/.vimrc
+  ln -s $CWD/.vimrc.phutchins ~/.vimrc
   ln -s $CWD/.bash_profile.phutchins ~/.bashrc
 elif [[ $platform == 'Darwin' ]]; then
   # Do OSX type things
@@ -31,7 +31,7 @@ elif [[ $platform == 'Darwin' ]]; then
   if [ -h "~/.bash_profile" ] ; then rm ~/.bash_profile ; else  mv ~/.bash_profile ~/.bash_profile.bak ; fi
   ln -s $CWD/.tmux.conf.phutchins ~/.tmux.conf
   ln -s $CWD/.tmux-osx ~/.tmux-osx
-  ln -s $CWD/.vimrc.phutchins.osx ~/.vimrc
+  ln -s $CWD/.vimrc.phutchins ~/.vimrc
   ln -s $CWD/.bashrc.phutchins.osx ~/.bashrc
   ln -s $CWD/.bash_profile.phutchins ~/.bash_profile
 fi
