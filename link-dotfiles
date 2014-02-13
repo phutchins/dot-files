@@ -19,12 +19,14 @@ if [[ $platform == 'linux' ]]; then
   if [ -h "$HOME/.tmux-linux" ] ; then rm $HOME/.tmux-linux ; else  mv $HOME/.tmux-linux $HOME/.tmux-linux.bak ; fi
   if [ -h "$HOME/.vimrc" ] ; then rm $HOME/.vimrc ; else  mv $HOME/.vimrc $HOME/.vimrc.bak ; fi
   if [ -h "$HOME/.bashrc" ] ; then rm $HOME/.bashrc ; else  mv $HOME/.bashrc $HOME/.bashrc.bak ; fi
+  if [ -h "$HOME/.bash_aliases" ] ; then rm $HOME/.bash_aliases ; else  mv $HOME/.bash_aliases $HOME/.bash_aliases.bak ; fi
 
   echo "Creating new links..."
   ln -s $CWD/.tmux.conf.phutchins $HOME/.tmux.conf
   ln -s $CWD/.tmux-linux $HOME/.tmux-linux
   ln -s $CWD/.vimrc.phutchins $HOME/.vimrc
   ln -s $CWD/.bash_profile.phutchins $HOME/.bashrc
+  ln -s $CWD/.bash_aliases $HOME/.bash_aliases
 elif [[ $platform == 'osx' ]]; then
   # Do OSX type things
   echo "Linking DotFiles for OSX..."
@@ -36,6 +38,7 @@ elif [[ $platform == 'osx' ]]; then
   if [ -h "$HOME/.vimrc" ] ; then rm $HOME/.vimrc ; else  mv $HOME/.vimrc $HOME/.vimrc.bak ; fi
   if [ -h "$HOME/.bashrc" ] ; then rm $HOME/.bashrc ; else  mv $HOME/.bashrc $HOME/.bashrc.bak ; fi
   if [ -h "$HOME/.bash_profile" ] ; then rm $HOME/.bash_profile ; else  mv $HOME/.bash_profile $HOME/.bash_profile.bak ; fi
+  if [ -h "$HOME/.bash_aliases" ] ; then rm $HOME/.bash_aliases ; else  mv $HOME/.bash_aliases $HOME/.bash_aliases.bak ; fi
 
   echo "Creating new links..."
   ln -s $CWD/.tmux.conf.phutchins $HOME/.tmux.conf
@@ -43,6 +46,7 @@ elif [[ $platform == 'osx' ]]; then
   ln -s $CWD/.vimrc.phutchins $HOME/.vimrc
   ln -s $CWD/.bashrc.phutchins.osx $HOME/.bashrc
   ln -s $CWD/.bash_profile.phutchins $HOME/.bash_profile
+  ln -s $CWD/.bash_aliases $HOME/.bash_aliases
 else
   echo "Unable to detect OS or OS not supported..."
   echo ""
