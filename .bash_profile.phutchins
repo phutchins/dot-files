@@ -38,6 +38,7 @@ elif [[ $platform == 'osx' ]]; then
   export PATH=~/bin:/usr/local/bin:~/Library/Python/2.7/bin:$PATH
   alias ls='ls -G'
 fi
+#export PATH=~/bin:/usr/local/bin:/Users/phutchins/Library/Python/2.7/bin:$PATH
 
 export AWS_AUTO_SCALING_HOME=~/aws/AutoScaling
 export AWS_CLOUDWATCH_HOME=~/aws/CloudWatch
@@ -100,26 +101,29 @@ if [ ! -d ~/.git/powerline/usr/local/bin ]; then
   cd ~/.git/powerline && python ~/.git/powerline/setup.py install --root="~/.git/powerline"
 fi
 
-if [ -f ~/.git/powerline/powerline/bindings/bash/powerline.sh ]; then
+#if [ -f ~/.git/powerline/powerline/bindings/bash/powerline.sh ]; then
   #export PATH=/Users/phutchins/Library/Python/2.7/bin:~/.git/powerline/usr/local/bin:$PATH
-  export PATH=~/.git/powerline/usr/local/bin:$PATH
-  export TERM=screen-256color
   #source ~/.git/powerline/usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
-  source ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh
   # Fix this so I can use the line below. Powerline doesn't like the jobnum argument in powerline.sh
   #source ~/.git/powerline/powerline/bindings/bash/powerline.sh
-else
-	if [ "$PS1" ]; then
-    if [[ $platform == 'linux' ]]; then
-      alias ls='ls --color=auto'
-      PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
-    elif [[ $platform == 'osx' ]]; then
-      export JAVA_HOME=$(/usr/libexec/java_home)
-#      export PATH=~/bin:/usr/local/bin:/Users/phutchins/Library/Python/2.7/bin:$PATH
-      PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
-      alias ls="ls -F"
-    fi
+if [[ $platform == 'linux' ]]; then
+  export PATH=~/.git/powerline/usr/local/bin:$PATH
+  export TERM=screen-256color
+  if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
+    source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
   fi
+  alias ls='ls --color=auto'
+  PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
+elif [[ $platform == 'osx' ]]; then
+  export PATH=~/.git/powerline/usr/local/bin:$PATH
+  export TERM=screen-256color
+  export JAVA_HOME=$(/usr/libexec/java_home)
+  #if [ -f ~/.git/powerline/powerline/bindings/bash/powerline.sh ]; then
+  if [ -f ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh ]; then
+    source ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh
+  fi
+  #PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
+  alias ls="ls -F"
 fi
 
 ### Update all git repos in github directory at once ###
