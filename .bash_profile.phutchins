@@ -23,6 +23,7 @@ shopt -s histappend
 
 ### Editor ###
 export EDITOR=vim
+set -o vi
 
 ### Amazon Credentials for DealerMatch ###
 export AWS_CREDENTIAL_FILE=~/aws/.credentials/aws.credentials
