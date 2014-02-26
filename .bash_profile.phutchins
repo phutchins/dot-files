@@ -92,12 +92,16 @@ fi
 #  export TERM=screen-256color
 #  source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 #fi
+if [ ! 'pip list | grep powerline' ]; then
+  pip install --user git+git://github.com/Lokaltog/powerline
+fi
 
 if [ ! -d ~/.git/powerline ]; then
   mkdir -p ~/.git
   git clone git@github.com:Lokaltog/powerline.git ~/.git/powerline
 fi
 if [ ! -d ~/.git/powerline/usr/local/bin ]; then
+  # TODO: This requires python-pip (which includes setuptools)
   cd ~/.git/powerline && python ~/.git/powerline/setup.py build
   cd ~/.git/powerline && python ~/.git/powerline/setup.py install --root="~/.git/powerline"
 fi

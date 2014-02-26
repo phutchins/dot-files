@@ -13,3 +13,4 @@ alias ku='knife cookbook upload'
 ka () { kill $(ps aux | grep "$@" | grep -v "grep" | awk '{print $2}'); }
 
 alias tags='git show-ref --tags -d'
+alias tag='git rev-parse HEAD'
