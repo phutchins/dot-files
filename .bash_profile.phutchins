@@ -92,10 +92,13 @@ fi
 #  export TERM=screen-256color
 #  source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 #fi
+# Install powerline via PIP so that it registers the libs
 if [ ! 'pip list | grep powerline' ]; then
   pip install --user git+git://github.com/Lokaltog/powerline
 fi
 
+# To do things this way I will need to register the python extension modules manually
+# Possibly add the extensions directory to the python path
 if [ ! -d ~/.git/powerline ]; then
   mkdir -p ~/.git
   git clone git@github.com:Lokaltog/powerline.git ~/.git/powerline
