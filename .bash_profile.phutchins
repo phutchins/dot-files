@@ -129,6 +129,8 @@ elif [[ $platform == 'osx' ]]; then
   #if [ -f ~/.git/powerline/powerline/bindings/bash/powerline.sh ]; then
   if [ -f ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh ]; then
     source ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh
+  elif [ -f ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/bash/powerline.sh ]; then
+    source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/bash/powerline.sh
   fi
   #PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
   alias ls="ls -F"
