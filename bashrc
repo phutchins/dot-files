@@ -15,11 +15,20 @@ fi
 ### History ###
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
-export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+#export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # ... or force ignoredups and ignorespace
-export HISTCONTROL=ignoreboth
+#export HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
-shopt -s histappend
+#shopt -s histappend
+
+HISTIGNORE="hnote*"
+# Used to put notes in a history file
+function hnote {
+    echo "## NOTE [`date`]: $*" >> $HOME/.history/bash_history-`date +%Y%m%d`
+}
+
+# used to keep my history forever
+PROMPT_COMMAND="[ -d $HOME/.history ] || mkdir -p $HOME/.history; echo : [\$(date)] $$ $USER \$OLDPWD\; \$(history 1 | sed -E 's/^[[:space:]]+[0-9]*[[:space:]]+//g') >> $HOME/.history/bash_history-\`date +%Y%m%d\`"
 
 ### Editor ###
 export EDITOR=vim
@@ -27,8 +36,23 @@ set -o vi
 
 ### Amazon Credentials for DealerMatch ###
 export AWS_CREDENTIAL_FILE=~/aws/.credentials/aws.credentials
-export AWS_ACCESS_KEY=AKIAJLJDFRSMRGHW24SA
-export AWS_SECRET_KEY=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
+
+### OWSSH ###
+export OWSSH_USER="phutchins"
+export OWSSH_SSH_KEY_FILE="~/.ssh/id_rsa"
+
+### MonDupe ###
+export MONDUPE_INSTANCE_IMAGE_ID="ami-018c9568"
+export MONDUPE_CHEF_RUN_LIST='"recipe[base], recipe[mongodb-corndog::production_copy]"'
+export MONDUPE_CHEF_IDENTITY_FILE="~/.ssh/DevOps.pem"
+export MONDUPE_CHEF_ENVIRONMENT="internal_development"
+export MONDUPE_SSH_KEY="~/.ssh/DevOps.pem"
+export MONDUPE_SSH_USER="ubuntu"
+export MONDUPE_ROUTE53_DOMAIN="dealermatch.biz."
+export MONDUPE_KEY_PAIR_NAME="DevOps"
+export MONDUPE_SECURITY_GROUP="mongo"
+export MONDUPE_S3_BUCKET_NAME="cde_production_mongo_backups"
+export MONDUPE_DUMP_FILE_NAME="mongodb.dump.tgz"
 
 ### PATH ###
 if [[ $platform == 'linux' ]]; then

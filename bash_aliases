@@ -1,13 +1,14 @@
 alias ls='ls -G'
 
-# GIT
 alias gaa='git add . --all'
 alias gc='git commit -m'
 alias gp='git push'
 alias gu='git up'
+
 alias gup='gu && gp'
 alias gac='gaa && gc'
 alias tags='git show-ref --tags -d'
+alias sha='git rev-parse HEAD'
 
 # Chef & Knife
 alias ku='knife cookbook upload'
