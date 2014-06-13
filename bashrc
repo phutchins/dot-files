@@ -141,6 +141,9 @@ fi
 if [[ $platform == 'linux' ]]; then
   export PATH=~/.git/powerline/usr/local/bin:$PATH
   export TERM=screen-256color
+  if [ -f ~/.git/powerline/usr/lib/python2.6/site-packages/powerline/bindings/bash/powerline.sh ]; then
+    source ~/.git/powerline/usr/lib/python2.6/site-packages/powerline/bindings/bash/powerline.sh
+  fi
   if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
     source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
   fi
