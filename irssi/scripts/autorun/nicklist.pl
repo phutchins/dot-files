@@ -1,0 +1,1 @@
+/Users/phutchins/.irssi/scripts/nicklist.pl

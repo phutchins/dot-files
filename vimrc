@@ -141,7 +141,10 @@ set number
 set ic
 set hlsearch
 set incsearch
-set noswapfile
+"set noswapfile
+"set nobackup
+set backupdir=~/.vim/backup/,~/.tmp,~/tmp,/tmp
+set directory=~/.vim/backup/,~/.tmp,~/tmp,/tmp
 set autoread      "Autoreload files changed externally
 set noeb vb t_vb=
 set so=5

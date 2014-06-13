@@ -15,39 +15,38 @@ if [[ $platform == 'linux' ]]; then
   echo ""
   CWD=$(pwd)
   echo "Removing old links and backing up non links..."
-  if [ -h "$HOME/.tmux.conf" ] ; then rm $HOME/.tmux.conf ; else  mv $HOME/.tmux.conf $HOME/.tmux.conf.bak ; fi
   if [ -h "$HOME/.tmux-linux" ] ; then rm $HOME/.tmux-linux ; else  mv $HOME/.tmux-linux $HOME/.tmux-linux.bak ; fi
-  if [ -h "$HOME/.vimrc" ] ; then rm $HOME/.vimrc ; else  mv $HOME/.vimrc $HOME/.vimrc.bak ; fi
-  if [ -h "$HOME/.bashrc" ] ; then rm $HOME/.bashrc ; else  mv $HOME/.bashrc $HOME/.bashrc.bak ; fi
-  if [ -h "$HOME/.bash_aliases" ] ; then rm $HOME/.bash_aliases ; else  mv $HOME/.bash_aliases $HOME/.bash_aliases.bak ; fi
 
   echo "Creating new links..."
-  ln -s $CWD/.tmux.conf.phutchins $HOME/.tmux.conf
-  ln -s $CWD/.tmux-linux $HOME/.tmux-linux
-  ln -s $CWD/.vimrc.phutchins $HOME/.vimrc
-  ln -s $CWD/.bash_profile.phutchins $HOME/.bashrc
-  ln -s $CWD/.bash_aliases $HOME/.bash_aliases
+  ln -s $CWD/tmux-linux $HOME/.tmux-linux
 elif [[ $platform == 'osx' ]]; then
   # Do OSX type things
   echo "Linking DotFiles for OSX..."
   echo ""
   CWD=$(pwd)
   echo "Removing old links and backing up non links..."
-  if [ -h "$HOME/.tmux.conf" ] ; then rm $HOME/.tmux.conf ; else  mv $HOME/.tmux.conf $HOME/.tmux.conf.bak ; fi
   if [ -h "$HOME/.tmux-osx" ] ; then rm $HOME/.tmux-osx ; else  mv $HOME/.tmux-osx $HOME/.tmux-osx.bak ; fi
-  if [ -h "$HOME/.vimrc" ] ; then rm $HOME/.vimrc ; else  mv $HOME/.vimrc $HOME/.vimrc.bak ; fi
-  if [ -h "$HOME/.bashrc" ] ; then rm $HOME/.bashrc ; else  mv $HOME/.bashrc $HOME/.bashrc.bak ; fi
-  if [ -h "$HOME/.bash_profile" ] ; then rm $HOME/.bash_profile ; else  mv $HOME/.bash_profile $HOME/.bash_profile.bak ; fi
-  if [ -h "$HOME/.bash_aliases" ] ; then rm $HOME/.bash_aliases ; else  mv $HOME/.bash_aliases $HOME/.bash_aliases.bak ; fi
 
   echo "Creating new links..."
-  ln -s $CWD/.tmux.conf.phutchins $HOME/.tmux.conf
-  ln -s $CWD/.tmux-osx $HOME/.tmux-osx
-  ln -s $CWD/.vimrc.phutchins $HOME/.vimrc
-  ln -s $CWD/.bashrc.phutchins.osx $HOME/.bashrc
-  ln -s $CWD/.bash_profile.phutchins $HOME/.bash_profile
-  ln -s $CWD/.bash_aliases $HOME/.bash_aliases
+  ln -s $CWD/tmux-osx $HOME/.tmux-osx
 else
   echo "Unable to detect OS or OS not supported..."
   echo ""
 fi
+
+echo "Linking OS agnostic DotFiles"
+echo "Removing old links and backing up non links"
+if [ -h "$HOME/.tmux.conf" ] ; then rm $HOME/.tmux.conf ; else  mv $HOME/.tmux.conf $HOME/.tmux.conf.bak ; fi
+if [ -h "$HOME/.vimrc" ] ; then rm $HOME/.vimrc ; else  mv $HOME/.vimrc $HOME/.vimrc.bak ; fi
+if [ -h "$HOME/.bash_profile" ] ; then rm $HOME/.bash_profile ; else  mv $HOME/.bash_profile $HOME/.bash_profile.bak ; fi
+if [ -h "$HOME/.bashrc" ] ; then rm $HOME/.bashrc ; else  mv $HOME/.bashrc $HOME/.bashrc.bak ; fi
+if [ -h "$HOME/.bash_aliases" ] ; then rm $HOME/.bash_aliases ; else  mv $HOME/.bash_aliases $HOME/.bash_aliases.bak ; fi
+if [ -h "$HOME/.irssi" ] ; then rm $HOME/.irssi ; else mv $HOME/.irssi $HOME/.irssi.bak ; fi
+
+echo "Creating new links..."
+ln -s $CWD/tmux.conf $HOME/.tmux.conf
+ln -s $CWD/vimrc $HOME/.vimrc
+ln -s $CWD/bash_profile $HOME/.bash_profile
+ln -s $CWD/bashrc $HOME/.bashrc
+ln -s $CWD/bash_aliases $HOME/.bash_aliases
+ln -s $CWD/irssi $HOME/.irssi
