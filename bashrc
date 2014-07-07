@@ -46,6 +46,8 @@ PROMPT_COMMAND="[ -d $HOME/.history ] || mkdir -p $HOME/.history; echo : [\$(dat
 ### Editor ###
 export EDITOR=vim
 set -o vi
+bind '\C-a:beginning-of-line'
+bind '\C-e:end-of-line'
 
 ### Amazon Credentials for DealerMatch ###
 export AWS_CREDENTIAL_FILE=~/aws/.credentials/aws.credentials
