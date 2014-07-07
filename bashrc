@@ -12,6 +12,19 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
    platform='osx'
 fi
 
+# Packages that I want installed
+if [[ $platform == 'linux' ]]; then
+  apt-get install tmux
+elif [[ $platform == 'osx' ]]; then
+  if [ ! -f /usr/local/bin/brew ]; then
+    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+  fi
+  if [ ! -f /usr/local/bin/tmux ]; then
+    brew install tmux
+    brew install reattach-to-user-namespace
+  fi
+fi
+
 ### History ###
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
@@ -130,7 +143,8 @@ fi
 if [ ! -d ~/.git/powerline/usr/local/bin ]; then
   # TODO: This requires python-pip (which includes setuptools)
   cd ~/.git/powerline && python ~/.git/powerline/setup.py build
-  cd ~/.git/powerline && python ~/.git/powerline/setup.py install --root="~/.git/powerline"
+  # Adding sudo here so that the python extensions get registered. Might have to try to change default python instead of this.
+  cd ~/.git/powerline && sudo python ~/.git/powerline/setup.py install --root="~/.git/powerline"
 fi
 
 #if [ -f ~/.git/powerline/powerline/bindings/bash/powerline.sh ]; then
@@ -150,10 +164,14 @@ if [[ $platform == 'linux' ]]; then
   alias ls='ls --color=auto'
   PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
 elif [[ $platform == 'osx' ]]; then
+  # Make this only copy files if they don't exist
+  # cp -r ~/github/dot-files/fonts/* ~/Library/Fonts/
   export PATH=~/.git/powerline/usr/local/bin:$PATH
   export TERM=screen-256color
   export JAVA_HOME=$(/usr/libexec/java_home)
-  #if [ -f ~/.git/powerline/powerline/bindings/bash/powerline.sh ]; then
+  if [ -f ~/.git/powerline/powerline/bindings/bash/powerline.sh ]; then
+    source ~/.git/powerline/powerline/bindings/bash/powerline.sh
+  fi
   if [ -f ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh ]; then
     source ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh
   elif [ -f ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/bash/powerline.sh ]; then
