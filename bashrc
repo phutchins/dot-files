@@ -164,7 +164,7 @@ if [[ $platform == 'linux' ]]; then
     source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
   fi
   alias ls='ls --color=auto'
-  POWERLINE_COMMAND="$POWERLINE_COMMAND -c ext.shell.theme=default_leftonly"
+  #POWERLINE_COMMAND="$POWERLINE_COMMAND -c ext.shell.theme=default_leftonly"
   PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
 elif [[ $platform == 'osx' ]]; then
   # Make this only copy files if they don't exist
@@ -182,7 +182,7 @@ elif [[ $platform == 'osx' ]]; then
   #PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
   alias ls="ls -F"
   # Probably better to find how to do this though the config file but will be easier on a clean install box
-  POWERLINE_COMMAND="$POWERLINE_COMMAND -c ext.shell.theme=default_leftonly"
+  #POWERLINE_COMMAND="$POWERLINE_COMMAND -c ext.shell.theme=default_leftonly"
 fi
 
 ### Update all git repos in github directory at once ###
