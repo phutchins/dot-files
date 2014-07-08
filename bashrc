@@ -173,8 +173,7 @@ elif [[ $platform == 'osx' ]]; then
   export JAVA_HOME=$(/usr/libexec/java_home)
   if [ -f ~/.git/powerline/powerline/bindings/bash/powerline.sh ]; then
     source ~/.git/powerline/powerline/bindings/bash/powerline.sh
-  fi
-  if [ -f ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh ]; then
+  elif [ -f ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh ]; then
     source ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh
   elif [ -f ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/bash/powerline.sh ]; then
     source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/bash/powerline.sh
