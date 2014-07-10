@@ -1,0 +1,8 @@
+#!/bin/bash
+# Install HomeBrew
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+# Install RVM
+\curl -sSL https://get.rvm.io | bash -s stable --ruby
+source /Users/phutchins/.rvm/scripts/rvm
+# Install irssi
+brew install irssi

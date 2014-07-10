@@ -1,0 +1,42 @@
+# ~/.tmuxinator/ow-corndog.yml
+
+name: ow-corndog
+root: ~/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+windows:
+  - Corndog:
+      layout: main-vertical
+      panes:
+        - cd github/Corndog
+        - cd github/Corndog
+  - Chef:
+      layout: main-vertical
+      panes:
+        - cd github/opsworks-corndog
+        - cd github/opsworks-corndog
+  - rails-app1:
+      layout: main-vertical
+      panes:
+        - ssh -t 54.197.71.10 cd /srv/www/corndog/current ';' exec /bin/bash
+        - ssh -t 54.197.71.10 tail -f /srv/www/corndog/shared/log/production.log ';' exec /bin/bash
+  - rails-app2:
+      layout: main-vertical
+      panes:
+        - ssh -t 107.22.101.8 cd /srv/www/corndog/current ';' exec /bin/bash
+        - ssh -t 107.22.101.8 tail -f /srv/www/corndog/shared/log/production.log ';' exec /bin/bash
+  - bash: ls
