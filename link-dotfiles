@@ -38,6 +38,7 @@ fi
 
 echo "Linking OS agnostic DotFiles"
 echo "Removing old links and backing up non links"
+if [ -h "$HOME/.config" ] ; then rm $HOME/.config ; else mv $HOME/.config $HOME/.config.bak ; fi
 if [ -h "$HOME/.tmuxinator" ] ; then rm $HOME/.tmuxinator ; else mv $HOME/.tmuxinator $HOME/.tmuxinator.bak ; fi
 if [ -h "$HOME/.tmux.conf" ] ; then rm $HOME/.tmux.conf ; else  mv $HOME/.tmux.conf $HOME/.tmux.conf.bak ; fi
 if [ -h "$HOME/.vimrc" ] ; then rm $HOME/.vimrc ; else  mv $HOME/.vimrc $HOME/.vimrc.bak ; fi
@@ -47,6 +48,7 @@ if [ -h "$HOME/.bash_aliases" ] ; then rm $HOME/.bash_aliases ; else  mv $HOME/.
 if [ -h "$HOME/.irssi" ] ; then rm $HOME/.irssi ; else mv $HOME/.irssi $HOME/.irssi.bak ; fi
 
 echo "Creating new links..."
+ln -s $CWD/config $HOME/.config
 ln -s $CWD/tmuxinator $HOME/.tmuxinator
 ln -s $CWD/tmux.conf $HOME/.tmux.conf
 ln -s $CWD/vimrc $HOME/.vimrc
