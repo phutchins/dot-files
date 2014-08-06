@@ -4,17 +4,25 @@
 [ -z "$PS1" ] && return
 
 # Determine what OS we're running on
-platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
    platform='linux'
+   OS=$(lsb_release -si)
+   ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
+   VER=$(lsb_release -sr)
 elif [[ "$unamestr" == 'Darwin' ]]; then
    platform='osx'
 fi
 
+echo "UNAME: $unamestr"
+
 # Packages that I want installed
 if [[ $platform == 'linux' ]]; then
-  apt-get install tmux
+  if [[ $OS == 'Ubuntu' ]]; then
+    apt-get install tmux
+  elif [[ $OS == 'CentOS' ]]; then
+    yum install tmux
+  fi
 elif [[ $platform == 'osx' ]]; then
   if [ ! -f /usr/local/bin/brew ]; then
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
