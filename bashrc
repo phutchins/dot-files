@@ -14,7 +14,9 @@ fi
 
 # Packages that I want installed
 if [[ $platform == 'linux' ]]; then
-  apt-get install tmux
+  if ! [ "dpkg -l | grep tmux" ] ; then
+    sudo apt-get install tmux
+  fi
 elif [[ $platform == 'osx' ]]; then
   if [ ! -f /usr/local/bin/brew ]; then
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
