@@ -161,11 +161,6 @@ if [ ! -d ~/.git_repos/powerline/build/ ]; then
   # TODO: This requires python-pip (which includes setuptools)
   cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py build && cd
 fi
-if [ ! -f ~/.local/bin/powerline-render ]; then
-# Adding sudo here so that the python extensions get registered. Might have to try to change default python instead of this.
-  echo "- Installing Powerline"
-  cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --user && cd
-fi
 
 #if [ -f ~/.git/powerline/powerline/bindings/bash/powerline.sh ]; then
   #export PATH=/Users/phutchins/Library/Python/2.7/bin:~/.git/powerline/usr/local/bin:$PATH
@@ -173,6 +168,10 @@ fi
   # Fix this so I can use the line below. Powerline doesn't like the jobnum argument in powerline.sh
   #source ~/.git/powerline/powerline/bindings/bash/powerline.sh
 if [[ $platform == 'linux' ]]; then
+  if [ ! -f ~/.local/bin/powerline-render ]; then
+    echo "- Installing Powerline"
+    cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --user && cd
+  fi
   export PATH=~/.local/bin:$PATH
   export TERM=screen-256color
   if [ -f ~/.local/lib/python2.6/site-packages/Powerline-beta-py2.6.egg/powerline/bindings/bash/powerline.sh ]; then
@@ -188,6 +187,10 @@ if [[ $platform == 'linux' ]]; then
 elif [[ $platform == 'osx' ]]; then
   # Make this only copy files if they don't exist
   # cp -r ~/github/dot-files/fonts/* ~/Library/Fonts/
+  if [ ! -f ~/Library/Python/2.7/bin/powerline ]; then
+    echo "- Installing Powerline"
+    cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --user && cd
+  fi
   export PATH=~/.git_repos/powerline/usr/local/bin:$PATH
   export TERM=screen-256color
   export JAVA_HOME=$(/usr/libexec/java_home)
