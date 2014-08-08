@@ -4,26 +4,26 @@ filetype off
 let os = substitute(system("uname"), "\n", "", "")
 if os == "Linux"
   let powerlineInstalled=1
-  let powerline_readme=expand('~/.git/powerline/README.rst')
+  let powerline_readme=expand('~/.git_repos/powerline/README.rst')
   if !filereadable(powerline_readme)
     echo "Installing Powerline"
     echo ""
-    silent !mkdir -p ~/.git
-    silent !git clone git@github.com:Lokaltog/powerline.git ~/.git/powerline
+    silent !mkdir -p ~/.git_repos
+    silent !git clone git@github.com:Lokaltog/powerline.git ~/.git_repos/powerline
     let powerlineInstalled=0
   endif
   if powerlineInstalled == 0
     echo "Building Powerline..."
     echo ""
-    silent !cd ~/.git/powerline && python ~/.git/powerline/setup.py build
-    silent !cd ~/.git/powerline && python ~/.git/powerline/setup.py install --root="~/.git/powerline"
+    silent !cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py build
+    silent !cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --root="~/.git_repos/powerline"
   endif
   let g:Powerline_symbols = 'fancy'
-  set rtp+=~/.git/powerline/powerline/bindings/vim
+  set rtp+=~/.git_repos/powerline/powerline/bindings/vim
   redraw!
 elseif os == "Darwin"
   let g:Powerline_symbols = 'fancy'
-  set rtp+=~/.git/powerline/powerline/bindings/vim
+  set rtp+=~/.git_repos/powerline/powerline/bindings/vim
   " Loads powerline from pip install
   " python from powerline.vim import setup as powerline_setup
   " python powerline_setup()
