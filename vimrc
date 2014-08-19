@@ -256,11 +256,6 @@ if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
 
-"SPEECEEAL COnnfeg"
-"" Shert-cuts to derectorees
-ca cde cd ~/Projects/Corndog
-ca etl cd ~/Projects/cde-etl
-
 " Rspec.vim mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
