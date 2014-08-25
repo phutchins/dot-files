@@ -4,18 +4,28 @@
 [ -z "$PS1" ] && return
 
 # Determine what OS we're running on
-platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
    platform='linux'
+   OS=$(lsb_release -si)
+   ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
+   VER=$(lsb_release -sr)
 elif [[ "$unamestr" == 'Darwin' ]]; then
    platform='osx'
 fi
 
 # Packages that I want installed
 if [[ $platform == 'linux' ]]; then
-  if ! [ "dpkg -l | grep tmux" ] ; then
-    sudo apt-get install tmux
+  if [[ $OS == 'Ubuntu' ]]; then
+    if ! [ "dpkg -l | grep tmux" ] ; then
+      echo "Installing Tmux"
+      sudo apt-get install tmux
+    fi
+  elif [[ $OS == 'CentOS' ]]; then
+    if ! [ "yum list installed | grep tmux" ]; then
+      echo "Installing Tmux"
+      sudo yum install tmux
+    fi
   fi
 elif [[ $platform == 'osx' ]]; then
   if [ ! -f /usr/local/bin/brew ]; then
@@ -134,21 +144,22 @@ fi
 #  source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 #fi
 # Install powerline via PIP so that it registers the libs
-if [ ! 'pip list | grep powerline' ]; then
+if [ ! 'pip list | grep Powerline' ]; then
+  echo "Installing Powerline with pip"
   pip install --user git+git://github.com/Lokaltog/powerline
 fi
 
 # To do things this way I will need to register the python extension modules manually
 # Possibly add the extensions directory to the python path
-if [ ! -d ~/.git/powerline ]; then
-  mkdir -p ~/.git
-  git clone git@github.com:Lokaltog/powerline.git ~/.git/powerline
+if [ ! -d ~/.git_repos/powerline ]; then
+  echo "Cloning Powerline GIT repository"
+  mkdir -p ~/.git_repos
+  git clone git@github.com:Lokaltog/powerline.git ~/.git_repos/powerline
 fi
-if [ ! -d ~/.git/powerline/usr/local/bin ]; then
+if [ ! -d ~/.git_repos/powerline/build/ ]; then
+  echo "- Building Powerline"
   # TODO: This requires python-pip (which includes setuptools)
-  cd ~/.git/powerline && python ~/.git/powerline/setup.py build
-  # Adding sudo here so that the python extensions get registered. Might have to try to change default python instead of this.
-  cd ~/.git/powerline && sudo python ~/.git/powerline/setup.py install --root="~/.git/powerline"
+  cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py build && cd
 fi
 
 #if [ -f ~/.git/powerline/powerline/bindings/bash/powerline.sh ]; then
@@ -157,13 +168,18 @@ fi
   # Fix this so I can use the line below. Powerline doesn't like the jobnum argument in powerline.sh
   #source ~/.git/powerline/powerline/bindings/bash/powerline.sh
 if [[ $platform == 'linux' ]]; then
-  export PATH=~/.git/powerline/usr/local/bin:$PATH
-  export TERM=screen-256color
-  if [ -f ~/.git/powerline/usr/lib/python2.6/site-packages/powerline/bindings/bash/powerline.sh ]; then
-    source ~/.git/powerline/usr/lib/python2.6/site-packages/powerline/bindings/bash/powerline.sh
+  if [ ! -f ~/.local/bin/powerline-render ]; then
+    echo "- Installing Powerline"
+    cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --user && cd
   fi
-  if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
-    source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+  export PATH=~/.local/bin:$PATH
+  export TERM=screen-256color
+  if [ -f ~/.local/lib/python2.6/site-packages/Powerline-beta-py2.6.egg/powerline/bindings/bash/powerline.sh ]; then
+    source ~/.local/lib/python2.6/site-packages/Powerline-beta-py2.6.egg/powerline/bindings/bash/powerline.sh
+  elif [ -f ~/.local/lib/python2.7/site-packages/Powerline-beta-py2.6.egg/powerline/bindings/bash/powerline.sh ]; then
+    source ~/.local/lib/python2.7/site-packages/Powerline-beta-py2.6.egg/powerline/bindings/bash/powerline.sh
+  else
+    echo "Cannot source powerline.sh for BASH"
   fi
   alias ls='ls --color=auto'
   #POWERLINE_COMMAND="$POWERLINE_COMMAND -c ext.shell.theme=default_leftonly"
@@ -171,13 +187,17 @@ if [[ $platform == 'linux' ]]; then
 elif [[ $platform == 'osx' ]]; then
   # Make this only copy files if they don't exist
   # cp -r ~/github/dot-files/fonts/* ~/Library/Fonts/
-  export PATH=~/.git/powerline/usr/local/bin:$PATH
+  if [ ! -f ~/Library/Python/2.7/bin/powerline ]; then
+    echo "- Installing Powerline"
+    cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --user && cd
+  fi
+  export PATH=~/.git_repos/powerline/usr/local/bin:$PATH
   export TERM=screen-256color
   export JAVA_HOME=$(/usr/libexec/java_home)
   if [ -f ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh ]; then
     source ~/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh
-  elif [ -f ~/.git/powerline/powerline/bindings/bash/powerline.sh ]; then
-    source ~/.git/powerline/powerline/bindings/bash/powerline.sh
+  elif [ -f ~/.git_repos/powerline/powerline/bindings/bash/powerline.sh ]; then
+    source ~/.git_repos/powerline/powerline/bindings/bash/powerline.sh
   elif [ -f ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/bash/powerline.sh ]; then
     source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/bash/powerline.sh
   fi
