@@ -211,7 +211,7 @@ fi
 function gitup {
   CURR_DIR=${PWD}
   for i in $(\ls -d ~/github/*); do
-    if [ -d ${i}/.git ]; then
+    if [ -d ${i}/.git_repos ]; then
       echo "Updating $i"
       cd $i
       git up
