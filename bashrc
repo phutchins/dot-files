@@ -147,17 +147,17 @@ fi
 
 # To do things this way I will need to register the python extension modules manually
 # Possibly add the extensions directory to the python path
-#if [ ! -d ~/.git_repos/powerline ]; then
-#  echo "Cloning Powerline GIT repository"
-#  mkdir -p ~/.git_repos
-#  git clone git@github.com:Lokaltog/powerline.git ~/.git_repos/powerline
-#fi
-#if [ ! -d ~/.git_repos/powerline/build/ ]; then
-#  echo "- Building Powerline"
-#  # TODO: This requires python-pip (which includes setuptools)
-#  sudo apt-get install python-setuptools
-#  cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py build && cd
-#fi
+if [ ! -d ~/.git_repos/powerline ]; then
+  echo "Cloning Powerline GIT repository"
+  mkdir -p ~/.git_repos
+  git clone git@github.com:Lokaltog/powerline.git ~/.git_repos/powerline
+fi
+if [ ! -d ~/.git_repos/powerline/build/ ]; then
+  echo "- Building Powerline"
+  # TODO: This requires python-pip (which includes setuptools)
+  sudo apt-get install python-setuptools
+  cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py build && cd
+fi
 
 #if [ -f ~/.git/powerline/powerline/bindings/bash/powerline.sh ]; then
   #export PATH=/Users/phutchins/Library/Python/2.7/bin:~/.git/powerline/usr/local/bin:$PATH
@@ -165,15 +165,18 @@ fi
   # Fix this so I can use the line below. Powerline doesn't like the jobnum argument in powerline.sh
   #source ~/.git/powerline/powerline/bindings/bash/powerline.sh
 if [[ $platform == 'linux' ]]; then
-  if [ ! 'pip list | grep Powerline' ]; then
-    echo "Installing Powerline with pip"
-    sudo apt-get install python-setuptools
-    pip install --user git+git://github.com/Lokaltog/powerline
-  fi
-  #if [ ! -f ~/.local/bin/powerline-render ]; then
-  #  echo "- Installing Powerline"
-  #  cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --user && cd
+  #if [ ! 'pip list | grep Powerline' ]; then
+  #  echo "Installing Powerline with pip"
+    #sudo apt-get install python-setuptools
+    #pip install --user git+git://github.com/Lokaltog/powerline
   #fi
+  if [ ! -f ~/.local/bin/powerline-render ]; then
+    echo "- Installing Powerline"
+    cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --user && cd
+  fi
+  if [ ! -h ~/.local/bin/powerline ]; then
+    ln -s ~/.git_repos/powerline/scripts/powerline ~/.local/bin/powerline
+  fi
   export PATH=~/.local/bin:$PATH
   #export PATH=~/.git_repos/powerline/usr/local/bin:$PATH
   export TERM=screen-256color
@@ -183,8 +186,8 @@ if [[ $platform == 'linux' ]]; then
   #  source ~/.git_repos/powerline/build/lib.linux-x86_64-2.7/powerline/bindings/bash/powerline.sh
   #elif [ -f ~/.local/lib/python2.6/site-packages/Powerline-beta-py2.6.egg/powerline/bindings/bash/powerline.sh ]; then
   #  source ~/.local/lib/python2.6/site-packages/Powerline-beta-py2.6.egg/powerline/bindings/bash/powerline.sh
-  #elif [ -f ~/.git_repos/powerline/powerline/bindings/bash/powerline.sh ]; then
-  #  source ~/.git_repos/powerline/powerline/bindings/bash/powerline.sh
+  elif [ -f ~/.git_repos/powerline/powerline/bindings/bash/powerline.sh ]; then
+    source ~/.git_repos/powerline/powerline/bindings/bash/powerline.sh
   #elif [ -f ~/.local/lib/python2.7/site-packages/Powerline-beta-py2.6.egg/powerline/bindings/bash/powerline.sh ]; then
   #  source ~/.local/lib/python2.7/site-packages/Powerline-beta-py2.6.egg/powerline/bindings/bash/powerline.sh
   else

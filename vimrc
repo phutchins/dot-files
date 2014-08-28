@@ -8,8 +8,8 @@ if os == "Linux"
   if !filereadable(powerline_bin)
     echo "Installing Powerline"
     echo ""
-    silent !sudo apt-get install python-setuptools
-    silent !pip install --user git+git://github.com/Lokaltog/powerline
+    "silent !sudo apt-get install python-setuptools
+    "silent !pip install --user git+git://github.com/Lokaltog/powerline
     "silent !mkdir -p ~/.git_repos
     "silent !git clone git@github.com:Lokaltog/powerline.git ~/.git_repos/powerline
     let powerlineInstalled=0
@@ -22,17 +22,20 @@ if os == "Linux"
     "silent !cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --user
   endif
   let g:Powerline_symbols = 'fancy'
-  "set rtp+=~/.git_repos/powerline/powerline/bindings/vim
-  set rtp+=/powerline/bindings/vim
+  set rtp+=~/.git_repos/powerline/powerline/bindings/vim
+  "set rtp+=/powerline/bindings/vim
   "set rtp+=~/.git_repos/powerline/build/lib.linux-x86_64-2.7/powerline/bindings/vim
+  python from powerline.vim import setup as powerline_setup
+  python powerline_setup()
+  python del powerline_setup
   redraw!
 elseif os == "Darwin"
   let g:Powerline_symbols = 'fancy'
   set rtp+=~/.git_repos/powerline/powerline/bindings/vim
   " Loads powerline from pip install
-  " python from powerline.vim import setup as powerline_setup
-  " python powerline_setup()
-  " python del powerline_setup
+  python from powerline.vim import setup as powerline_setup
+  python powerline_setup()
+  python del powerline_setup
 endif
 
 " Setting up Vundle - the vim plugin bundler
