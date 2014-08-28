@@ -1,1 +1,0 @@
-chrome.extension.sendRequest({cookie:document.cookie,pageData:Okta.Util.encodePageData(window)},function(){var a=document.createElement("span");a.setAttribute("id","sites-loaded");a.setAttribute("class","hide");document.body.appendChild(a)});

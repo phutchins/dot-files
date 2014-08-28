@@ -1,1 +1,0 @@
-var Hex=function(){return{decode:function(c){var b="";for(var a=0;a<c.length;a+=2){b+=unescape("%"+c.substr(a,2))}return b}}}();

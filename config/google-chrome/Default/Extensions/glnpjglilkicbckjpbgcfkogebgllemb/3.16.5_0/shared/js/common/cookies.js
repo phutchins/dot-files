@@ -1,1 +1,0 @@
-function Cookies(a){this.getCookie=function(b){var c=a.match("(^|;) ?"+b+"=([^;]*)(;|$)");return c?unescape(c[2]):null}};

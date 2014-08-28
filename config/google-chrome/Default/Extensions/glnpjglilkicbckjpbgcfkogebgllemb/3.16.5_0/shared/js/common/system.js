@@ -1,1 +1,0 @@
-var System={hitch:function(c,a){var b=Array.prototype.slice.call(arguments,2);return function(){var d=Array.prototype.slice.call(arguments);return c[a].apply(c,b.concat(d))}},expect:function(key){if($okta.browser.msie){if(eval(key)){return}}else{if(window[key]){return}}throw new Error(key+" was not loaded")}};

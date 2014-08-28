@@ -4,26 +4,31 @@ filetype off
 let os = substitute(system("uname"), "\n", "", "")
 if os == "Linux"
   let powerlineInstalled=1
-  let powerline_readme=expand('~/.git/powerline/README.rst')
-  if !filereadable(powerline_readme)
+  let powerline_bin=expand('~/.local/bin/powerline')
+  if !filereadable(powerline_bin)
     echo "Installing Powerline"
     echo ""
-    silent !mkdir -p ~/.git
-    silent !git clone git@github.com:Lokaltog/powerline.git ~/.git/powerline
+    silent !sudo apt-get install python-setuptools
+    silent !pip install --user git+git://github.com/Lokaltog/powerline
+    "silent !mkdir -p ~/.git_repos
+    "silent !git clone git@github.com:Lokaltog/powerline.git ~/.git_repos/powerline
     let powerlineInstalled=0
   endif
   if powerlineInstalled == 0
-    echo "Building Powerline..."
-    echo ""
-    silent !cd ~/.git/powerline && python ~/.git/powerline/setup.py build
-    silent !cd ~/.git/powerline && python ~/.git/powerline/setup.py install --root="~/.git/powerline"
+    "echo "Building Powerline..."
+    "echo ""
+    "silent !cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py build
+    "silent !cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --root="~/.git_repos/powerline"
+    "silent !cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --user
   endif
   let g:Powerline_symbols = 'fancy'
-  set rtp+=~/.git/powerline/powerline/bindings/vim
+  "set rtp+=~/.git_repos/powerline/powerline/bindings/vim
+  set rtp+=/powerline/bindings/vim
+  "set rtp+=~/.git_repos/powerline/build/lib.linux-x86_64-2.7/powerline/bindings/vim
   redraw!
 elseif os == "Darwin"
   let g:Powerline_symbols = 'fancy'
-  set rtp+=~/.git/powerline/powerline/bindings/vim
+  set rtp+=~/.git_repos/powerline/powerline/bindings/vim
   " Loads powerline from pip install
   " python from powerline.vim import setup as powerline_setup
   " python powerline_setup()
@@ -255,11 +260,6 @@ endif
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
-
-"SPEECEEAL COnnfeg"
-"" Shert-cuts to derectorees
-ca cde cd ~/Projects/Corndog
-ca etl cd ~/Projects/cde-etl
 
 " Rspec.vim mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>

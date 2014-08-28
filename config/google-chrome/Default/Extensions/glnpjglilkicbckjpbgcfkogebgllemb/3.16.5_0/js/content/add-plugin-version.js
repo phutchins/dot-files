@@ -1,1 +1,0 @@
-var child=document.createElement("span");child.innerHTML=PLUGIN_VERSIONS.currentVersion;child.setAttribute("id","okta-crx-version");child.setAttribute("style","display: none;");child.setAttribute("installMethod","webstore");document.body.appendChild(child);

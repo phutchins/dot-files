@@ -1,3 +1,0 @@
-Opscode
-Opscode
-checksum_v1 = f3b5035fb5f6c2a820fac77c7bbedaba
