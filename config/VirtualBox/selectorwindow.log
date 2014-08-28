@@ -1,0 +1,15 @@
+VirtualBox GUI VM Selector Window 4.3.10 r93012 linux.amd64 (Mar 26 2014 18:51:56) release log
+00:00:01.038495 Log opened 2014-08-27T21:18:50.751443000Z
+00:00:01.038496 Build Type: release
+00:00:01.038497 OS Product: Linux
+00:00:01.038498 OS Release: 3.13.0-35-generic
+00:00:01.038498 OS Version: #62-Ubuntu SMP Fri Aug 15 01:58:42 UTC 2014
+00:00:01.038510 DMI Product Name: System Product Name
+00:00:01.038514 DMI Product Version: System Version
+00:00:01.038599 Host RAM: 7962MB total, 4156MB available
+00:00:01.038600 Executable: /usr/lib/virtualbox/VirtualBox
+00:00:01.038601 Process ID: 17340
+00:00:01.038601 Package type: LINUX_64BITS_UBUNTU_13_04
+00:00:01.046528 UIMediumEnumerator: Medium-enumeration started...
+00:00:01.387058 UIMediumEnumerator: Medium-enumeration finished!
+00:00:01.470887 Failed to open "/dev/vboxdrv", errno=13, rc=VERR_VM_DRIVER_NOT_ACCESSIBLE

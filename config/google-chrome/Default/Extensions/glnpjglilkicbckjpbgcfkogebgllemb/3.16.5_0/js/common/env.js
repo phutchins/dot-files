@@ -1,0 +1,1 @@
+var ENV={getUrl:function(a){return chrome.extension.getURL(a)},getCss:function(a){return this._domain+"/plugin/css/"+a},getImg:function(a){return this._domain+"/plugin/img/"+a},OverlayImage:chrome.extension.getURL("img/okta-spinner.gif"),DefaultTimeout:25*1000,DefaultWaitDelay:250};

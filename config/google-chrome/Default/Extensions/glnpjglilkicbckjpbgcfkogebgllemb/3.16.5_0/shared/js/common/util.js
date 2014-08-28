@@ -1,0 +1,1 @@
+(function(){Okta.Util={encodePageData:function(c){var b=false,a=c.location;try{b=(c===c.top)}catch(d){}return JSON.stringify({isTopWindow:b,location:{protocol:a.protocol,hostname:a.hostname,port:a.port,pathname:a.pathname,search:a.search,hash:a.hash,href:a.href}})},decodePageData:function(a){return JSON.parse(a)}}}());

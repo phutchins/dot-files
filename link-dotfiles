@@ -46,6 +46,7 @@ if [ -h "$HOME/.bash_profile" ] ; then rm $HOME/.bash_profile ; else  mv $HOME/.
 if [ -h "$HOME/.bashrc" ] ; then rm $HOME/.bashrc ; else  mv $HOME/.bashrc $HOME/.bashrc.bak ; fi
 if [ -h "$HOME/.bash_aliases" ] ; then rm $HOME/.bash_aliases ; else  mv $HOME/.bash_aliases $HOME/.bash_aliases.bak ; fi
 if [ -h "$HOME/.irssi" ] ; then rm $HOME/.irssi ; else mv $HOME/.irssi $HOME/.irssi.bak ; fi
+if [ -h "$HOME/.gitconfig" ] ; then rm $HOME/.gitconfig ; else mv $HOME/.gitconfig $HOME/.gitconfig.bak ; fi
 
 echo "Creating new links..."
 ln -s $CWD/config $HOME/.config
@@ -56,3 +57,4 @@ ln -s $CWD/bash_profile $HOME/.bash_profile
 ln -s $CWD/bashrc $HOME/.bashrc
 ln -s $CWD/bash_aliases $HOME/.bash_aliases
 ln -s $CWD/irssi $HOME/.irssi
+ln -s $CWD/gitconfig $HOME/.gitconfig

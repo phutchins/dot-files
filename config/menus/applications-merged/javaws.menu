@@ -1,0 +1,12 @@
+<Menu>
+<Name>Applications</Name>
+<Menu>
+<Name>Java WebStart</Name>
+<Menu>
+<Name>ISY994 Series</Name>
+<Include>
+<Filename>jws_app_shortcut_1408886899692.desktop</Filename>
+</Include>
+</Menu>
+</Menu>
+</Menu>

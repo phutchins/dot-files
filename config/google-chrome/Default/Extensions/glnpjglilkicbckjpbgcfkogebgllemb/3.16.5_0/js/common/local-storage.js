@@ -1,0 +1,1 @@
+LocalStorage=function(){return{put:function(a,b){localStorage.setItem(a,b)},get:function(b,a){var c=localStorage.getItem(b);return c?c:a}}}();

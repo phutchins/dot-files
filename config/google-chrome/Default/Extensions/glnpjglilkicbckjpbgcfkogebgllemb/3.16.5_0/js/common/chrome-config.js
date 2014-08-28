@@ -1,0 +1,1 @@
+function ChromePluginConfig(){this.setSyncBookmarksAutomatically=function(a){LocalStorage.put("sync-bookmarks",a)};this.syncBookmarksAutomatically=function(){return LocalStorage.get("sync-bookmarks",true)}};

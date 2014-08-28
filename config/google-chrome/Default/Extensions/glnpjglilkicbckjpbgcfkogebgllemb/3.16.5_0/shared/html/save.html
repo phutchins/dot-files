@@ -1,0 +1,126 @@
+<head></head><body>hi there
+
+<div id="errorDiv"></div>Username<input id="username">Password<input id="password">Instance<select id="siteList"></select>
+
+
+<div id="saveButton">save</div>
+
+
+<script>
+
+function SaveController(callback,matchInfo){
+
+    var usernameElm;
+    var passwordElm;
+    var siteListElm;
+    var errorElm;
+
+
+    var pwInput=false;
+
+    var UNSELECTED_VALUE="choose-one";
+
+    function onPwInput(){
+        pwInput=true;
+    }
+
+    function getSelectedOption(select){
+        for (var i=0;i<select.options.length;i++){
+            var opt=select.options[i];
+            if (opt.selected){
+                return opt.value;
+            }
+        }
+
+        return null;
+    }
+
+    function setDiv(div,text){
+        while (div.hasChildNodes()) {
+            div.removeChild(div.lastChild);
+        }
+
+        var msgText = document.createTextNode(text);
+        div.appendChild(msgText);
+    }
+
+    function onSave(){
+        var selectedSite=getSelectedOption(siteListElm);
+        if (!selectedSite || selectedSite==UNSELECTED_VALUE){
+            setDiv(errorElm,"Please select a instance");
+            return;
+        }
+        if (passwordElm.value.length==0){
+            setDiv(errorElm,"Please type in a password");
+            return;
+        }
+
+        var param={username:usernameElm.value,password:passwordElm.value,appUserId:selectedSite};
+
+        if (!pwInput){
+            matchInfo.formData.passwords.forEach(function(p,idx){
+                param["ps"+idx]=p;
+            });
+        }
+
+        callback("doSave",param);
+        window.close();
+    }
+
+    function initSiteList(){
+        function createOpt(key,displayName){
+            var opt=document.createElement("option");
+            opt.value=key;
+            var msgText = document.createTextNode(displayName);
+            opt.appendChild(msgText);
+            return opt;
+        }
+
+
+        siteListElm=document.getElementById("siteList");
+
+        if (matchInfo.matchedSites.length==1){
+            var opt=createOpt(matchInfo.matchedSites[0].id,matchInfo.matchedSites[0].displayName);
+            siteListElm.appendChild(opt)
+        }else{
+            var opt=createOpt(UNSELECTED_VALUE,"(choose one)");
+            siteListElm.appendChild(opt)
+
+            matchInfo.matchedSites.forEach(function(matchedSite){
+                var opt=createOpt(matchedSite.id,matchedSite.displayName);
+                if (matchInfo.matchedSite && matchInfo.matchedSite.id==matchedSite.id){
+                    opt.selected=true;
+                }
+                siteListElm.appendChild(opt)
+            });
+        }
+    }
+
+    this.init=function(){
+        document.getElementById("saveButton").addEventListener("click",onSave,false);
+
+        usernameElm=document.getElementById("username");
+        passwordElm=document.getElementById("password");
+        errorElm=document.getElementById("errorDiv");
+
+
+        passwordElm.addEventListener("keyup",onPwInput,false);
+
+        usernameElm.value=matchInfo.formData.username;
+        passwordElm.value=matchInfo.formData.passwords.length==1?matchInfo.formData.passwords[0]:"";
+
+        initSiteList();
+    }
+}
+
+window.addEventListener("load",function(){
+    var data=window.opener._okta_secret;
+    if (!data){
+        return;
+    }
+
+    var saveController=new SaveController(data.callback,data.matchInfo);
+    saveController.init();
+},false);
+</script>
+</body>
