@@ -28,7 +28,7 @@ if os == "Linux"
   python from powerline.vim import setup as powerline_setup
   python powerline_setup()
   python del powerline_setup
-  redraw!
+  "redraw!
 elseif os == "Darwin"
   let g:Powerline_symbols = 'fancy'
   set rtp+=~/.git_repos/powerline/powerline/bindings/vim
