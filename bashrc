@@ -207,7 +207,8 @@ elif [[ $platform == 'osx' ]]; then
     #pip install git+git://github.com/Lokaltog/powerline
 
   fi
-  if [ ! -f ~/.local/bin/powerline-render ]; then
+  #if [ ! -f ~/.local/bin/powerline-render ]; then
+  if [ ! -f /usr/local/bin/powerline-render ]; then
     echo "- Installing Powerline"
     #cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --user && cd
     cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install && cd

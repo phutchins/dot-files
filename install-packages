@@ -25,6 +25,7 @@ elif [[ $platform == 'osx' ]]; then
   brew install irssi
   # Install non system python
   brew install python
+  pip install psutil
 else
   echo "Unable to detect OS or OS not supported..."
   echo ""
