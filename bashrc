@@ -37,6 +37,7 @@ elif [[ $platform == 'osx' ]]; then
   fi
 fi
 
+
 ### History ###
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
@@ -97,6 +98,7 @@ export AWS_CLOUDWATCH_HOME=~/aws/CloudWatch
 export PATH=/usr/local/git/bin:$PATH
 export PATH=$AWS_AUTO_SCALING_HOME:$PATH
 export PATH=$AWS_CLOUDWATCH_HOME:$PATH
+
 
 # Eclipse
 export PATH=${PATH}:~/android-sdk/tools
@@ -194,14 +196,25 @@ if [[ $platform == 'linux' ]]; then
     echo "Cannot source powerline.sh for BASH"
   fi
   alias ls='ls --color=auto'
+
   #POWERLINE_COMMAND="$POWERLINE_COMMAND -c ext.shell.theme=default_leftonly"
   PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
 elif [[ $platform == 'osx' ]]; then
   if [ ! 'pip list | grep Powerline' ]; then
     echo "Installing Powerline with pip"
     brew install python
-    pip install git+git://github.com/Lokaltog/powerline
+    brew linkapps
+    #pip install git+git://github.com/Lokaltog/powerline
+
   fi
+  if [ ! -f ~/.local/bin/powerline-render ]; then
+    echo "- Installing Powerline"
+    #cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --user && cd
+    cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install && cd
+  fi
+  #if [ ! -h ~/.local/bin/powerline ]; then
+  #  ln -s ~/.git_repos/powerline/scripts/powerline ~/.local/bin/powerline
+  #fi
   # Make this only copy files if they don't exist
   # cp -r ~/github/dot-files/fonts/* ~/Library/Fonts/
   #if [ ! -f ~/Library/Python/2.7/bin/powerline ]; then

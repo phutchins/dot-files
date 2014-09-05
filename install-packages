@@ -13,13 +13,18 @@ if [[ $platform == 'linux' ]]; then
   echo "Doing Linuxy things..."
 elif [[ $platform == 'osx' ]]; then
   echo "Doing osxy things..."
+  # Need to automate java install from apple
+  echo "Install Java from here: http://support.apple.com/downloads/DL1572/en_US/JavaForOSX2014-001.dmg"
   # Install HomeBrew
+  # Link: http://support.apple.com/kb/DL1572?viewlocale=en_US
   ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
   # Install RVM
   \curl -sSL https://get.rvm.io | bash -s stable --ruby
   source /Users/phutchins/.rvm/scripts/rvm
   # Install irssi
   brew install irssi
+  # Install non system python
+  brew install python
 else
   echo "Unable to detect OS or OS not supported..."
   echo ""
