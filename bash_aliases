@@ -20,3 +20,6 @@ alias be='bundle exec'
 
 # Processes
 ka () { kill $(ps aux | grep "$@" | grep -v "grep" | awk '{print $2}'); }
+
+# Docker
+alias dockerip='docker ps | tail -n +2 | while read cid b; do echo -n "$cid\t"; docker inspect $cid | grep IPAddress | cut -d \" -f 4; done'
