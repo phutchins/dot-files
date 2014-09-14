@@ -3,6 +3,10 @@
 
 # Add option to nuke and overwrite existing dotfiles
 
+agnostic_links=( ".config/powerline" ".tmuxinator" ".tmux.conf" ".vimrc" ".bash_profile" ".bashrc" ".bash_aliases" ".irssi" ".gitconfig" )
+linux_links=( ".tmux-linux")
+osx_links=( ".tmux-osx" )
+
 platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
@@ -17,7 +21,16 @@ if [[ $platform == 'linux' ]]; then
   echo ""
   CWD=$(pwd)
   echo "Removing old links and backing up non links..."
-  if [ -h "$HOME/.tmux-linux" ] ; then rm $HOME/.tmux-linux ; else  mv $HOME/.tmux-linux $HOME/.tmux-linux.bak ; fi
+  for FILE in "${linux_links[@]}"
+  do
+    :
+    if [ -h "$HOME/$FILE" ] ; then
+      rm $HOME/$FILE ;
+    elif  [ -e "$HOME/$FILE" ] ; then
+      echo "$HOME/$FILE already exists and is not a link so backing it up to ${FILE}.bak" ;
+      mv $HOME/$FILE $HOME/${FILE}.bak ;
+    fi
+  done
 
   echo "Creating new links..."
   ln -s $CWD/tmux-linux $HOME/.tmux-linux
@@ -27,7 +40,16 @@ elif [[ $platform == 'osx' ]]; then
   echo ""
   CWD=$(pwd)
   echo "Removing old links and backing up non links..."
-  if [ -h "$HOME/.tmux-osx" ] ; then rm $HOME/.tmux-osx ; else  mv $HOME/.tmux-osx $HOME/.tmux-osx.bak ; fi
+  for FILE in "${osx_links[@]}"
+  do
+    :
+    if [ -h "$HOME/$FILE" ] ; then
+      rm $HOME/$FILE ;
+    elif  [ -e "$HOME/$FILE" ] ; then
+      echo "$HOME/$FILE already exists and is not a link so backing it up to ${FILE}.bak" ;
+      mv $HOME/$FILE $HOME/${FILE}.bak ;
+    fi
+  done
 
   echo "Creating new links..."
   ln -s $CWD/tmux-osx $HOME/.tmux-osx
@@ -38,15 +60,17 @@ fi
 
 echo "Linking OS agnostic DotFiles"
 echo "Removing old links and backing up non links"
-if [ -h "$HOME/.config/powerline" ] ; then rm $HOME/.config/powerline ; else mv $HOME/.config/powerline $HOME/.config/powerline.bak ; fi
-if [ -h "$HOME/.tmuxinator" ] ; then rm $HOME/.tmuxinator ; else mv $HOME/.tmuxinator $HOME/.tmuxinator.bak ; fi
-if [ -h "$HOME/.tmux.conf" ] ; then rm $HOME/.tmux.conf ; else  mv $HOME/.tmux.conf $HOME/.tmux.conf.bak ; fi
-if [ -h "$HOME/.vimrc" ] ; then rm $HOME/.vimrc ; else  mv $HOME/.vimrc $HOME/.vimrc.bak ; fi
-if [ -h "$HOME/.bash_profile" ] ; then rm $HOME/.bash_profile ; else  mv $HOME/.bash_profile $HOME/.bash_profile.bak ; fi
-if [ -h "$HOME/.bashrc" ] ; then rm $HOME/.bashrc ; else  mv $HOME/.bashrc $HOME/.bashrc.bak ; fi
-if [ -h "$HOME/.bash_aliases" ] ; then rm $HOME/.bash_aliases ; else  mv $HOME/.bash_aliases $HOME/.bash_aliases.bak ; fi
-if [ -h "$HOME/.irssi" ] ; then rm $HOME/.irssi ; else mv $HOME/.irssi $HOME/.irssi.bak ; fi
-if [ -h "$HOME/.gitconfig" ] ; then rm $HOME/.gitconfig ; else mv $HOME/.gitconfig $HOME/.gitconfig.bak ; fi
+
+for FILE in "${agnostic_links[@]}"
+do
+  :
+  if [ -h "$HOME/$FILE" ] ; then
+    rm $HOME/$FILE ;
+  elif  [ -e "$HOME/$FILE" ] ; then
+    echo "$HOME/$FILE already exists and is not a link so backing it up to ${FILE}.bak" ;
+    mv $HOME/$FILE $HOME/${FILE}.bak ;
+  fi
+done
 
 echo "Creating new links..."
 ln -s $CWD/config/powerline $HOME/.config/powerline
