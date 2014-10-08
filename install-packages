@@ -26,6 +26,7 @@ elif [[ $platform == 'osx' ]]; then
   # Install non system python
   brew install python
   pip install psutil
+  gem install tmuxinator
 else
   echo "Unable to detect OS or OS not supported..."
   echo ""

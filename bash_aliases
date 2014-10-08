@@ -23,3 +23,8 @@ ka () { kill $(ps aux | grep "$@" | grep -v "grep" | awk '{print $2}'); }
 
 # Docker
 alias dockerip='docker ps | tail -n +2 | while read cid b; do echo -n "$cid\t"; docker inspect $cid | grep IPAddress | cut -d \" -f 4; done'
+
+# BitPay
+alias tnbitpay='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/phutchins/bitpay/testnet/bitpay'
+alias tncustomer='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/phutchins/bitpay/testnet/customer'
+alias tntestnet='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/phutchins/bitpay/testnet/pubtestnet'

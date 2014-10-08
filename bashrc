@@ -35,6 +35,8 @@ elif [[ $platform == 'osx' ]]; then
     brew install tmux
     brew install reattach-to-user-namespace
   fi
+  # Export Docker Host IP
+  export DOCKER_HOST=tcp://192.168.59.103:2375
 fi
 
 
