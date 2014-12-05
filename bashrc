@@ -73,12 +73,12 @@ export OWSSH_SSH_KEY_FILE="~/.ssh/id_rsa"
 
 ### MonDupe ###
 export MONDUPE_INSTANCE_IMAGE_ID="ami-018c9568"
-export MONDUPE_CHEF_RUN_LIST='"recipe[base], recipe[mongodb-corndog::production_copy]"'
+export MONDUPE_CHEF_RUN_LIST='"recipe[chefbp-base]"'
 export MONDUPE_CHEF_IDENTITY_FILE="~/.ssh/DevOps.pem"
 export MONDUPE_CHEF_ENVIRONMENT="internal_development"
 export MONDUPE_SSH_KEY="~/.ssh/DevOps.pem"
 export MONDUPE_SSH_USER="ubuntu"
-export MONDUPE_ROUTE53_DOMAIN="dealermatch.biz."
+export MONDUPE_ROUTE53_DOMAIN="b-pay.net."
 export MONDUPE_KEY_PAIR_NAME="DevOps"
 export MONDUPE_SECURITY_GROUP="mongo"
 export MONDUPE_S3_BUCKET_NAME="cde_production_mongo_backups"

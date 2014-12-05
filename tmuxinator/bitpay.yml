@@ -1,6 +1,6 @@
 # ~/.tmuxinator/ow-corndog.yml
 
-name: bpbitcoind
+name: bitpay
 root: ~/
 
 # Optional tmux socket
@@ -19,6 +19,11 @@ root: ~/
 # tmux_command: byobu
 
 windows:
+  - bitpay:
+      layout: main-vertical
+      panes:
+        -
+        - cd ~/gitlab/bitpay && ./runCluster 2
   - bitcoind:
       layout: main-vertical
       panes:

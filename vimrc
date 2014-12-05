@@ -203,6 +203,9 @@ au BufRead,BufNewFile *.hamlc setf haml
 "  autocmd BufWritePost .vimrc source $MYVIMRC
 "endif
 
+set modeline
+set modelines=5
+
 let g:EasyMotion_leader_key = ','
 nmap <leader>v :tabedit $MYVIMRC<CR>
 nmap <leader>n :set invnumber<CR>
