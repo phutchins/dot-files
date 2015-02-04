@@ -38,6 +38,10 @@ elif [[ $platform == 'osx' ]]; then
   # Export Docker Host IP
   export DOCKER_HOST=tcp://192.168.59.103:2375
 fi
+source "$HOME/git-completion.bash"
+if [ ! -f $HOME/git-completion.bash ]; then
+  cd && curl https://raw.github.com/git/git/master/contrib/completion/git-completion.bash -OL
+fi
 
 
 ### History ###
@@ -256,3 +260,6 @@ function gitup {
 ### RVM ###
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+export NVM_DIR="/Users/philip/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

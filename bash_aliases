@@ -26,6 +26,12 @@ ka () { kill $(ps aux | grep "$@" | grep -v "grep" | awk '{print $2}'); }
 alias dockerip='docker ps | tail -n +2 | while read cid b; do echo -n "$cid\t"; docker inspect $cid | grep IPAddress | cut -d \" -f 4; done'
 
 # BitPay
-alias tnbitpay='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/phutchins/bitpay/testnet/bitpay'
-alias tncustomer='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/phutchins/bitpay/testnet/customer'
-alias tntestnet='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/phutchins/bitpay/testnet/pubtestnet'
+alias tnbitpay='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/philip/testnet/bitpay'
+alias tncustomer='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/philip/testnet/customer'
+alias tntestnet='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/philip/testnet/pubtestnet'
+
+# Plist Services for OSX
+alias startmongo='launchctl load /usr/local/Cellar/mongodb24/2.4.10_1/homebrew.mxcl.mongodb24.plist'
+alias startredis='launchctl load /usr/local/Cellar/redis/2.8.19/homebrew.mxcl.redis.plist'
+
+alias pp='python -mjson.tool'

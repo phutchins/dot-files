@@ -17,7 +17,7 @@ elif [[ $platform == 'osx' ]]; then
   echo "Install Java from here: http://support.apple.com/downloads/DL1572/en_US/JavaForOSX2014-001.dmg"
   # Install HomeBrew
   # Link: http://support.apple.com/kb/DL1572?viewlocale=en_US
-  ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   # Install RVM
   \curl -sSL https://get.rvm.io | bash -s stable --ruby
   source /Users/phutchins/.rvm/scripts/rvm
