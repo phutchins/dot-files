@@ -7,6 +7,8 @@ agnostic_links=( ".config/powerline" ".tmuxinator" ".tmux.conf" ".vimrc" ".bash_
 linux_links=( ".tmux-linux")
 osx_links=( ".tmux-osx" )
 
+mkdir $HOME/.config
+
 platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then

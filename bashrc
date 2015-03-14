@@ -182,7 +182,7 @@ if [[ $platform == 'linux' ]]; then
     echo "- Installing Powerline"
     cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --user && cd
   fi
-  if [ ! -h ~/.local/bin/powerline ]; then
+  if [ ! -h ~/.local/bin/powerline ] && [ ! -f ~/.local/bin/powerline ]; then
     ln -s ~/.git_repos/powerline/scripts/powerline ~/.local/bin/powerline
   fi
   export PATH=~/.local/bin:$PATH
