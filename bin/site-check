@@ -6,8 +6,8 @@ do
   if [[ $1 -eq 200 ]]; then
     printf '.'
   else
-    printf "\n$1 - $2"
-    echo "$1 - $2" > site-check.errors
+    printf "$(date) - \n$1 : $2"
+    echo "$(date) - $1 : $2" > site-check.errors
   fi
   #if [[ $(($2 * 1)) -gt 3 ]]; then
   #  printf "\n$1 - $2"

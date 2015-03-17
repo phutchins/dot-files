@@ -35,3 +35,8 @@ alias startmongo='launchctl load /usr/local/Cellar/mongodb24/2.4.10_1/homebrew.m
 alias startredis='launchctl load /usr/local/Cellar/redis/2.8.19/homebrew.mxcl.redis.plist'
 
 alias pp='python -mjson.tool'
+
+alias restart-staging='knife ssh -a "ipaddress" -p 7453 "recipes:chefbp-bitpay\:\:bitpay-staging*" "sudo service bitpay-worker1 restart && sudo service bitpay-worker2 restart"'
+alias restart-integration='knife ssh -a "ipaddress" -p 7453 "recipes:chefbp-bitpay\:\:bitpay-integration*" "sudo service bitpay-worker1 restart && sudo service bitpay-worker2 restart"'
+alias restart-test='knife ssh -a "ipaddress" -p 7453 "recipes:chefbp-bitpay\:\:bitpay-test*" "sudo service bitpay-worker1 restart && sudo service bitpay-worker2 restart"'
+alias restart-cpint='knife ssh -a "ipaddress" -p 7453 "recipes:chefbp-bitpay\:\:bitpay-cpint*" "sudo service bitpay-worker1 restart && sudo service bitpay-worker2 restart"'
