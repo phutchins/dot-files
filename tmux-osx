@@ -1,7 +1,9 @@
 # Requirements: reattach-to-user-namespace, powerline
 #
 # prompt options
-source ~/.git_repos/powerline/powerline/bindings/tmux/powerline.conf
+#source ~/.git_repos/powerline/powerline/bindings/tmux/powerline.conf
+#source ~/.git_repos/powerline/powerline/bindings/tmux/powerline_tmux_1.9_plus.conf
+source /usr/local/lib/python2.7/site-packages/powerline_status-dev_d562844a1aba2a4108b1ecd2c6d9c5febff76c1d-py2.7.egg/powerline/bindings/tmux/powerline.conf
 
 # Copy & Paste
 set-option -g default-command "reattach-to-user-namespace -l bash" # or zsh...
