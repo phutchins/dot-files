@@ -32,7 +32,11 @@ alias tntestnet='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir
 
 # Plist Services for OSX
 alias startmongo='launchctl load /usr/local/Cellar/mongodb24/2.4.10_1/homebrew.mxcl.mongodb24.plist'
+alias stopmongo='launchctl unload /usr/local/Cellar/mongodb24/2.4.10_1/homebrew.mxcl.mongodb24.plist'
 alias startredis='launchctl load /usr/local/Cellar/redis/2.8.19/homebrew.mxcl.redis.plist'
+alias stopredis='launchctl unload /usr/local/Cellar/redis/2.8.19/homebrew.mxcl.redis.plist'
+#alias startredis='launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist'
+#alias stopredis='launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.redis.plist'
 
 alias pp='python -mjson.tool'
 
@@ -40,3 +44,5 @@ alias restart-staging='knife ssh -a "ipaddress" -p 7453 "recipes:chefbp-bitpay\:
 alias restart-integration='knife ssh -a "ipaddress" -p 7453 "recipes:chefbp-bitpay\:\:bitpay-integration*" "sudo service bitpay-worker1 restart && sudo service bitpay-worker2 restart"'
 alias restart-test='knife ssh -a "ipaddress" -p 7453 "recipes:chefbp-bitpay\:\:bitpay-test*" "sudo service bitpay-worker1 restart && sudo service bitpay-worker2 restart"'
 alias restart-cpint='knife ssh -a "ipaddress" -p 7453 "recipes:chefbp-bitpay\:\:bitpay-cpint*" "sudo service bitpay-worker1 restart && sudo service bitpay-worker2 restart"'
+
+certinfo () { echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -issuer -subject -dates; }
