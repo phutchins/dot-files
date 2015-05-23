@@ -29,6 +29,7 @@ alias dockerip='docker ps | tail -n +2 | while read cid b; do echo -n "$cid\t"; 
 alias tnbitpay='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/philip/testnet/bitpay'
 alias tncustomer='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/philip/testnet/customer'
 alias tntestnet='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/philip/testnet/pubtestnet'
+alias wallet1='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/philip/livenet/wallet1'
 
 # Plist Services for OSX
 alias startmongo='launchctl load /usr/local/Cellar/mongodb24/2.4.10_1/homebrew.mxcl.mongodb24.plist'
@@ -46,3 +47,4 @@ alias restart-test='knife ssh -a "ipaddress" -p 7453 "recipes:chefbp-bitpay\:\:b
 alias restart-cpint='knife ssh -a "ipaddress" -p 7453 "recipes:chefbp-bitpay\:\:bitpay-cpint*" "sudo service bitpay-worker1 restart && sudo service bitpay-worker2 restart"'
 
 certinfo () { echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -issuer -subject -dates; }
+getcert () { echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -text; }

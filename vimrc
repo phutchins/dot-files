@@ -196,6 +196,10 @@ au BufWrite * if ! &bin | call StripTrailingWhitespace() | endif
 " Add syntax highlighting for rabl
 au BufRead,BufNewFile *.rabl setf ruby
 
+if has("autocmd")
+  au BufRead,BufNewFile *.ejs setfiletype html
+endif
+
 au BufRead,BufNewFile *.hamlc setf haml
 
 "Reload .vimrc after updating it
