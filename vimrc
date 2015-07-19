@@ -113,6 +113,7 @@ set suffixesadd=.jst.ejs,.js.coffee
 syntax on
 set laststatus=2
 set encoding=utf-8
+set mouse=a
 
 map <leader>ff :CtrlP<CR>
 map <leader>fb :CtrlPBuffer<CR>

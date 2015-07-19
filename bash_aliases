@@ -36,8 +36,7 @@ alias startmongo='launchctl load /usr/local/Cellar/mongodb24/2.4.10_1/homebrew.m
 alias stopmongo='launchctl unload /usr/local/Cellar/mongodb24/2.4.10_1/homebrew.mxcl.mongodb24.plist'
 alias startredis='launchctl load /usr/local/Cellar/redis/2.8.19/homebrew.mxcl.redis.plist'
 alias stopredis='launchctl unload /usr/local/Cellar/redis/2.8.19/homebrew.mxcl.redis.plist'
-#alias startredis='launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist'
-#alias stopredis='launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.redis.plist'
+alias starttinyproxy='/usr/local/Cellar/tinyproxy/1.8.3/sbin/tinyproxy'
 
 alias pp='python -mjson.tool'
 
