@@ -215,6 +215,8 @@ let g:EasyMotion_leader_key = ','
 nmap <leader>v :tabedit $MYVIMRC<CR>
 nmap <leader>n :set invnumber<CR>
 nmap <leader>p :set paste!<CR>
+nmap <leader>] :set mouse-=a<CR>
+nmap <leader>[ :set mouse=a<CR>
 
 nnoremap <Leader>h :h <C-r><C-w><CR>
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
