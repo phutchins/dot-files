@@ -7,6 +7,7 @@ alias gu='git up'
 
 alias gup='gu && gp'
 alias gac='gaa && gc'
+alias gbl='git for-each-ref --sort=-committerdate refs/heads/'
 alias tags='git show-ref --tags -d'
 alias sha='git rev-parse HEAD'
 alias sgrep='egrep -Rso '.{0,40}$@.{0,40}' ./*'
