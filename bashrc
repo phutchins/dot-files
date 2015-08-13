@@ -7,9 +7,11 @@
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
    platform='linux'
-   OS=$(lsb_release -si)
-   ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
-   VER=$(lsb_release -sr)
+   if [ -f /usr/bin/lsb_release ]; then
+     OS=$(lsb_release -si)
+     ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
+     VER=$(lsb_release -sr)
+   fi
 elif [[ "$unamestr" == 'Darwin' ]]; then
    platform='osx'
 fi
