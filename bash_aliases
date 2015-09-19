@@ -11,6 +11,7 @@ alias gbl='git for-each-ref --sort=-committerdate refs/heads/'
 alias tags='git show-ref --tags -d'
 alias sha='git rev-parse HEAD'
 alias sgrep='egrep -Rso '.{0,40}$@.{0,40}' ./*'
+alias vi='vim'
 
 # Chef & Knife
 alias ku='knife cookbook upload'
