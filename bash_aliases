@@ -12,6 +12,7 @@ alias tags='git show-ref --tags -d'
 alias sha='git rev-parse HEAD'
 alias sgrep='egrep -Rso '.{0,40}$@.{0,40}' ./*'
 alias vi='vim'
+alias gfer='git for-each-ref --sort=-committerdate refs/heads/'
 
 # Chef & Knife
 alias ku='knife cookbook upload'
@@ -26,6 +27,7 @@ ka () { kill $(ps aux | grep "$@" | grep -v "grep" | awk '{print $2}'); }
 
 # Docker
 alias dockerip='docker ps | tail -n +2 | while read cid b; do echo -n "$cid\t"; docker inspect $cid | grep IPAddress | cut -d \" -f 4; done'
+dockerenv () { eval $(docker-machine env $@); }
 
 # BitPay
 alias tnbitpay='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/philip/testnet/bitpay'
@@ -34,11 +36,13 @@ alias tntestnet='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir
 alias wallet1='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/philip/livenet/wallet1'
 
 # Plist Services for OSX
-alias startmongo='launchctl load /usr/local/Cellar/mongodb24/2.4.10_1/homebrew.mxcl.mongodb24.plist'
-alias stopmongo='launchctl unload /usr/local/Cellar/mongodb24/2.4.10_1/homebrew.mxcl.mongodb24.plist'
+alias startmongo='launchctl load /usr/local/Cellar/mongodb/3.0.7/homebrew.mxcl.mongodb.plist'
+alias stopmongo='launchctl unload /usr/local/Cellar/mongodb/3.0.7/homebrew.mxcl.mongodb.plist'
 alias startredis='launchctl load /usr/local/Cellar/redis/2.8.19/homebrew.mxcl.redis.plist'
 alias stopredis='launchctl unload /usr/local/Cellar/redis/2.8.19/homebrew.mxcl.redis.plist'
 alias starttinyproxy='/usr/local/Cellar/tinyproxy/1.8.3/sbin/tinyproxy'
+alias startelasticsearch='launchctl load /usr/local/Cellar/elasticsearch/2.1.0_1/homebrew.mxcl.elasticsearch.plist'
+alias stopelasticsearch='launchctl unload /usr/local/Cellar/elasticsearch/2.1.0_1/homebrew.mxcl.elasticsearch.plist'
 
 alias pp='python -mjson.tool'
 
@@ -49,3 +53,6 @@ alias restart-cpint='knife ssh -a "ipaddress" -p 7453 "recipes:chefbp-bitpay\:\:
 
 certinfo () { echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -issuer -subject -dates; }
 getcert () { echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -text; }
+
+alias awsenv='echo $AWS_ENVIRONMENT'
+awssetenv () { source ~/.aws/$@.sh; }
