@@ -49,8 +49,12 @@ elif [[ $platform == 'osx' ]]; then
     brew install tmux
     brew install reattach-to-user-namespace
   fi
-  # Export Docker Host IP
-  export DOCKER_HOST=tcp://192.168.59.103:2375
+  if [ ! -f /usr/local/bin/weechat ]; then
+    echo "Installing weechat"
+    brew install weechat --with-aspell --with-curl --with-python --with-perl --with-ruby --with-lua --with-guile
+  fi
+#  # Export Docker Host IP
+#  export DOCKER_HOST=tcp://192.168.59.103:2375
 fi
 source "$HOME/git-completion.bash"
 if [ ! -f $HOME/git-completion.bash ]; then
