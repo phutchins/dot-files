@@ -11,6 +11,13 @@ if [[ "$unamestr" == 'Linux' ]]; then
      OS=$(lsb_release -si)
      ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
      VER=$(lsb_release -sr)
+     # Need to detect ARCH here with uname -r
+   elif [ -f /etc/os-release ]; then
+     source /etc/os-release
+     #OS=$(uname -r | sed s/[0-9.-]*//)
+     if [[ $ID == 'antergos' ]]; then
+       OS='ARCH'
+     fi
    fi
 elif [[ "$unamestr" == 'Darwin' ]]; then
    platform='osx'
@@ -27,6 +34,11 @@ if [[ $platform == 'linux' ]]; then
     if ! [ "yum list installed | grep tmux" ]; then
       echo "Installing Tmux"
       sudo yum install tmux
+    fi
+  elif [[ $OS == 'ARCH' ]]; then
+    if ! [ "which tmux" ]; then
+      echo "Installing Tmux, you may be asked for sudo password"
+      sudo pacman -S tmux
     fi
   fi
 elif [[ $platform == 'osx' ]]; then
@@ -165,7 +177,14 @@ fi
 if [ ! -d ~/.git_repos/powerline/build/ ]; then
   echo "- Building Powerline"
   # TODO: This requires python-pip (which includes setuptools)
-  sudo apt-get install python-setuptools
+  if [[ $OS == 'Ubuntu' ]]; then
+    echo "Installing python-setuptools"
+    sudo apt-get install python-setuptools
+  elif [[ $OS == 'ARCH' ]]; then
+    echo "Installing python-setuptools"
+    sudo pacman -S install python-setuptools
+    # Something may be funky with python here so need to test
+  fi
   cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py build && cd
 fi
 
