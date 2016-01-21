@@ -105,6 +105,11 @@ elif [[ $platform == 'osx' ]]; then
 fi
 #export PATH=~/bin:/usr/local/bin:/Users/phutchins/Library/Python/2.7/bin:$PATH
 
+#### GO ####
+export GOPATH=~/go
+export PATH=$PATH:$GOPATH/bin
+
+### AWS ###
 export AWS_AUTO_SCALING_HOME=~/aws/AutoScaling
 export AWS_CLOUDWATCH_HOME=~/aws/CloudWatch
 export PATH=/usr/local/git/bin:$PATH
@@ -269,3 +274,4 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 export NVM_DIR="/Users/philip/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
