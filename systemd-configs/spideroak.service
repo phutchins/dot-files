@@ -1,0 +1,12 @@
+[Unit]
+Description=SpiderOak Backup
+
+[Service]
+Environment="HOME=/root"
+Type=simple
+User=%i
+PIDFile=/var/run/SpiderOak.pid
+ExecStart=/usr/bin/SpiderOakONE --headless %h
+
+[Install]
+WantedBy=multi-user.target
