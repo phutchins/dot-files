@@ -29,12 +29,6 @@ ka () { kill $(ps aux | grep "$@" | grep -v "grep" | awk '{print $2}'); }
 alias dockerip='docker ps | tail -n +2 | while read cid b; do echo -n "$cid\t"; docker inspect $cid | grep IPAddress | cut -d \" -f 4; done'
 dockerenv () { eval $(docker-machine env $@); }
 
-# BitPay
-alias tnbitpay='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/philip/testnet/bitpay'
-alias tncustomer='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/philip/testnet/customer'
-alias tntestnet='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/philip/testnet/pubtestnet'
-alias wallet1='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/philip/livenet/wallet1'
-
 # Plist Services for OSX
 alias startmongo='launchctl load /usr/local/Cellar/mongodb/3.0.7/homebrew.mxcl.mongodb.plist'
 alias stopmongo='launchctl unload /usr/local/Cellar/mongodb/3.0.7/homebrew.mxcl.mongodb.plist'
@@ -46,13 +40,22 @@ alias stopelasticsearch='launchctl unload /usr/local/Cellar/elasticsearch/2.1.0_
 
 alias pp='python -mjson.tool'
 
-alias restart-staging='knife ssh -a "ipaddress" -p 7453 "recipes:chefbp-bitpay\:\:bitpay-staging*" "sudo service bitpay-worker1 restart && sudo service bitpay-worker2 restart"'
-alias restart-integration='knife ssh -a "ipaddress" -p 7453 "recipes:chefbp-bitpay\:\:bitpay-integration*" "sudo service bitpay-worker1 restart && sudo service bitpay-worker2 restart"'
-alias restart-test='knife ssh -a "ipaddress" -p 7453 "recipes:chefbp-bitpay\:\:bitpay-test*" "sudo service bitpay-worker1 restart && sudo service bitpay-worker2 restart"'
-alias restart-cpint='knife ssh -a "ipaddress" -p 7453 "recipes:chefbp-bitpay\:\:bitpay-cpint*" "sudo service bitpay-worker1 restart && sudo service bitpay-worker2 restart"'
-
 certinfo () { echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -issuer -subject -dates; }
 getcert () { echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -text; }
 
-alias awsenv='echo $AWS_ENVIRONMENT'
+# alias awsenv='echo $AWS_ENVIRONMENT'
+awsenv () {
+  if [[ -z "$@" ]]; then
+    echo $AWS_ENVIRONMENT;
+  else
+    source ~/.aws/$@.sh;
+    echo "AWS Environment Set To: $AWS_ENVIRONMENT";
+  fi;
+}
 awssetenv () { source ~/.aws/$@.sh; }
+
+## Kubernetes ##
+# Run kubectl and set the namespace by environment variable
+kube () { echo "K8S Namespace: $KUBECTL_NAMESPACE"; kubectl --namespace="$KUBECTL_NAMESPACE" $@; }
+# Set the kubernetes namespace environment variable
+kns () { export KUBECTL_NAMESPACE="$@"; }
