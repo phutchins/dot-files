@@ -58,4 +58,11 @@ awssetenv () { source ~/.aws/$@.sh; }
 # Run kubectl and set the namespace by environment variable
 kube () { echo "K8S Namespace: $KUBECTL_NAMESPACE"; kubectl --namespace="$KUBECTL_NAMESPACE" $@; }
 # Set the kubernetes namespace environment variable
-kns () { export KUBECTL_NAMESPACE="$@"; }
+kns () {
+  if [[ -z "$@" ]]; then
+    echo "Kubernetes Namespace is currently: $KUBECTL_NAMESPACE";
+  else
+    export KUBECTL_NAMESPACE="$@";
+    echo "Kubernetes Namespace Set To: $KUBECTL_NAMESPACE";
+  fi;
+}

@@ -24,10 +24,16 @@ windows:
       panes:
         -
   - pipo:
-      layout: main-vertical
+      layout: 9e66,420x85,0,0{150x85,0,0,2,139x85,151,0,4,129x85,291,0[129x57,291,0,5,129x27,291,58,6]}
       panes:
-        - cd ~/github/pipo
+        - cd ~/github/pipo && clear
+        - cd ~/github/pipo && clear
+        - cd ~/github/pipo && clear
+        - cd ~/github/pipo && clear
   - blue:
-      layout: main-vertical
+      layout: 9e66,420x85,0,0{150x85,0,0,2,139x85,151,0,4,129x85,291,0[129x57,291,0,5,129x27,291,58,6]}
       panes:
-        - cd ~/github/blue
+        - cd ~/github/blue && clear
+        - cd ~/github/blue && clear
+        - cd ~/github/blue && clear
+        - cd ~/github/blue && clear
