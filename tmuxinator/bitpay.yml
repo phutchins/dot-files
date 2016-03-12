@@ -1,0 +1,45 @@
+# ~/.tmuxinator/ow-corndog.yml
+
+name: bitpay
+root: ~/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+windows:
+  - bitpay:
+      layout: main-vertical
+      panes:
+        -
+        - cd ~/gitlab/bitpay && ./runCluster 2
+  - bitcoind:
+      layout: main-vertical
+      panes:
+        -
+        - tnbitpay
+        - tncustomer
+        - tntestnet
+  - raspberry:
+      layout: main-vertical
+      panes:
+        -
+        - ssh rasph.bp
+        - ssh rasphi.bp
+  - faucet:
+      layout: main-vertical
+      panes:
+        -
+        - cd ~/github/bitfaucet/ && node app.js bptestnet
+        - cd ~/github/bitfaucet/ && node app.js testnet

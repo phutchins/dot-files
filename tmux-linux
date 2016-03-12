@@ -2,7 +2,7 @@
 #
 # prompt options
 #source ~/.local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf
-source ~/.git/powerline/powerline/bindings/tmux/powerline.conf
+source ~/.git_repos/powerline/powerline/bindings/tmux/powerline.conf
 
 # Copy & Paste
 # move x clipboard into tmux paste buffer

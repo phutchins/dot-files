@@ -1,0 +1,39 @@
+# ~/.tmuxinator/ow-corndog.yml
+
+name: dev
+root: ~/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+windows:
+  - misc:
+      layout: main-vertical
+      panes:
+        -
+  - pipo:
+      layout: 9e66,420x85,0,0{150x85,0,0,2,139x85,151,0,4,129x85,291,0[129x57,291,0,5,129x27,291,58,6]}
+      panes:
+        - cd ~/github/pipo && clear
+        - cd ~/github/pipo && clear
+        - cd ~/github/pipo && clear
+        - cd ~/github/pipo && clear
+  - blue:
+      layout: 9e66,420x85,0,0{150x85,0,0,2,139x85,151,0,4,129x85,291,0[129x57,291,0,5,129x27,291,58,6]}
+      panes:
+        - cd ~/github/blue && clear
+        - cd ~/github/blue && clear
+        - cd ~/github/blue && clear
+        - cd ~/github/blue && clear

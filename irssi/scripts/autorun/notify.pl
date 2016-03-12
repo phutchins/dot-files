@@ -1,0 +1,1 @@
+/home/phutchins/.irssi/scripts/notify.pl

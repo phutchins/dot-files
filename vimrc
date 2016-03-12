@@ -4,30 +4,38 @@ filetype off
 let os = substitute(system("uname"), "\n", "", "")
 if os == "Linux"
   let powerlineInstalled=1
-  let powerline_readme=expand('~/.git/powerline/README.rst')
-  if !filereadable(powerline_readme)
+  let powerline_bin=expand('~/.local/bin/powerline')
+  if !filereadable(powerline_bin)
     echo "Installing Powerline"
     echo ""
-    silent !mkdir -p ~/.git
-    silent !git clone git@github.com:Lokaltog/powerline.git ~/.git/powerline
+    "silent !sudo apt-get install python-setuptools
+    "silent !pip install --user git+git://github.com/Lokaltog/powerline
+    "silent !mkdir -p ~/.git_repos
+    "silent !git clone git@github.com:Lokaltog/powerline.git ~/.git_repos/powerline
     let powerlineInstalled=0
   endif
   if powerlineInstalled == 0
-    echo "Building Powerline..."
-    echo ""
-    silent !cd ~/.git/powerline && python ~/.git/powerline/setup.py build
-    silent !cd ~/.git/powerline && python ~/.git/powerline/setup.py install --root="~/.git/powerline"
+    "echo "Building Powerline..."
+    "echo ""
+    "silent !cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py build
+    "silent !cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --root="~/.git_repos/powerline"
+    "silent !cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --user
   endif
   let g:Powerline_symbols = 'fancy'
-  set rtp+=~/.git/powerline/powerline/bindings/vim
-  redraw!
+  set rtp+=~/.git_repos/powerline/powerline/bindings/vim
+  "set rtp+=/powerline/bindings/vim
+  "set rtp+=~/.git_repos/powerline/build/lib.linux-x86_64-2.7/powerline/bindings/vim
+  "python from powerline.vim import setup as powerline_setup
+  "python powerline_setup()
+  "python del powerline_setup
+  "redraw!
 elseif os == "Darwin"
   let g:Powerline_symbols = 'fancy'
-  set rtp+=~/.git/powerline/powerline/bindings/vim
+  set rtp+=~/.git_repos/powerline/powerline/bindings/vim
   " Loads powerline from pip install
-  " python from powerline.vim import setup as powerline_setup
-  " python powerline_setup()
-  " python del powerline_setup
+  python from powerline.vim import setup as powerline_setup
+  python powerline_setup()
+  python del powerline_setup
 endif
 
 " Setting up Vundle - the vim plugin bundler
@@ -105,6 +113,7 @@ set suffixesadd=.jst.ejs,.js.coffee
 syntax on
 set laststatus=2
 set encoding=utf-8
+set mouse=a
 
 map <leader>ff :CtrlP<CR>
 map <leader>fb :CtrlPBuffer<CR>
@@ -141,11 +150,14 @@ set number
 set ic
 set hlsearch
 set incsearch
-set noswapfile
+"set noswapfile
+"set nobackup
+set backupdir=~/.vim/backup/,~/.tmp,~/tmp,/tmp
+set directory=~/.vim/backup/,~/.tmp,~/tmp,/tmp
 set autoread      "Autoreload files changed externally
 set noeb vb t_vb=
 set so=5
-set foldmethod=syntax
+set foldmethod=indent
 set foldminlines=1
 set foldlevel=100
 au GUIEnter * set vb t_vb=
@@ -185,6 +197,10 @@ au BufWrite * if ! &bin | call StripTrailingWhitespace() | endif
 " Add syntax highlighting for rabl
 au BufRead,BufNewFile *.rabl setf ruby
 
+if has("autocmd")
+  au BufRead,BufNewFile *.ejs setfiletype html
+endif
+
 au BufRead,BufNewFile *.hamlc setf haml
 
 "Reload .vimrc after updating it
@@ -192,10 +208,15 @@ au BufRead,BufNewFile *.hamlc setf haml
 "  autocmd BufWritePost .vimrc source $MYVIMRC
 "endif
 
+set modeline
+set modelines=5
+
 let g:EasyMotion_leader_key = ','
 nmap <leader>v :tabedit $MYVIMRC<CR>
 nmap <leader>n :set invnumber<CR>
 nmap <leader>p :set paste!<CR>
+nmap <leader>] :set mouse-=a<CR>
+nmap <leader>[ :set mouse=a<CR>
 
 nnoremap <Leader>h :h <C-r><C-w><CR>
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
@@ -252,11 +273,6 @@ endif
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
-
-"SPEECEEAL COnnfeg"
-"" Shert-cuts to derectorees
-ca cde cd ~/Projects/Corndog
-ca etl cd ~/Projects/cde-etl
 
 " Rspec.vim mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
