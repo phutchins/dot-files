@@ -152,3 +152,20 @@ function gitup {
 ### RVM ###
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export PATH=/usr/local/sbin:/Users/flip/.git/powerline/usr/local/bin:/Users/flip/aws/CloudWatch:/Users/flip/aws/AutoScaling:/usr/local/git/bin:/Users/flip/bin:/usr/local/bin:/Users/flip/Library/Python/2.7/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:/Users/flip/android-sdk/tools:/Users/flip/android-sdk/platform-tools:/Users/flip/.rvm/bin
+
+# Install and set up NVM
+if [[ $platform == 'linux' ]]; then
+  if [ -f $(brew --prefix nvm)/nvm.sh ]; then
+    export NVM_DIR=~/.nvm
+    source $(brew --prefix nvm)/nvm.sh
+  fi
+elif [[ $platform == 'osx' ]]; then
+  if ! [ -f $(brew --prefix nvm)/nvm.sh ]; then
+    brew install nvm
+  fi
+  if [ -f $(brew --prefix nvm)/nvm.sh ]; then
+    export NVM_DIR=~/.nvm
+    source $(brew --prefix nvm)/nvm.sh
+  fi
+fi
