@@ -25,6 +25,7 @@ elif [[ $platform == 'osx' ]]; then
   brew install irssi
   # Install non system python
   brew install python
+  brew install python-pip
   pip install psutil
   gem install tmuxinator
 else

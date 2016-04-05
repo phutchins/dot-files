@@ -17,6 +17,11 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
    platform='osx'
 fi
 
+if [[ $platform == 'osx' ]]; then
+  rsync -rtv ~/github/dot-files/fonts/* ~/Library/Fonts/
+  #cp -r ~/github/dot-files/fonts/* ~/Library/Fonts/
+fi
+
 if [[ $platform == 'linux' ]]; then
   # Do Linux type things
   echo "Linking DotFiles for Linux..."

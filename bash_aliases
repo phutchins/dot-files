@@ -30,8 +30,8 @@ alias dockerip='docker ps | tail -n +2 | while read cid b; do echo -n "$cid\t"; 
 dockerenv () { eval $(docker-machine env $@); }
 
 # Plist Services for OSX
-alias startmongo='launchctl load /usr/local/Cellar/mongodb/3.0.7/homebrew.mxcl.mongodb.plist'
-alias stopmongo='launchctl unload /usr/local/Cellar/mongodb/3.0.7/homebrew.mxcl.mongodb.plist'
+alias startmongo='launchctl load /usr/local/Cellar/mongodb/3.2.4/homebrew.mxcl.mongodb.plist'
+alias stopmongo='launchctl unload /usr/local/Cellar/mongodb/3.2.4/homebrew.mxcl.mongodb.plist'
 alias startredis='launchctl load /usr/local/Cellar/redis/2.8.19/homebrew.mxcl.redis.plist'
 alias stopredis='launchctl unload /usr/local/Cellar/redis/2.8.19/homebrew.mxcl.redis.plist'
 alias starttinyproxy='/usr/local/Cellar/tinyproxy/1.8.3/sbin/tinyproxy'
