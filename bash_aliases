@@ -32,11 +32,11 @@ dockerenv () { eval $(docker-machine env $@); }
 # Plist Services for OSX
 alias startmongo='launchctl load /usr/local/Cellar/mongodb/3.2.4/homebrew.mxcl.mongodb.plist'
 alias stopmongo='launchctl unload /usr/local/Cellar/mongodb/3.2.4/homebrew.mxcl.mongodb.plist'
-alias startredis='launchctl load /usr/local/Cellar/redis/2.8.19/homebrew.mxcl.redis.plist'
-alias stopredis='launchctl unload /usr/local/Cellar/redis/2.8.19/homebrew.mxcl.redis.plist'
+alias startredis='launchctl load /usr/local/Cellar/redis/3.0.7/homebrew.mxcl.redis.plist'
+alias stopredis='launchctl unload /usr/local/Cellar/redis/3.0.7/homebrew.mxcl.redis.plist'
 alias starttinyproxy='/usr/local/Cellar/tinyproxy/1.8.3/sbin/tinyproxy'
-alias startelasticsearch='launchctl load /usr/local/Cellar/elasticsearch/2.1.0_1/homebrew.mxcl.elasticsearch.plist'
-alias stopelasticsearch='launchctl unload /usr/local/Cellar/elasticsearch/2.1.0_1/homebrew.mxcl.elasticsearch.plist'
+alias startelasticsearch='launchctl load /usr/local/Cellar/elasticsearch22/2.2.2/homebrew.mxcl.elasticsearch22.plist'
+alias stopelasticsearch='launchctl unload /usr/local/Cellar/elasticsearch22/2.2.2/homebrew.mxcl.elasticsearch22.plist'
 
 alias pp='python -mjson.tool'
 
