@@ -76,6 +76,7 @@ endif
     Bundle 'rking/ag.vim'
     Bundle 'nathanaelkane/vim-indent-guides'
     Bundle 'thoughtbot/vim-rspec'
+    Bundle 'Valloric/YouCompleteMe'
     "Bundle 'Syntastic' "uber awesome syntax and errors highlighter
     if iCanHazVundle == 0
         echo "Installing Bundles, please ignore key map error messages"

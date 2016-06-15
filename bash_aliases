@@ -12,6 +12,7 @@ alias tags='git show-ref --tags -d'
 alias sha='git rev-parse HEAD'
 alias sgrep='egrep -Rso '.{0,40}$@.{0,40}' ./*'
 alias vi='vim'
+alias vim='/usr/local/bin/vim'
 alias gfer='git for-each-ref --sort=-committerdate refs/heads/'
 
 # Chef & Knife
