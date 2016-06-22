@@ -18,7 +18,9 @@ alias gfer='git for-each-ref --sort=-committerdate refs/heads/'
 # Chef & Knife
 alias ku='knife cookbook upload'
 knife-bootstrap () { knife bootstrap -N $@ -E internal_production -i ~/.ssh/DevOps.pem -r "recipe[base]" -x ubuntu --sudo $@; }
-sr () { echo "Running command on $1"; knife ssh "stack:$1" -a rackspace.public_ip -p 7453 -x philip "$2"; }
+
+# Knife SSH Shortcut - Need to make sure to enter the command to execute in quotes and use sudo with -i to get env
+sr () { echo "Running command on $1"; knife ssh "name:$1" -a cloud_v2.public_ipv4 -x philip "$2"; }
 
 # Bundler
 alias be='bundle exec'
