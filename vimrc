@@ -161,6 +161,7 @@ set so=5
 set foldmethod=indent
 set foldminlines=1
 set foldlevel=100
+set backspace=indent,eol,start
 au GUIEnter * set vb t_vb=
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
@@ -172,7 +173,7 @@ nmap <leader>l :set list!<CR>
 set listchars=tab:▸\ ,eol:¬
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
-set list
+" set list
 
 " Backup files in alternative directory
 set backupdir-=.

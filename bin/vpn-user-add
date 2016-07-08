@@ -1,0 +1,19 @@
+#!/bin/bash
+
+MYUSER=`whoami`
+HOST=vpn.storj.io
+
+function host_run_sudo() {
+  ssh -n $MYUSER@$HOST sudo $1
+}
+
+if [[ $1 && $2 ]]; then
+  USERNAME=$1
+  EMAIL=$2
+  echo "Creating key for $USERNAME with email $EMAIL"
+else
+  echo "Please include a USERNAME and EMAIL"
+fi
+
+host_run_sudo "/usr/local/bin/vpnsetup $USERNAME"
+scp $HOST:/etc/openvpn/easy-rsa/tmp/${USERNAME}.tgz $HOME/tmp/vpn/

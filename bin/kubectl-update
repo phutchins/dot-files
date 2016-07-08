@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# Find latest version of kubectl
+REQUESTED_VERSION=$@
+KUBECTL_VERSION="${REQUESTED_VERSION:-v1.3.0}"
+ARCHITECTURE=amd64
+
+# Determine what OS we're running on
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+   PLATFORM='linux'
+   if [ -f /usr/bin/lsb_release ]; then
+     OS=$(lsb_release -si)
+     ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
+     VER=$(lsb_release -sr)
+     # Need to detect ARCH here with uname -r
+   elif [ -f /etc/os-release ]; then
+     source /etc/os-release
+     #OS=$(uname -r | sed s/[0-9.-]*//)
+     if [[ $ID == 'antergos' ]]; then
+       OS='ARCH'
+     fi
+   fi
+elif [[ "$unamestr" == 'Darwin' ]]; then
+   PLATFORM='darwin'
+fi
+
+echo "Downloading kubectl version $KUBECTL_VERSION for platform $PLATFORM"
+
+cd /tmp
+curl -o /tmp/kubectl https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/$PLATFORM/$ARCHITECTURE/kubectl
+
+echo "curl result $?"
+
+echo "Got kubectl binary. Installing..."
+chmod +x /tmp/kubectl
+
+echo "Backing up current binary at /usr/local/bin/kubectl.old"
+mv /usr/local/bin/kubectl /usr/local/bin/kubectl.old
+echo "Moving in new binary..."
+mv /tmp/kubectl /usr/local/bin/kubectl
+
+echo "Updated kubectl binary to version $KUBECTL_VERSION"

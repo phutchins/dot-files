@@ -20,7 +20,7 @@ alias ku='knife cookbook upload'
 knife-bootstrap () { knife bootstrap -N $@ -E internal_production -i ~/.ssh/DevOps.pem -r "recipe[base]" -x ubuntu --sudo $@; }
 
 # Knife SSH Shortcut - Need to make sure to enter the command to execute in quotes and use sudo with -i to get env
-sr () { echo "Running command on $1"; knife ssh "name:$1" -a cloud_v2.public_ipv4 -x philip "$2"; }
+cr () { echo "Running command on $1"; knife ssh "name:$1" -a cloud_v2.public_ipv4 -x philip "$2"; }
 
 # Bundler
 alias be='bundle exec'
@@ -67,5 +67,18 @@ kns () {
   else
     export KUBECTL_NAMESPACE="$@";
     echo "Kubernetes Namespace Set To: $KUBECTL_NAMESPACE";
+  fi;
+}
+
+# Set the kubernetes current context
+kenv () {
+  if [[ -z "$@" ]]; then
+    CURRENT_CONTEXT=$(kubectl config current-context);
+    echo "Kubernetes environment is currently: $CURRENT_CONTEXT";
+  else
+    PREVIOUS_CONTEXT=$(kubectl config current-context);
+    KUBECTL_OUTPUT=$(kubectl config use-context storj-$@_kubernetes)
+    CURRENT_CONTEXT=$(kubectl config current-context);
+    echo "Kubernetes environment changed from $PREVIOUS_CONTEXT to $CURRENT_CONTEXT";
   fi;
 }

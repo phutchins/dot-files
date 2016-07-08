@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+require 'json'
+
+# Usage:
+# storj-deploy [app] [environment] [version]
+if !ARGV[2]
+  puts "Usage: storj-deploy [app] [environment] [version]"
+  exit(1)
+end
+
+# Defaults
+env_file_dir = "/Users/philip/github/chefsj/environment/"
+
+# App Options ( bridge )
+APP = ARGV[0]
+ENVIRONMENT = ARGV[1]
+VERSION = ARGV[2]
+
+# Update environment file locally
+env_file = File.join(env_file_dir, ENVIRONMENT + '.json')
+env_file_data = File.read(env_file)
+env_data_json = JSON.parse(env_file_data)
+env_data_json['override_attributes']['storj']['bridge']['revision'] = VERSION
+env_data_pretty = JSON.pretty_generate(env_data_json)
+
+#puts "New ENV:\n #{env_data_pretty}"
+# Should diff the file here and prompt for OK before moving along...
+
+# Write the file
+File.open(env_file, "w") do |f|
+  f.write(env_data_pretty)
+end
+
+# Upload the new environment file to chef
+puts "Uplaoding new environment file"
+
+`knife environment from file #{env_file}`
+
+# Commit the changes to git
+puts "Committing changes to GIT"
+`cd #{env_file_dir} && git add ./#{ENVIRONMENT + '.json'} && git commit -m 'updating #{APP} version to #{VERSION}' && git push`
+
+# Use knife ssh to run chef-client on all hosts for this app one at a time
+puts "Running chef on app hosts to deploy changes"
+`knife ssh "chef_environment:#{ENVIRONMENT} AND recipes:chefsj-storj\\:\\:#{APP}" -a cloud_v2.public_ipv4 sudo chef-client`
+
+puts "Deploy COMPLETE!"

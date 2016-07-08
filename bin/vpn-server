@@ -1,0 +1,15 @@
+#!/bin/bash
+if [[ $1 ]]; then
+  HOST=$1
+  echo "Creating key for $HOST"
+else
+  echo "Please include a hostname"
+fi
+
+ssh vpn.bp "sudo /etc/openvpn/scripts/vpnsetup $HOST"
+scp vpn.bp:/etc/openvpn/easy-rsa/$HOST.zip $HOME/gitlab/chefbp-base/files/default/
+cd $HOME/gitlab/chefbp-base
+git add . --all
+git commit -m  "adding vpn keys for $HOST"
+git push
+knife cookbook upload chefbp-base --force

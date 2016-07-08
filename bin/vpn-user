@@ -1,0 +1,10 @@
+#!/bin/bash
+if [[ $1 ]]; then
+  USERNAME=$1
+  echo "Creating key for $USERNAME"
+else
+  echo "Please include a USERNAME"
+fi
+
+ssh vpn.bp "sudo /etc/openvpn/scripts/vpnsetup $USERNAME"
+scp vpn.bp:/etc/openvpn/easy-rsa/${USERNAME}.zip $HOME/tmp/vpn/
