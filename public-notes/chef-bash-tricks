@@ -1,0 +1,1 @@
+for host in `knife search node "chef_environment:production AND recipes:chefsj-storj\\:\\:bridge_production" -a cloud_v2.public_ipv4 -F json | jq '.rows[][][]' | sed -e 's/^"//' -e 's/"$//'`; do curl http://$host:8080 | jq '.info' ; done

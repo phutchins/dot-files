@@ -1,47 +1,60 @@
 #!/usr/bin/env ruby
+
+require 'optparse'
 require 'json'
 
-# Usage:
-# storj-deploy [app] [environment] [version]
-if !ARGV[2]
-  puts "Usage: storj-deploy [app] [environment] [version]"
-  exit(1)
-end
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: storj-deploy [options]"
+
+  opts.on('-d', '--deploy TYPE', 'Deploy type') { |v| options[:deploy_type] = v }
+  opts.on('-a', '--app APPLICATION', 'Application to deploy') { |v| options[:application] = v }
+  opts.on('-e', '--environment ENVIRONMENT', 'Environment in which to deploy') { |v| options[:environment] = v }
+  opts.on('-v', '--version VERSION', 'Version to deploy') { |v| options[:version] = v }
+end.parse!
+
+puts "Deploying #{options[:application]} to #{options[:environment]}"
 
 # Defaults
 env_file_dir = "/Users/philip/github/chefsj/environment/"
 
-# App Options ( bridge )
-APP = ARGV[0]
-ENVIRONMENT = ARGV[1]
-VERSION = ARGV[2]
+if options[:version]
+	# Update environment file locally
+	env_file = File.join(env_file_dir, options[:environment] + '.json')
+	env_file_data = File.read(env_file)
+	env_data_json = JSON.parse(env_file_data)
+	env_data_json['override_attributes']['storj']['bridge']['revision'] = options[:version]
+	env_data_pretty = JSON.pretty_generate(env_data_json)
 
-# Update environment file locally
-env_file = File.join(env_file_dir, ENVIRONMENT + '.json')
-env_file_data = File.read(env_file)
-env_data_json = JSON.parse(env_file_data)
-env_data_json['override_attributes']['storj']['bridge']['revision'] = VERSION
-env_data_pretty = JSON.pretty_generate(env_data_json)
+	#puts "New ENV:\n #{env_data_pretty}"
+	# Should diff the file here and prompt for OK before moving along...
 
-#puts "New ENV:\n #{env_data_pretty}"
-# Should diff the file here and prompt for OK before moving along...
+	# Write the file
+	File.open(env_file, "w") do |f|
+		f.write(env_data_pretty)
+	end
 
-# Write the file
-File.open(env_file, "w") do |f|
-  f.write(env_data_pretty)
+	# Upload the new environment file to chef
+	puts "Uplaoding new environment file"
+
+	`knife environment from file #{env_file}`
+
+	# Commit the changes to git
+	puts "Committing changes to GIT"
+	`cd #{env_file_dir} && git add ./#{options[:environment] + '.json'} && git commit -m 'updating #{options[:application]} version to #{options[:version]}' && git push`
 end
-
-# Upload the new environment file to chef
-puts "Uplaoding new environment file"
-
-`knife environment from file #{env_file}`
-
-# Commit the changes to git
-puts "Committing changes to GIT"
-`cd #{env_file_dir} && git add ./#{ENVIRONMENT + '.json'} && git commit -m 'updating #{APP} version to #{VERSION}' && git push`
 
 # Use knife ssh to run chef-client on all hosts for this app one at a time
 puts "Running chef on app hosts to deploy changes"
-`knife ssh "chef_environment:#{ENVIRONMENT} AND recipes:chefsj-storj\\:\\:#{APP}" -a cloud_v2.public_ipv4 sudo chef-client`
+puts "Running knife ssh \"chef_environment:#{options[:environment]} AND recipes:chefsj-storj\\:\\:#{options[:application]}\" -a cloud_v2.public_ipv4 sudo -i chef-client"
+chef_output = `knife ssh "chef_environment:#{options[:environment]} AND recipes:chefsj-storj\\:\\:#{options[:application]}" "sudo -i chef-client" -i ~/.ssh/id_rsa.storj -a cloud_v2.public_ipv4`
+
+puts "Chef output: #{chef_output.lines.last}"
 
 puts "Deploy COMPLETE!"
+
+# knife ssh "name:bridge-api-* AND chef_environment:production AND NOT name:bridge-api-proxy-*" -a cloud_v2.public_ipv4 -x philip "sudo rm -rf /opt/storj/bridge/node_modules/storj && sudo -i -u storj bash -c \"cd /opt/storj/bridge && source /opt/storj/.nvm/nvm.sh && npm install\""
+# knife ssh "name:bridge-api-* AND chef_environment:production AND NOT name:bridge-api-proxy-*" -a cloud_v2.public_ipv4 -x philip "sudo service bridge restart"
+#
+# We can do this with gcloud to get the actual hosts
+# for addr in `gcloud compute instances list --filter='tags.items:bridge-renters' | sed -n '1!p' | awk '{ print $5 }'`; do ssh $addr hostname; done

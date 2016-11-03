@@ -20,7 +20,10 @@ alias ku='knife cookbook upload'
 knife-bootstrap () { knife bootstrap -N $@ -E internal_production -i ~/.ssh/DevOps.pem -r "recipe[base]" -x ubuntu --sudo $@; }
 
 # Knife SSH Shortcut - Need to make sure to enter the command to execute in quotes and use sudo with -i to get env
-cr () { echo "Running command on $1"; knife ssh "name:$1" -a cloud_v2.public_ipv4 -x philip "$2"; }
+# Should add ability to do environment also and some help...
+# knife ssh "name:bridge-api-* AND chef_environment:production" -a cloud_v2.public_ipv4 -x philip "sudo -i hostname"
+crn () { echo "Running command on $1"; knife ssh "name:$1" -a cloud_v2.public_ipv4 -x philip "$2"; }
+crr () { echo "Running command on $1"; knife ssh "recipes:$1" -a cloud_v2.public_ipv4 -x philip "$2"; }
 
 # Bundler
 alias be='bundle exec'
@@ -59,7 +62,7 @@ awssetenv () { source ~/.aws/$@.sh; }
 
 ## Kubernetes ##
 # Run kubectl and set the namespace by environment variable
-kube () { echo "K8S Namespace: $KUBECTL_NAMESPACE"; kubectl --namespace="$KUBECTL_NAMESPACE" $@; }
+kube () { kubectl --namespace="$KUBECTL_NAMESPACE" $@; }
 # Set the kubernetes namespace environment variable
 kns () {
   if [[ -z "$@" ]]; then
