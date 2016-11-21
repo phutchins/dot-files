@@ -1,0 +1,16 @@
+#!/bin/bash
+
+for i in "$@"
+do
+case $i in
+  -t=*|--tag=*)
+  TAG="${i#*=}"
+  shift
+  ;;
+  *)
+  ;;
+esac
+done
+
+#for addr in `gcloud compute instances list --filter="tags.items:${TAG}" | sed -n '1!p' | awk '{ print $9 }'`; do echo $addr; done
+for addr in `gcloud compute instances list --filter="tags.items:${TAG}" | sed -n '1!p' | awk '{ print $5 }'`; do echo $addr; done

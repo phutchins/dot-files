@@ -1,0 +1,34 @@
+#!/bin/bash
+
+remove_from_knownhosts () {
+  echo "remove_from_knownhosts is processing $1";
+  line_number=$( ssh-keygen -F $1 | awk '{ print $6 }'; );
+  if ! [ -z "$line_number" ]; then
+    echo "Found $1 on line $line_number";
+
+    #sed -i.bak -e "$line_number"'d' ~/.ssh/known_hosts;
+
+    echo "Done with $1";
+  else
+    echo "Host $1 not found in known_hosts";
+  fi
+  break;
+}
+
+add_host_to_knownhosts () {
+  ssh-keyscan -H $1 >> ~/.ssh/known_hosts;
+  echo "Host $i added to known hosts";
+}
+
+rescan_key () {
+  ssh-keygen -R $1;
+  ssh-keyscan $1 >> ~/.ssh/known_hosts;
+}
+
+read_from_pipe () {
+  while read line; do
+    echo $(rescan_key "$line");
+  done
+};
+
+read_from_pipe;

@@ -1,0 +1,178 @@
+#!/usr/bin/env ruby
+
+# TODO
+# - Add confirmation and summary before doing anything
+# - Add ability to list all hosts that we would deploy to
+# - Add option to select deploying to type of host or all hosts in env
+# - Add ability to select different environments (via tag) in nonprod
+# - Ability to list available environments
+
+require 'optparse'
+require 'json'
+
+defaults = {
+  'host_search' => 'gcloud',
+  'environment' => 'nonprod'
+}
+host_types = {
+  'bridge-api' => {
+    'services' => [
+      {
+        'name' => 'bridge',
+        'instances' => 14
+      },
+      {
+        'name' => 'landlord'
+      }
+    ]
+  },
+  'bridge-renters' => {
+    'services' => [
+      {
+        'name' => 'renter',
+        'instances' => 14
+      }
+    ]
+  },
+  'farmer' => {
+    'services' => {
+      'name' => 'share'
+    }
+  }
+}
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: storj-deploy [options]"
+
+  opts.on('-s', '--search TYPE', 'Host search method') { |v| options[:host_search] = v }
+  opts.on('-a', '--app APPLICATION', 'Application to deploy') { |v| options[:application] = v }
+  opts.on('-e', '--environment ENVIRONMENT', 'Environment in which to deploy') { |v| options[:environment] = v }
+  opts.on('-v', '--version VERSION', 'Version to deploy') { |v| options[:version] = v }
+  opts.on('-r', '--restart', 'Restart cluster') { |v| options[:restart] = true }
+end.parse!
+
+environment = options[:environment] || defaults['environment']
+host_search = options[:host_search] || defaults['host_search']
+
+puts "Deploying #{options[:application]} to #{environment}"
+
+# Defaults
+env_file_dir = "/Users/philip/github/chefsj/environment/"
+
+case host_search
+when 'gcloud'
+  `gcloud config set project storj-#{environment}`
+else
+  puts "Not doing anything with environment #{environment} for deploy type #{host_search}"
+end
+
+if !options[:environment]
+  puts "No environment specified, defaulting to #{defaults['environment']}"
+end
+
+
+if options[:version]
+	# Update environment file locally
+	env_file = File.join(env_file_dir, environment + '.json')
+	env_file_data = File.read(env_file)
+	env_data_json = JSON.parse(env_file_data)
+	env_data_json['override_attributes']['storj']['bridge']['revision'] = options[:version]
+	env_data_pretty = JSON.pretty_generate(env_data_json)
+
+	#puts "New ENV:\n #{env_data_pretty}"
+	# Should diff the file here and prompt for OK before moving along...
+
+	# Write the file
+	File.open(env_file, "w") do |f|
+		f.write(env_data_pretty)
+	end
+
+	# Upload the new environment file to chef
+	puts "Uplaoding new environment file"
+
+	`knife environment from file #{env_file}`
+
+	# Commit the changes to git
+	puts "Committing changes to GIT"
+	`cd #{env_file_dir} && git add ./#{options[:environment] + '.json'} && git commit -m 'updating #{options[:application]} version to #{options[:version]}' && git push`
+end
+
+puts "Finding hosts using #{host_search}"
+
+if host_search == 'knife'
+  # Use knife ssh to run chef-client on all hosts for this app one at a time
+  puts "Running chef on app hosts to deploy changes"
+  puts "Running knife ssh \"chef_environment:#{options[:environment]} AND recipes:chefsj-storj\\:\\:#{options[:application]}\" -a cloud_v2.public_ipv4 sudo -i chef-client"
+  chef_output = `knife ssh "chef_environment:#{options[:environment]} AND recipes:chefsj-storj\\:\\:#{options[:application]}" "sudo -i chef-client" -i ~/.ssh/id_rsa.storj -a cloud_v2.public_ipv4`
+
+  puts "Chef output: #{chef_output.lines.last}"
+  puts "Deploy COMPLETE!"
+end
+
+if host_search == 'gcloud'
+  host_types.each do |type, data|
+    puts "Running rolling deploy against #{type}"
+    hosts = `gcloud compute instances list --filter="tags.items:#{type}" --format json | jq '.[] | .networkInterfaces[] | .accessConfigs[] | .natIP' | cut -d '"' -f 2`
+
+    hosts.split.each do |host|
+      puts "Running chef-client on #{host}"
+      run_output = `ssh #{host} "sudo -i chef-client"`
+      puts "Chef run for #{host} complete. Output: #{run_output}"
+    end
+  end
+  puts "Deploy COMPLETE!"
+end
+
+if options[:restart]
+  host_types.each do |type, data|
+    puts "Running rolling deploy against #{type}"
+    hosts = `gcloud compute instances list --filter="tags.items:#{type}" | sed -n '1!p' | awk '{ print $5 }'`
+
+    puts "type: #{type}"
+    puts "data: #{data}"
+
+    service_names = []
+
+    restart_command = ''
+    data['services'].each do |service|
+      puts "service: #{service}"
+      service_names.push(service['name'])
+
+      # If the service is not the first, add &&
+      if data['services'].index(service) > 0
+        restart_command += " && "
+      end
+
+      if service['instances']
+        restart_command += "for i in {1..#{service['instances']}}; do sudo service #{service['name']}-$i restart; done"
+      else
+        restart_command += "sudo service #{service['name']} restart"
+      end
+    end
+
+    puts "Beginning restart of services #{service_names.to_s}"
+
+    hosts.split.each do |host|
+      puts "Running restart command on #{host}"
+      run_output = `ssh #{host} '#{restart_command}'`
+      puts "Restart for services #{service_names} on #{host} complete."
+    end
+  end
+end
+
+
+# knife ssh "name:bridge-api-* AND chef_environment:production AND NOT name:bridge-api-proxy-*" -a cloud_v2.public_ipv4 -x philip "sudo rm -rf /opt/storj/bridge/node_modules/storj && sudo -i -u storj bash -c \"cd /opt/storj/bridge && source /opt/storj/.nvm/nvm.sh && npm install\""
+# knife ssh "name:bridge-api-* AND chef_environment:production AND NOT name:bridge-api-proxy-*" -a cloud_v2.public_ipv4 -x philip "sudo service bridge restart"
+#
+# We can do this with gcloud to get the actual hosts
+# for addr in `gcloud compute instances list --filter='tags.items:bridge-renters' | sed -n '1!p' | awk '{ print $5 }'`; do ssh $addr hostname; done
+#
+#
+# Deploy to environment
+# Check to make sure we can SSH to each host without getting prompts and have the keys
+# for host in $(./gcloud_find_by_tag -t=bridge-renters); do ssh $host hostname; done
+# Automatically reset all of the host keys
+# ./gcloud_find_by_tag -t=bridge-renters | reset-confirm-ssh-hosts
+# ./gcloud_find_by_tag -t=bridge-api | reset-confirm-ssh-hosts
+# for host in $(./gcloud_find_by_tag -t=bridge-api); do ssh $host hostname; done
