@@ -3,6 +3,16 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# Use this to find what might be slowing down bash session startup
+SHOW_TIMERS=false
+
+# Get the current milliseconds
+function getms {
+  echo $(($(gdate +%s%N)/1000000))
+}
+
+start=$(getms)
+
 # Determine what OS we're running on
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
@@ -23,6 +33,12 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
    platform='osx'
 fi
 
+duration=$(($(getms) - start ))
+if [ "$SHOW_TIMERS" = true ]; then
+  echo "Determine OS: ${duration}ms"
+fi
+
+start=$(getms)
 # Packages that I want installed
 if [[ $platform == 'linux' ]]; then
   if [[ $OS == 'Ubuntu' ]]; then
@@ -49,6 +65,9 @@ elif [[ $platform == 'osx' ]]; then
     brew install tmux
     brew install reattach-to-user-namespace
   fi
+  if [ ! -f /usr/local/bin/gdate ]; then
+    brew install gdate
+  fi
   if [ ! -f /usr/local/bin/weechat ]; then
     echo "Installing weechat"
     brew install weechat --with-aspell --with-curl --with-python --with-perl --with-ruby --with-lua --with-guile
@@ -66,7 +85,12 @@ fi
 #  source "$HOME/github/kubernetes/contrib/completions/bash/kubectl";
 #fi
 
-#!/bin/bash
+duration=$(($(getms) - start ))
+if [ "$SHOW_TIMERS" = true ]; then
+  echo "Install packages: ${duration}ms"
+fi
+
+start=$(getms)
 
 # Set up ssh-agent
 SSH_ENV="$HOME/.ssh/environment"
@@ -90,6 +114,11 @@ else
     start_agent
 fi
 
+duration=$(($(getms) - start ))
+if [ "$SHOW_TIMERS" = true ]; then
+  echo "Starting SSH Agent: ${duration}ms"
+fi
+
 ### History ###
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
@@ -98,6 +127,8 @@ fi
 #export HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
 #shopt -s histappend
+
+start=$(getms)
 
 HISTIGNORE="hnote*"
 # Used to put notes in a history file
@@ -143,7 +174,6 @@ elif [[ $platform == 'osx' ]]; then
   export PATH=~/bin:/usr/local/bin:~/Library/Python/2.7/bin:$PATH
   alias ls='ls -G'
 fi
-#export PATH=~/bin:/usr/local/bin:/Users/phutchins/Library/Python/2.7/bin:$PATH
 
 #### GO ####
 export GOPATH=~/go
@@ -194,6 +224,11 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
+duration=$(($(getms) - start ))
+if [ "$SHOW_TIMERS" = true ]; then
+  echo "Exports and Aliases: ${duration}ms"
+fi
+
 ### Prompt ###
 #if [ -f "$HOME/Library/Python/2.7/lib/python/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/bash/powerline.sh" ]; then
 #  export TERM=screen-256color
@@ -203,6 +238,8 @@ fi
 #  source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 #fi
 # Install powerline via PIP so that it registers the libs
+
+start=$(getms)
 
 # To do things this way I will need to register the python extension modules manually
 # Possibly add the extensions directory to the python path
@@ -224,6 +261,13 @@ if [ ! -d ~/.git_repos/powerline/build/ ]; then
   fi
   cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py build && cd
 fi
+
+duration=$(($(getms) - start ))
+if [ "$SHOW_TIMERS" = true ]; then
+  echo "Get powerline and install deps: ${duration}ms"
+fi
+
+start=$(getms)
 
 #if [ -f ~/.git/powerline/powerline/bindings/bash/powerline.sh ]; then
   #export PATH=/Users/phutchins/Library/Python/2.7/bin:~/.git/powerline/usr/local/bin:$PATH
@@ -302,6 +346,12 @@ elif [[ $platform == 'osx' ]]; then
   #POWERLINE_COMMAND="$POWERLINE_COMMAND -c ext.shell.theme=default_leftonly"
 fi
 
+duration=$(($(getms) - start ))
+if [ "$SHOW_TIMERS" = true ]; then
+  echo "Setup powerline: ${duration}ms"
+fi
+
+
 ### Update all git repos in github directory at once ###
 function gitup {
   CURR_DIR=${PWD}
@@ -322,6 +372,8 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export NVM_DIR="/Users/philip/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
+start=$(getms)
+
 # Install and set up NVM
 if [[ $platform == 'linux' ]]; then
   if [ -f $(brew --prefix nvm)/nvm.sh ]; then
@@ -336,4 +388,9 @@ elif [[ $platform == 'osx' ]]; then
     export NVM_DIR=~/.nvm
     source $(brew --prefix nvm)/nvm.sh
   fi
+fi
+
+duration=$(($(getms) - start ))
+if [ "$SHOW_TIMERS" = true ]; then
+  echo "Install and setup NVM: ${duration}ms"
 fi
