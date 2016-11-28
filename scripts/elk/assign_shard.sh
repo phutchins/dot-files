@@ -67,6 +67,12 @@ fi
 if [ "$#" -eq 1 ]; then
   NODE=$1
   unassigned_shards=$(curl -s localhost:9200/_cat/shards | grep UNASS)
+
+  if [ -z "$unassigned_shards" ]; then
+    echo "No unassigned shards found"
+    exit 0;
+  fi
+
   while read -r shard_line; do
     output_array=($shard_line)
     index=${output_array[0]}
