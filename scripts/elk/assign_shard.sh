@@ -11,7 +11,11 @@
 # curl -XPUT https://logs.storj.io:9900/logstash-*/_settings -d ' { "number_of_replicas": 2 } '
 
 if [ -z "$1" ]; then
-  echo "Usage: assign_shard [index] [node] [shard_count]"
+  echo "Manually assign shards per index for all instances of this shard"
+  echo "Usage: assign_shard [index] [node_name] [shard_count]"
+  echo "or"
+  echo "Automatically assign all unassigned shards to [node_name]"
+  echo "Usage: assign_shard [node_name]"
   exit 1;
 fi
 
