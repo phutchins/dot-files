@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# This needs to be turned into a script. Simply serves as notes for now.
+
+# Be careful with this! Will delete from all nodes...
+knife exec -E "nodes.transform(:all) {|n| n.normal_attrs['storj']['renter']['instances'].delete('0') rescue nil }"

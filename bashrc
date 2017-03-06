@@ -308,13 +308,14 @@ if [[ $platform == 'linux' ]]; then
   #POWERLINE_COMMAND="$POWERLINE_COMMAND -c ext.shell.theme=default_leftonly"
   PS1="\[\033[01;34m\]\u\[\033[01;32m\]@\[\033[01;31m\]\h\[\033[32m\][\[\033[01;30m\]\w\[\033[32m\]]\[\033[31m\]>\[\033[00m\]"
 elif [[ $platform == 'osx' ]]; then
-  if [ ! 'pip list | grep Powerline' ]; then
-    echo "Installing Powerline with pip"
-    brew install python
-    brew linkapps
-    #pip install git+git://github.com/Lokaltog/powerline
+  # Commenting this way out for now, may be needed... need to test
+  #if [ ! 'pip list | grep Powerline' ]; then
+  #  echo "Installing Powerline with pip"
+  #  brew install python
+  #  brew linkapps
+  #  #pip install git+git://github.com/Lokaltog/powerline
+  #fi
 
-  fi
   #if [ ! -f ~/.local/bin/powerline-render ]; then
   if [ ! -f /usr/local/bin/powerline-render ]; then
     echo "- Installing Powerline"
@@ -365,28 +366,31 @@ function gitup {
   cd $CURR_DIR
 }
 
+start=$(getms)
+
 ### RVM ###
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
-export NVM_DIR="/Users/philip/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+duration=$(($(getms) - start ))
+if [ "$SHOW_TIMERS" = true ]; then
+  echo "Configure RVM: ${duration}ms"
+fi
 
 start=$(getms)
 
 # Install and set up NVM
 if [[ $platform == 'linux' ]]; then
-  if [ -f $(brew --prefix nvm)/nvm.sh ]; then
-    export NVM_DIR=~/.nvm
-    source $(brew --prefix nvm)/nvm.sh
+  if [ -f "$HOME/nvm.sh" ]; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
   fi
 elif [[ $platform == 'osx' ]]; then
-  if ! [ -f $(brew --prefix nvm)/nvm.sh ]; then
+  if [ -f "$HOME/.nvm/nvm.sh" ]; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+  else
     brew install nvm
-  fi
-  if [ -f $(brew --prefix nvm)/nvm.sh ]; then
-    export NVM_DIR=~/.nvm
-    source $(brew --prefix nvm)/nvm.sh
   fi
 fi
 

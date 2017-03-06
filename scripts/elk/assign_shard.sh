@@ -8,7 +8,19 @@
 # curl -s localhost:9200/_cat/shards | grep UNASS | while read -r line; do line_arr=($line); curl -XPUT "localhost:9200/${line_arr[0]}/_settings" -d ' { "index": { "number_of_replicas" : 0 } } '; done
 # If you use the command above, you will still likely want to set the number_of_replicas in the template for that index which
 # will affect all new indices created in the future
-# curl -XPUT https://logs.storj.io:9900/logstash-*/_settings -d ' { "number_of_replicas": 2 } '
+# curl -XPUT https://localhost:9200/logstash-*/_settings -d ' { "number_of_replicas": 2 } '
+
+# Set number of replicas for an index
+# curl -XPUT http://localhost:9200/data-api-*/_settings -d ' { "number_of_replicas": 0 } '
+
+# Set number of replicas for entire cluster
+# curl -XPUT localhost:9200/_template/template_1 -d '
+# {
+#   "template" : "*",
+#   "settings" : {
+#     "number_of_replicas" : 2
+#   }
+# }'
 
 if [ -z "$1" ]; then
   echo "Manually assign shards per index for all instances of this shard"

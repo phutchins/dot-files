@@ -34,6 +34,10 @@ ka () { kill $(ps aux | grep "$@" | grep -v "grep" | awk '{print $2}'); }
 # Docker
 alias dockerip='docker ps | tail -n +2 | while read cid b; do echo -n "$cid\t"; docker inspect $cid | grep IPAddress | cut -d \" -f 4; done'
 dockerenv () { eval $(docker-machine env $@); }
+dcleanup(){
+  docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
+  docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
+}
 
 # Plist Services for OSX
 alias startmongo='launchctl load /usr/local/Cellar/mongodb/3.2.4/homebrew.mxcl.mongodb.plist'
@@ -70,6 +74,23 @@ kns () {
   else
     export KUBECTL_NAMESPACE="$@";
     echo "Kubernetes Namespace Set To: $KUBECTL_NAMESPACE";
+  fi;
+}
+# Execute a bash shell inside of a container
+keb () {
+  if [[ -z "$@" ]]; then
+    echo "Please provide a pod name"
+  else
+    kube exec -it $@ /bin/bash
+  fi;
+}
+
+# Tail the logs for a container starting with the last 100 lines
+ktl () {
+  if [[ -z "$@" ]]; then
+    echo "Please provide a pod name"
+  else
+    kube logs --tail=100 -f $@
   fi;
 }
 

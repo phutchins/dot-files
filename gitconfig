@@ -8,3 +8,5 @@
 	helper = osxkeychain
 [commit]
 	gpgsign = true
+[http]
+	postBuffer = 524288000
