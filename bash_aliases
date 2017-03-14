@@ -52,6 +52,7 @@ alias pp='python -mjson.tool'
 
 certinfo () { echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -issuer -subject -dates; }
 getcert () { echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -text; }
+getcertexp () { echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -dates; }
 
 # alias awsenv='echo $AWS_ENVIRONMENT'
 awsenv () {
