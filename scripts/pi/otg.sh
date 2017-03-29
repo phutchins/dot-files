@@ -31,7 +31,7 @@ if [[ $CMDLINE_CONTENTS =~ dwc2,g_ether ]]; then
   echo "dwc2 and g_ether already exist in cmdline.txt"
 else
   echo "Adding dwc2 and g_ether to cmdline.txt"
-  sed -ie 's/rootwait/rootwait modules-load=dwc2,g_ether/g' $CMDLINE_FILE
+  sed -i -E 's/rootwait/rootwait modules-load=dwc2,g_ether/g' $CMDLINE_FILE
 fi
 
 # Done!
