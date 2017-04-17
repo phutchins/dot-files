@@ -38,6 +38,7 @@ dcleanup(){
   docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
   docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
 }
+alias dc='docker-compose'
 
 # Plist Services for OSX
 alias startmongo='launchctl load /usr/local/Cellar/mongodb/3.2.4/homebrew.mxcl.mongodb.plist'
@@ -45,8 +46,9 @@ alias stopmongo='launchctl unload /usr/local/Cellar/mongodb/3.2.4/homebrew.mxcl.
 alias startredis='launchctl load /usr/local/Cellar/redis/3.0.7/homebrew.mxcl.redis.plist'
 alias stopredis='launchctl unload /usr/local/Cellar/redis/3.0.7/homebrew.mxcl.redis.plist'
 alias starttinyproxy='/usr/local/Cellar/tinyproxy/1.8.3/sbin/tinyproxy'
-alias startelasticsearch='launchctl load /usr/local/Cellar/elasticsearch22/2.2.2/homebrew.mxcl.elasticsearch22.plist'
-alias stopelasticsearch='launchctl unload /usr/local/Cellar/elasticsearch22/2.2.2/homebrew.mxcl.elasticsearch22.plist'
+alias startelasticsearch='launchctl load /usr/local/Cellar/elasticsearch/5.3.0/homebrew.mxcl.elasticsearch.plist'
+#alias startelasticsearch='brew services start elasticsearch'
+alias stopelasticsearch='launchctl unload /usr/local/Cellar/elasticsearch/5.3.0/homebrew.mxcl.elasticsearch.plist'
 
 alias pp='python -mjson.tool'
 

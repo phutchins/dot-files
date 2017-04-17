@@ -1,0 +1,265 @@
+dnsgen:
+    image: jderusse/dns-gen
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+        - 172.17.0.1:53:53/udp
+    restart: always
+
+datastore:
+  build: .
+  volumes:
+    - /srv/data/apps/sabnzbd/:/data
+    - /media/data1/video/:/htpc
+  restart: always
+
+sabnzbd:
+  image: funkypenguin/sabnzbd:latest
+  volumes:
+    - /srv/data/apps/sabnzbd:/config
+  volumes_from:
+    - datastore
+  ports:
+    - 8082:8080
+  environment:
+    - PGID=4242
+    - PUID=4242
+    - EDGE=1
+    - DOMAIN_NAME=sabnzbd.hutchins.io
+    - VIRTUAL_HOST=sabnzbd.hutchins.io
+    - LETSENCRYPT_HOST=sabnzbd.hutchins.io
+    - LETSENCRYPT_EMAIL=philip@hutchins.io
+    - VIRTUAL_PORT=8080
+  dns:
+    - 172.17.0.1
+  links:
+    - dnsgen
+  restart: always
+
+mylar:
+  image: linuxserver/mylar:latest
+  volumes:
+    - /srv/data/apps/mylar:/config
+  volumes_from:
+    - datastore
+  environment:
+    - PGID=4242
+    - PUID=4242
+    - DOMAIN_NAME=mylar.hutchins.io
+    - EDGE=1
+    - VIRTUAL_HOST=mylar.hutchins.io
+    - LETSENCRYPT_HOST=mylar.hutchins.io
+    - LETSENCRYPT_EMAIL=philip@hutchins.io
+  links:
+    - dnsgen
+  dns:
+    - 172.17.0.1
+  links:
+    - dnsgen
+  restart: always
+
+plexrequests:
+  image: linuxserver/plexrequests:latest
+  volumes:
+    - /srv/data/apps/plexrequests:/config
+  volumes_from:
+    - datastore
+  environment:
+    - PGID=4242
+    - PUID=4242
+    - DOMAIN_NAME=plexrequests.hutchins.io
+    - EDGE=1
+    - VIRTUAL_HOST=plexrequests.hutchins.io
+    - LETSENCRYPT_HOST=plexrequests.hutchins.io
+    - LETSENCRYPT_EMAIL=youremail@hutchins.io
+  links:
+    - dnsgen
+  dns:
+    - 172.17.0.1
+  links:
+    - dnsgen
+  restart: always
+
+headphones:
+  image: linuxserver/headphones:latest
+  volumes:
+    - /srv/data/apps/headphones:/config
+  volumes_from:
+    - datastore
+  environment:
+    - PGID=4242
+    - PUID=4242
+    - DOMAIN_NAME=headphones.hutchins.io
+    - EDGE=1
+    - VIRTUAL_HOST=headphones.hutchins.io
+    - LETSENCRYPT_HOST=headphones.hutchins.io
+    - LETSENCRYPT_EMAIL=philip@hutchins.io
+  links:
+    - dnsgen
+  dns:
+    - 172.17.0.1
+  links:
+    - dnsgen
+  restart: always
+
+couchpotato:
+  image: linuxserver/couchpotato:latest
+  volumes:
+    - /srv/data/apps/couchpotato:/config
+  volumes_from:
+    - datastore
+  ports:
+    - 5050:5050
+  environment:
+    - PGID=4242
+    - PUID=4242
+    - DOMAIN_NAME=couchpotato.hutchins.io
+    - EDGE=1
+    - VIRTUAL_HOST=couchpotato.hutchins.io
+    - LETSENCRYPT_HOST=couchpotato.hutchins.io
+    - LETSENCRYPT_EMAIL=philip@hutchins.io
+  links:
+    - dnsgen
+  dns:
+    - 172.17.0.1
+  links:
+    - dnsgen
+  restart: always
+
+rtorrent:
+  image: funkypenguin/rtorrent
+  volumes:
+    - /srv/data/apps/rtorrent:/config
+    - /srv/data/htpc/nginx/htpasswd/rtorrent.hutchins.io:/config/.htpasswd
+  volumes_from:
+    - datastore
+  ports:
+    - 36898:36898
+    - 8086:80
+  environment:
+    - PGID=4242
+    - PUID=4242
+    - DOMAIN_NAME=rtorrent.hutchins.io
+    - EDGE=1
+    - VIRTUAL_HOST=rtorrent.hutchins.io
+    - VIRTUAL_PORT=80
+    - LETSENCRYPT_HOST=rtorrent.hutchins.io
+    - LETSENCRYPT_EMAIL=philip@hutchins.io
+  dns:
+    - 172.17.0.1
+  links:
+    - dnsgen
+
+plex:
+  image: linuxserver/plex
+  volumes:
+    - /srv/data/apps/plex:/config
+  volumes_from:
+    - datastore
+  ports:
+    - 32469:32469
+    - 32400:32400
+    - 32401:32401
+    - 3005:3005
+    - 8324:8324
+    - 1900:1900/udp
+    - 32410:32410/udp
+    - 32412:32412/udp
+    - 32413:32413/udp
+    - 32414:32414/udp
+  environment:
+    - PGID=4242
+    - PUID=4242
+    - EDGE=1
+    - VERSION=latest
+    - DOMAIN_NAME=plex.hutchins.io
+    - VIRTUAL_HOST=plex.hutchins.io
+    - VIRTUAL_PORT=32400
+    - LETSENCRYPT_HOST=plex.hutchins.io
+    - LETSENCRYPT_EMAIL=philip@hutchins.io
+  dns:
+    - 172.17.0.1
+  links:
+    - dnsgen
+  restart: always
+
+htpc-cron:
+  image: funkypenguin/htpc-cron
+  volumes:
+    - /srv/data/apps/htpc-cron:/config
+    - /usr/share/zoneinfo/Pacific/Auckland:/etc/localtime:ro
+  volumes_from:
+    - datastore
+  environment:
+    - DOMAIN_NAME=htpc-cron.hutchins.io
+  dns:
+    - 172.17.0.1
+  links:
+    - dnsgen
+  restart: always
+
+sonarr:
+  image: linuxserver/sonarr
+  volumes:
+    - /srv/data/apps/sonarr:/config
+  volumes_from:
+    - datastore
+  ports:
+    - 8989:8989
+  environment:
+    - PGID=4242
+    - PUID=4242
+    - DOMAIN_NAME=sonarr.hutchins.io
+    - VIRTUAL_HOST=sonarr.hutchins.io
+    - LETSENCRYPT_HOST=sonarr.hutchins.io
+    - LETSENCRYPT_EMAIL=philip@hutchins.io
+  dns:
+    - 172.17.0.1
+  links:
+    - dnsgen
+  restart: always
+
+plexpy:
+  image: linuxserver/plexpy
+  volumes:
+    - /srv/data/apps/plexpy:/config
+    - /usr/share/zoneinfo/US/Eastern:/etc/localtime:ro
+    - /srv/data/htpc/plex/Library/Application\ Support/Plex\ Media\ Server/Logs:/logs:ro
+  volumes_from:
+    - datastore
+  ports:
+    - 8181:8181
+  environment:
+    - PGID=4242
+    - PUID=4242
+    - DOMAIN_NAME=plexpy.hutchins.io
+    - VIRTUAL_HOST=plexpy.hutchins.io
+    - LETSENCRYPT_HOST=plexpy.hutchins.io
+    - LETSENCRYPT_EMAIL=philip@hutchins.io
+  dns:
+    - 172.17.0.1
+  links:
+    - dnsgen
+  restart: always
+
+nzbhydra:
+  image: linuxserver/hydra
+  volumes:
+    - /srv/data/apps/nzbhydra:/config
+    - /usr/share/zoneinfo/US/Eastern:/etc/localtime:ro
+  volumes_from:
+    - datastore
+  ports:
+    - 5075:5075
+  environment:
+    - PGID=4242
+    - PUID=4242
+    - DOMAIN_NAME=nzbhydra.hutchins.io
+    - VIRTUAL_HOST=nzbhydra.hutchins.io
+    - LETSENCRYPT_HOST=nzbhydra.hutchins.io
+    - LETSENCRYPT_EMAIL=philip@hutchins.io
+  dns:
+    - 172.17.0.1
+  links:
+    - dnsgen
+  restart: always
