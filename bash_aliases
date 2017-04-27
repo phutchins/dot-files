@@ -4,6 +4,7 @@ alias gaa='git add . --all'
 alias gc='git commit -m'
 alias gp='git push'
 alias gu='git up'
+alias gss='git rev-parse --short HEAD'
 
 alias gup='gu && gp'
 alias gac='gaa && gc'
@@ -109,3 +110,6 @@ kenv () {
     echo "Kubernetes environment changed from $PREVIOUS_CONTEXT to $CURRENT_CONTEXT";
   fi;
 }
+
+# Storj SDK
+sdk-mongo () { mongo $($STORJ_SDK_DIR/scripts/get_local_db.sh); }

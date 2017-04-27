@@ -1,0 +1,44 @@
+#!/bin/bash -e
+#
+# generateSelfSignedCert
+# (c) 2014 Sam Caldwell.  Public Domain
+#
+KEYFILE=/etc/ssl/private/selfsigned.key
+CSRFILE=/etc/ssl/selfsigned.csr
+CRTFILE=/etc/ssl/certs/selfsigned.crt
+SUBJ="/C=US/ST=TX/L=Austin/O=Sam Caldwell/OU=Public Domain/CN=localhost"
+
+echo "checking for openssl"
+which openssl || {
+    echo "   openssl needs to be installed.  installing..."
+    apt-get update -y
+    apt-get install openssl -y
+}
+
+which openssl || {
+    echo "   openssl failed to install"
+    exit 1
+}
+
+echo "creating private key and CSR"
+openssl req \
+        -nodes \
+        -newkey rsa:2048 \
+        -keyout ${KEYFILE} \
+        -out /etc/ssl/selfsigned.csr \
+        -subj "${SUBJ}" || exit 1
+
+echo "signing CSR"
+openssl x509 \
+    -req \
+    -days 365 \
+    -in ${CSRFILE} \
+    -signkey ${KEYFILE} \
+    -out ${CRTFILE} || exit 1
+
+echo " "
+echo "Generated self-signed certificate"
+echo "   KEYFILE: ${KEYFILE}"
+echo "   CSRFILE: ${CSRFILE}"
+echo "   CRTFILE: ${CRTFILE}"
+echo " "
