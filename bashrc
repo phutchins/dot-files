@@ -75,15 +75,16 @@ elif [[ $platform == 'osx' ]]; then
 #  # Export Docker Host IP
 #  export DOCKER_HOST=tcp://192.168.59.103:2375
 fi
+
 source "$HOME/git-completion.bash"
 if [ ! -f $HOME/git-completion.bash ]; then
   cd && curl https://raw.github.com/git/git/master/contrib/completion/git-completion.bash -OL
 fi
 
-# THis doesn't work yet on osx due to bash-completion package issues
-#if [ -f $HOME/github/kubernetes/contrib/completions/bash/kubectl ]; then
-#  source "$HOME/github/kubernetes/contrib/completions/bash/kubectl";
-#fi
+# Bash completion for kubectl and kube alias
+if [ -f $HOME/.bash_completion/kube ]; then
+  source "$HOME/.bash_completion/kube";
+fi
 
 duration=$(($(getms) - start ))
 if [ "$SHOW_TIMERS" = true ]; then
