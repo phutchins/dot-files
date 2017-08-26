@@ -15,6 +15,7 @@ alias sgrep='egrep -Rso '.{0,40}$@.{0,40}' ./*'
 alias vi='vim'
 alias vim='/usr/local/bin/vim'
 alias gfer='git for-each-ref --sort=-committerdate refs/heads/'
+alias sbrc='source ~/.bashrc'
 
 # Chef & Knife
 alias ku='knife cookbook upload'
