@@ -73,7 +73,7 @@ elif [[ $platform == 'osx' ]]; then
   fi
 
   if [ ! -f /usr/local/bin/gdate ]; then
-    brew install gdate
+    brew install coreutils
   fi
 
   if [ ! -f /usr/local/bin/weechat ]; then
@@ -326,10 +326,11 @@ elif [[ $platform == 'osx' ]]; then
   #fi
 
   #if [ ! -f ~/.local/bin/powerline-render ]; then
-  if [ ! -f /usr/local/bin/powerline-render ]; then
+  if [ ! -f ~/Library/Python/2.7/bin/powerline-render ]; then
     echo "- Installing Powerline"
     #cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --user && cd
-    cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install && cd
+    pip install --user powerline-status
+    cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py install --user && cd
   fi
   #if [ ! -h ~/.local/bin/powerline ]; then
   #  ln -s ~/.git_repos/powerline/scripts/powerline ~/.local/bin/powerline
@@ -414,3 +415,4 @@ duration=$(($(getms) - start ))
 if [ "$SHOW_TIMERS" = true ]; then
   echo "Install and setup NVM: ${duration}ms"
 fi
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
