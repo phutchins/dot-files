@@ -2,6 +2,8 @@
 
 ## ToDo
 
++ Check for JDK and JRE, prompt user to install
+
 + On initial launch of weechat, prompt for passwords and create encrypted secret file
 '''
 /secure passphrase passwordToEncryptAllSecrets
