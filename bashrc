@@ -61,13 +61,21 @@ elif [[ $platform == 'osx' ]]; then
   if [ ! -f /usr/local/bin/brew ]; then
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
   fi
+
+  if ! [ "which reattach-to-user-namespace" ]; then
+    echo "Installing reattach-to-user-namespace"
+    brew install reattach-to-user-namespace
+  fi
+
   if [ ! -f /usr/local/bin/tmux ]; then
     brew install tmux
     brew install reattach-to-user-namespace
   fi
+
   if [ ! -f /usr/local/bin/gdate ]; then
     brew install gdate
   fi
+
   if [ ! -f /usr/local/bin/weechat ]; then
     echo "Installing weechat"
     brew install weechat --with-aspell --with-curl --with-python --with-perl --with-ruby --with-lua --with-guile
@@ -260,7 +268,7 @@ if [ ! -d ~/.git_repos/powerline/build/ ]; then
     sudo pacman -S install python-setuptools
     # Something may be funky with python here so need to test
   fi
-  cd ~/.git_repos/powerline && python ~/.git_repos/powerline/setup.py build && cd
+  cd ~/.git_repos/powerline && sudo python ~/.git_repos/powerline/setup.py build && cd
 fi
 
 duration=$(($(getms) - start ))
@@ -390,9 +398,16 @@ elif [[ $platform == 'osx' ]]; then
   if [ -f "$HOME/.nvm/nvm.sh" ]; then
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+  elif [ -f "/usr/local/opt/nvm/nvm.sh" ]; then
+    export NVM_DIR="$HOME/.nvm"
+    . "/usr/local/opt/nvm/nvm.sh"
   else
     brew install nvm
+    [[ ! -d "$HOME/.nvm" ]] && mkdir $HOME/.nvm
   fi
+
+  export NVM_DIR="$HOME/.nvm"
+  . "/usr/local/opt/nvm/nvm.sh"
 fi
 
 duration=$(($(getms) - start ))
