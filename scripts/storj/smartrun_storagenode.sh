@@ -72,7 +72,7 @@ function get_archive() {
     echo "Attempting to download version ${LATEST_VERSION}"
     BUILD_DOWNLOAD_URL="${BUILD_BASE_PATH}/${LATEST_VERSION}${BUILD_PATH_EXT}/${BUILD_FILE_NAME}"
     echo "Downloading build from ${BUILD_DOWNLOAD_URL}"
-    GET_BUILD_COMMAND="wget -O ${BUILD_DOWNLOAD_DIR}/${LATEST_VERSION}_${BUILD_FILE_NAME} ${BUILD_DOWNLOAD_URL}"
+    GET_BUILD_COMMAND="wget -q -O ${BUILD_DOWNLOAD_DIR}/${LATEST_VERSION}_${BUILD_FILE_NAME} ${BUILD_DOWNLOAD_URL}"
 
     if $($GET_BUILD_COMMAND); then
       # set LATEST_BUILD so we exit the loop and move along
@@ -120,6 +120,11 @@ if [ -f "${UPDATE_STATE_DIR}/${CURRENT_BUILD_FILE}" ]; then
   echo "Current build is ${CURRENT_BUILD}"
 else
   echo "No current build found."
+fi
+
+if [ "${CURRENT_BUILD}" == "${LATEST_VERSION}" ]; then
+  echo "Latest version of ${LATEST_VERSION} is already installed"
+  exit 0;
 fi
 
 
