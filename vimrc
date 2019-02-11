@@ -33,9 +33,9 @@ elseif os == "Darwin"
   let g:Powerline_symbols = 'fancy'
   set rtp+=~/.git_repos/powerline/powerline/bindings/vim
   " Loads powerline from pip install
-  python from powerline.vim import setup as powerline_setup
-  python powerline_setup()
-  python del powerline_setup
+  " python from powerline.vim import setup as powerline_setup
+  " python powerline_setup()
+  " python del powerline_setup
 endif
 
 " Setting up Vundle - the vim plugin bundler
@@ -77,6 +77,7 @@ endif
     Bundle 'nathanaelkane/vim-indent-guides'
     Bundle 'thoughtbot/vim-rspec'
     Bundle 'Valloric/YouCompleteMe'
+    Bundle 'fatih/vim-go'
     "Bundle 'Syntastic' "uber awesome syntax and errors highlighter
     if iCanHazVundle == 0
         echo "Installing Bundles, please ignore key map error messages"
