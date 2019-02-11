@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ueo pipefail
+
 UPDATER_BASE_DIR=${HOME}
 BINARY_PATH="/usr/local/bin"
 STORJ_GIT_DIR="${UPDATER_BASE_DIR}/github"
