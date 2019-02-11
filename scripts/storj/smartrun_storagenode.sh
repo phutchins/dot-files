@@ -62,6 +62,8 @@ function get_latest_build() {
 }
 
 function get_archive() {
+  BUILDCOUNTER=0
+
   # find the latest version
   while [ -z ${LATEST_BUILD} ]; do
     BUILDCOUNTER=$(expr $BUILDCOUNTER + 1)
@@ -114,7 +116,7 @@ get_archive;
 
 # determine what version we're running now
 if [ -f "${UPDATE_STATE_DIR}/${CURRENT_BUILD_FILE}" ]; then
-  CURRENT_BUILD=$(echo ${UPDATE_STATE_DIR}/${CURRENT_BUILD_FILE})
+  CURRENT_BUILD=$(cat ${UPDATE_STATE_DIR}/${CURRENT_BUILD_FILE})
   echo "Current build is ${CURRENT_BUILD}"
 else
   echo "No current build found."
@@ -124,7 +126,7 @@ fi
 # write current version number to file
 if [ ! -z "${CURRENT_BUILD}" ]; then
   # if we have a current build, save it to the previous build file
-  echo "${CURRENT_BUILD} > ${UPDATE_STATE_DIR}/${PREVIOUS_BUILD_FILE}"
+  echo ${CURRENT_BUILD} > ${UPDATE_STATE_DIR}/${PREVIOUS_BUILD_FILE}
   echo "Saved the current build (${CURRENT_BUILD}) to ${UPDATE_STATE_DIR}/${PREVIOUS_BUILD_FILE}"
 else
   echo "No current build to save as previous build"
