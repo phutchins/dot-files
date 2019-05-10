@@ -157,6 +157,11 @@ bind '\C-e:end-of-line'
 ### Amazon Credentials for DealerMatch ###
 export AWS_CREDENTIAL_FILE=~/aws/.credentials/aws.credentials
 
+### GCloud Credentials ###
+export GOOGLE_APPLICATION_CREDENTIALS=/Users/philip/.gcloud/StorjNonProd.json
+export CLOUDSDK_CORE_PROJECT=storj-nonprod
+export KOPS_STATE_STORE=gs://${CLOUDSDK_CORE_PROJECT}-kops
+
 ### OWSSH ###
 export OWSSH_USER="phutchins"
 export OWSSH_SSH_KEY_FILE="~/.ssh/id_rsa"
@@ -182,6 +187,10 @@ elif [[ $platform == 'osx' ]]; then
   export JAVA_HOME=$(/usr/libexec/java_home)
   export PATH=~/bin:/usr/local/bin:~/Library/Python/2.7/bin:$PATH
   alias ls='ls -G'
+fi
+
+if [[ -d "~/bin" ]]; then
+  export $PATH=$PATH:~/bin
 fi
 
 #### GO ####
@@ -416,3 +425,4 @@ if [ "$SHOW_TIMERS" = true ]; then
   echo "Install and setup NVM: ${duration}ms"
 fi
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source <(kubectl completion bash)

@@ -1,0 +1,270 @@
+2018-05-06 17:27:59	-->	philip1 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-06 17:28:00	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-06 17:28:00	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-06 17:28:00	--	Channel #ethereumjs: 6 nicks (0 ops, 1 voice, 5 normals)
+2018-05-06 17:28:01	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-06 17:28:10	philip1	Hey, anyone awake here by chance?
+2018-05-06 17:28:18	philip1	Trying to figure out what I'm doing wrong with the new web3 1.0 interface... 
+2018-05-06 17:54:28	<--	ZeroGox (~ZeroGox@unaffiliated/caktux/bot/zerogox) has quit (*.net *.split)
+2018-05-06 17:54:43	<--	caktux (~caktux@unaffiliated/caktux) has quit (*.net *.split)
+2018-05-06 17:54:43	<--	Ana25Lindgren (~Ana25Lind@ns334669.ip-5-196-64.eu) has quit (*.net *.split)
+2018-05-06 17:54:43	<--	emschwartz (sid151392@gateway/web/irccloud.com/x-sofoaurghqgkkehd) has quit (*.net *.split)
+2018-05-06 17:54:43	<--	shalkydri (~sh4l@163.172.97.52) has quit (*.net *.split)
+2018-05-06 17:54:44	-->	Ana25Lindgren (~Ana25Lind@ns334669.ip-5-196-64.eu) has joined #ethereumjs
+2018-05-06 17:54:44	-->	emschwartz (sid151392@gateway/web/irccloud.com/x-sofoaurghqgkkehd) has joined #ethereumjs
+2018-05-06 17:54:44	-->	shalkydri (~sh4l@163.172.97.52) has joined #ethereumjs
+2018-05-06 17:54:44	-->	ZeroGox (~ZeroGox@unaffiliated/caktux/bot/zerogox) has joined #ethereumjs
+2018-05-06 17:54:44	-->	caktux (~caktux@unaffiliated/caktux) has joined #ethereumjs
+2018-05-06 17:54:44	--	Mode #ethereumjs [+v ZeroGox] by orwell.freenode.net
+2018-05-07 01:38:57	<--	Ana25Lindgren (~Ana25Lind@ns334669.ip-5-196-64.eu) has quit (Ping timeout: 256 seconds)
+2018-05-07 02:18:17	-->	Beatrice46Champl (~Beatrice4@ns334669.ip-5-196-64.eu) has joined #ethereumjs
+2018-05-07 03:22:49	-->	elichai2 (uid212594@gateway/web/irccloud.com/x-rllnuyyeggzdksme) has joined #ethereumjs
+2018-05-07 03:31:47	<--	elichai2 (uid212594@gateway/web/irccloud.com/x-rllnuyyeggzdksme) has left #ethereumjs
+2018-05-07 05:01:05	<--	Beatrice46Champl (~Beatrice4@ns334669.ip-5-196-64.eu) has quit (Remote host closed the connection)
+2018-05-07 05:55:05	-->	Brant73Grady (~Brant73Gr@ns334669.ip-5-196-64.eu) has joined #ethereumjs
+2018-05-07 09:11:08	<--	Brant73Grady (~Brant73Gr@ns334669.ip-5-196-64.eu) has quit (*.net *.split)
+2018-05-07 09:55:03	-->	Kaylin69Doyle (~Kaylin69D@ns334669.ip-5-196-64.eu) has joined #ethereumjs
+2018-05-08 01:51:43	--	irc: disconnected from server
+2018-05-08 04:52:00	--	irc: disconnected from server
+2018-05-08 06:28:52	--	irc: disconnected from server
+2018-05-08 11:52:41	--	irc: disconnected from server
+2018-05-08 19:47:58	-->	philip1 (~philip@wsip-70-183-226-95.pn.at.cox.net) has joined #ethereumjs
+2018-05-08 19:47:58	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-08 19:47:58	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-08 19:47:58	--	Channel #ethereumjs: 6 nicks (0 ops, 1 voice, 5 normals)
+2018-05-08 19:48:10	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-08 20:19:33	--	irc: disconnected from server
+2018-05-08 20:20:01	-->	philip1 (~philip@wsip-70-183-226-95.pn.at.cox.net) has joined #ethereumjs
+2018-05-08 20:20:01	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-08 20:20:01	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 11:49:19
+2018-05-08 20:20:01	--	Channel #ethereumjs: 6 nicks (0 ops, 1 voice, 5 normals)
+2018-05-08 20:29:29	--	irc: disconnected from server
+2018-05-08 20:30:10	-->	philip1 (~philip@wsip-70-183-226-95.pn.at.cox.net) has joined #ethereumjs
+2018-05-08 20:30:10	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-08 20:30:10	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 11:49:19
+2018-05-08 20:30:10	--	Channel #ethereumjs: 6 nicks (0 ops, 1 voice, 5 normals)
+2018-05-08 20:30:15	--	Channel created on Fri, 27 Mar 2015 04:12:44
+2018-05-08 21:57:38	--	irc: disconnected from server
+2018-05-08 23:48:03	--	irc: disconnected from server
+2018-05-09 03:48:46	--	irc: disconnected from server
+2018-05-09 05:49:15	--	irc: disconnected from server
+2018-05-09 07:49:49	-->	philip1 (~philip@wsip-70-183-226-95.pn.at.cox.net) has joined #ethereumjs
+2018-05-09 07:49:49	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-09 07:49:49	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 11:49:19
+2018-05-09 07:49:49	--	Channel #ethereumjs: 6 nicks (0 ops, 1 voice, 5 normals)
+2018-05-09 07:50:01	--	Channel created on Fri, 27 Mar 2015 04:12:44
+2018-05-09 08:49:03	--	irc: disconnected from server
+2018-05-09 08:49:33	-->	philip1 (~philip@wsip-70-183-226-95.pn.at.cox.net) has joined #ethereumjs
+2018-05-09 08:49:33	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-09 08:49:33	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 11:49:19
+2018-05-09 08:49:33	--	Channel #ethereumjs: 6 nicks (0 ops, 1 voice, 5 normals)
+2018-05-09 08:49:45	--	Channel created on Fri, 27 Mar 2015 04:12:44
+2018-05-09 14:07:03	--	irc: disconnected from server
+2018-05-09 14:07:31	-->	philip1 (~philip@wsip-70-183-226-95.pn.at.cox.net) has joined #ethereumjs
+2018-05-09 14:07:32	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-09 14:07:32	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 11:49:19
+2018-05-09 14:07:32	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-09 14:07:43	--	Channel created on Fri, 27 Mar 2015 04:12:44
+2018-05-10 08:52:20	-->	rmcdaniel (465948a1@gateway/web/freenode/ip.70.89.72.161) has joined #ethereumjs
+2018-05-10 08:53:42	rmcdaniel	I have to admit I was expecting more people and some ops... is this channel dead?
+2018-05-10 08:55:29	<--	rmcdaniel (465948a1@gateway/web/freenode/ip.70.89.72.161) has quit (Client Quit)
+2018-05-10 10:36:38	--	irc: disconnected from server
+2018-05-10 10:37:58	-->	philip2 (~philip@172.56.26.92) has joined #ethereumjs
+2018-05-10 10:37:58	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-10 10:37:58	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 11:49:19
+2018-05-10 10:37:58	--	Channel #ethereumjs: 6 nicks (0 ops, 1 voice, 5 normals)
+2018-05-10 10:38:10	--	Channel created on Fri, 27 Mar 2015 04:12:44
+2018-05-10 10:39:22	<--	philip1 (~philip@wsip-70-183-226-95.pn.at.cox.net) has quit (Ping timeout: 264 seconds)
+2018-05-10 10:47:49	--	irc: disconnected from server
+2018-05-10 11:09:00	-->	philip2 (~philip@wsip-70-183-226-95.pn.at.cox.net) has joined #ethereumjs
+2018-05-10 11:09:01	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-10 11:09:01	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 11:49:19
+2018-05-10 11:09:01	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-10 11:09:13	--	Channel created on Fri, 27 Mar 2015 04:12:44
+2018-05-10 20:05:58	--	irc: disconnected from server
+2018-05-10 20:06:29	-->	philip3 (~philip@wsip-70-183-226-95.pn.at.cox.net) has joined #ethereumjs
+2018-05-10 20:06:30	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-10 20:06:30	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 11:49:19
+2018-05-10 20:06:30	--	Channel #ethereumjs: 6 nicks (0 ops, 1 voice, 5 normals)
+2018-05-10 20:06:42	--	Channel created on Fri, 27 Mar 2015 04:12:44
+2018-05-10 20:08:49	<--	philip2 (~philip@wsip-70-183-226-95.pn.at.cox.net) has quit (Ping timeout: 256 seconds)
+2018-05-11 04:48:25	-->	basiclaser (uid10861@gateway/web/irccloud.com/x-lmqxuttevlnzodye) has joined #ethereumjs
+2018-05-11 08:17:20	<--	basiclaser (uid10861@gateway/web/irccloud.com/x-lmqxuttevlnzodye) has quit (Quit: Connection closed for inactivity)
+2018-05-11 08:29:57	<--	philip3 (~philip@wsip-70-183-226-95.pn.at.cox.net) has quit (Ping timeout: 240 seconds)
+2018-05-11 08:29:57	--	irc: disconnected from server
+2018-05-11 08:30:31	-->	philip3 (~philip@wsip-70-183-226-95.pn.at.cox.net) has joined #ethereumjs
+2018-05-11 08:30:31	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-11 08:30:31	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 11:49:19
+2018-05-11 08:30:31	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-11 08:30:42	--	Channel created on Fri, 27 Mar 2015 04:12:44
+2018-05-11 20:15:50	--	irc: disconnected from server
+2018-05-12 02:03:17	--	irc: disconnected from server
+2018-05-12 04:03:38	--	irc: disconnected from server
+2018-05-12 08:04:13	--	irc: disconnected from server
+2018-05-12 09:04:20	-->	philip3 (~philip@wsip-70-183-226-95.pn.at.cox.net) has joined #ethereumjs
+2018-05-12 09:04:20	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-12 09:04:20	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 11:49:19
+2018-05-12 09:04:20	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-14 10:25:16	--	irc: disconnected from server
+2018-05-14 10:25:46	-->	philip3 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-14 10:25:46	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-14 10:25:46	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-14 10:25:46	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-14 10:25:58	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-15 06:35:08	-->	Phoebe68Witting (~Phoebe68W@ns334669.ip-5-196-64.eu) has joined #ethereumjs
+2018-05-15 11:12:00	--	irc: disconnected from server
+2018-05-15 11:12:30	-->	philip4 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-15 11:12:30	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-15 11:12:30	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-15 11:12:30	--	Channel #ethereumjs: 7 nicks (0 ops, 1 voice, 6 normals)
+2018-05-15 11:12:42	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-15 11:15:13	<--	philip3 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has quit (Ping timeout: 248 seconds)
+2018-05-16 16:15:08	--	irc: disconnected from server
+2018-05-16 16:22:38	-->	philip4 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-16 16:22:38	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-16 16:22:38	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-16 16:22:38	--	Channel #ethereumjs: 6 nicks (0 ops, 1 voice, 5 normals)
+2018-05-16 16:22:50	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-16 20:54:35	<--	Phoebe68Witting (~Phoebe68W@ns334669.ip-5-196-64.eu) has quit (Ping timeout: 240 seconds)
+2018-05-16 21:31:19	--	irc: disconnected from server
+2018-05-16 21:31:49	-->	philip1 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-16 21:31:49	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-16 21:31:49	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-16 21:31:49	--	Channel #ethereumjs: 6 nicks (0 ops, 1 voice, 5 normals)
+2018-05-16 21:32:01	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-16 21:33:36	<--	philip4 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has quit (Ping timeout: 240 seconds)
+2018-05-16 22:19:13	<--	caktux (~caktux@unaffiliated/caktux) has quit (Ping timeout: 265 seconds)
+2018-05-16 22:23:29	<--	ZeroGox (~ZeroGox@unaffiliated/caktux/bot/zerogox) has quit (Remote host closed the connection)
+2018-05-16 22:24:03	-->	ZeroGox (~ZeroGox@unaffiliated/caktux/bot/zerogox) has joined #ethereumjs
+2018-05-16 22:24:03	--	Mode #ethereumjs [+v ZeroGox] by ChanServ
+2018-05-16 22:27:59	-->	caktux (~caktux@unaffiliated/caktux) has joined #ethereumjs
+2018-05-17 10:03:58	--	irc: disconnected from server
+2018-05-17 10:04:48	-->	philip1 (~philip@104.200.143.66) has joined #ethereumjs
+2018-05-17 10:04:49	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-17 10:04:49	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-17 10:04:49	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-17 10:05:01	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-17 16:48:09	--	irc: disconnected from server
+2018-05-17 16:48:37	-->	philip1 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-17 16:48:38	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-17 16:48:38	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-17 16:48:38	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-17 18:31:06	--	irc: disconnected from server
+2018-05-17 21:14:08	--	irc: disconnected from server
+2018-05-17 21:14:39	-->	philip1 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-17 21:14:39	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-17 21:14:39	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-17 21:14:39	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-17 21:14:50	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-18 00:57:00	--	irc: disconnected from server
+2018-05-18 03:57:15	--	irc: disconnected from server
+2018-05-18 08:20:45	--	irc: disconnected from server
+2018-05-18 12:15:25	-->	philip1 (~philip@104.200.143.66) has joined #ethereumjs
+2018-05-18 12:15:25	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-18 12:15:25	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-18 12:15:25	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-18 12:15:37	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-18 15:46:14	--	irc: disconnected from server
+2018-05-18 18:43:02	--	irc: disconnected from server
+2018-05-18 22:43:32	--	irc: disconnected from server
+2018-05-19 00:43:51	--	irc: disconnected from server
+2018-05-19 02:44:09	--	irc: disconnected from server
+2018-05-19 03:43:59	--	irc: disconnected from server
+2018-05-19 13:56:28	-->	philip1 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-19 13:56:28	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-19 13:56:28	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-19 13:56:28	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-19 13:56:40	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-19 14:50:38	--	irc: disconnected from server
+2018-05-19 14:51:07	-->	philip2 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-19 14:51:07	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-19 14:51:07	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-19 14:51:07	--	Channel #ethereumjs: 6 nicks (0 ops, 1 voice, 5 normals)
+2018-05-19 14:51:19	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-19 14:52:59	<--	philip1 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has quit (Ping timeout: 256 seconds)
+2018-05-19 18:26:23	--	irc: disconnected from server
+2018-05-19 21:26:38	--	irc: disconnected from server
+2018-05-20 01:27:09	--	irc: disconnected from server
+2018-05-20 03:27:31	--	irc: disconnected from server
+2018-05-20 04:27:19	--	irc: disconnected from server
+2018-05-20 04:27:49	-->	philip2 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-20 04:27:49	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-20 04:27:49	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-20 04:27:49	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-20 20:37:37	--	irc: disconnected from server
+2018-05-20 20:38:07	-->	philip2 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-20 20:38:07	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-20 20:38:07	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-20 20:38:07	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-20 20:38:19	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-21 04:27:19	--	irc: disconnected from server
+2018-05-21 04:34:49	-->	philip2 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-21 04:34:49	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-21 04:34:49	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-21 04:34:49	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-21 04:35:01	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-21 05:11:40	-->	Mozell76Hickle (~Mozell76H@ns334669.ip-5-196-64.eu) has joined #ethereumjs
+2018-05-21 11:42:44	<--	Mozell76Hickle (~Mozell76H@ns334669.ip-5-196-64.eu) has quit (Read error: Connection reset by peer)
+2018-05-21 11:43:58	--	You are now known as phutchins
+2018-05-21 12:38:37	-->	Deshawn17Jacobi (~Deshawn17@ns334669.ip-5-196-64.eu) has joined #ethereumjs
+2018-05-23 18:10:12	<--	Deshawn17Jacobi (~Deshawn17@ns334669.ip-5-196-64.eu) has quit (Ping timeout: 245 seconds)
+2018-05-24 08:28:07	--	irc: disconnected from server
+2018-05-24 08:28:33	-->	phutchins (~philip@104.200.143.66) has joined #ethereumjs
+2018-05-24 08:28:33	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-24 08:28:33	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-24 08:28:33	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-24 08:28:45	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-24 11:48:02	--	irc: disconnected from server
+2018-05-24 11:52:22	-->	phutchins (~philip@104.200.143.66) has joined #ethereumjs
+2018-05-24 11:52:22	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-24 11:52:22	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-24 11:52:22	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-24 11:52:34	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-24 14:56:30	--	irc: disconnected from server
+2018-05-24 16:11:00	-->	phutchins (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-24 16:11:00	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-24 16:11:00	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-24 16:11:00	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-24 16:11:12	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-25 00:40:03	--	irc: disconnected from server
+2018-05-25 01:40:05	--	irc: disconnected from server
+2018-05-25 05:40:37	--	irc: disconnected from server
+2018-05-25 07:51:30	-->	phutchins (~philip@104.200.143.66) has joined #ethereumjs
+2018-05-25 07:51:30	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-25 07:51:30	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-25 07:51:30	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-25 07:51:40	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-25 15:31:44	--	irc: disconnected from server
+2018-05-25 20:47:21	-->	phutchins (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-25 20:47:21	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-25 20:47:21	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-25 20:47:21	--	Channel #ethereumjs: 5 nicks (0 ops, 1 voice, 4 normals)
+2018-05-25 20:47:31	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-28 06:27:44	-->	Austen58Grimes (~Austen58G@ns334669.ip-5-196-64.eu) has joined #ethereumjs
+2018-05-28 07:53:00	--	irc: disconnected from server
+2018-05-28 07:53:28	-->	philip1 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-28 07:53:28	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-28 07:53:28	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-28 07:53:28	--	Channel #ethereumjs: 7 nicks (0 ops, 1 voice, 6 normals)
+2018-05-28 07:53:38	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-28 07:55:37	<--	phutchins (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has quit (Ping timeout: 245 seconds)
+2018-05-28 08:28:01	--	irc: disconnected from server
+2018-05-28 08:39:07	-->	philip1 (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #ethereumjs
+2018-05-28 08:39:07	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-28 08:39:07	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-28 08:39:07	--	Channel #ethereumjs: 6 nicks (0 ops, 1 voice, 5 normals)
+2018-05-28 08:39:13	--	Channel created on Fri, 27 Mar 2015 05:12:44
+2018-05-28 22:46:51	<--	ZeroGox (~ZeroGox@unaffiliated/caktux/bot/zerogox) has quit (*.net *.split)
+2018-05-28 22:47:09	-->	ZeroGox (~ZeroGox@unaffiliated/caktux/bot/zerogox) has joined #ethereumjs
+2018-05-28 22:47:10	--	Mode #ethereumjs [+v ZeroGox] by adams.freenode.net
+2018-05-28 22:47:28	<--	ZeroGox (~ZeroGox@unaffiliated/caktux/bot/zerogox) has left #ethereumjs
+2018-05-28 22:47:28	-->	ZeroGox (~ZeroGox@unaffiliated/caktux/bot/zerogox) has joined #ethereumjs
+2018-05-28 22:47:34	--	Mode #ethereumjs [+v ZeroGox] by ChanServ
+2018-05-28 22:50:07	<--	Austen58Grimes (~Austen58G@ns334669.ip-5-196-64.eu) has quit (*.net *.split)
+2018-05-28 22:51:46	-->	Austen58Grimes (~Austen58G@ns334669.ip-5-196-64.eu) has joined #ethereumjs
+2018-05-29 07:18:36	--	irc: disconnected from server
+2018-05-29 07:20:08	-->	philip1 (~philip@104.200.143.66) has joined #ethereumjs
+2018-05-29 07:20:08	--	Topic for #ethereumjs is "ethereumjs stack"
+2018-05-29 07:20:08	--	Topic set by null_radix (Elite7851@gateway/shell/elitebnc/x-ybwyrvwcpniyywjj) on Sun, 30 Aug 2015 12:49:19
+2018-05-29 07:20:08	--	Channel #ethereumjs: 6 nicks (0 ops, 1 voice, 5 normals)
+2018-05-29 07:20:19	--	Channel created on Fri, 27 Mar 2015 05:12:44

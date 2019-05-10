@@ -1,0 +1,308 @@
+2018-09-20 09:26:37	-->	phutchins (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #zabbix
+2018-09-20 09:26:37	--	Topic for #zabbix is "2.0.21[EOL] 2.2.23 2.4.8[EOL] 3.0.20 3.2.11[EOL] 3.4.12 4.0.0beta1[DON'T USE] | bringBackSpecsZabbix++ | https://www.zabbix.com/zabbix_summit2018 | channel logs: https://www.zabbix.org/irclogs"
+2018-09-20 09:26:37	--	Topic set by Richlv (~rich@103.serveri.lv) on Tue, 11 Sep 2018 15:24:45
+2018-09-20 09:26:37	--	Channel #zabbix: 182 nicks (0 ops, 0 voices, 182 normals)
+2018-09-20 09:26:38	--	Channel created on Sun, 26 Nov 2006 01:42:46
+2018-09-20 09:26:44	phutchins	Good morning (or time appropriate greeting)
+2018-09-20 09:27:22	Richlv	very considerate :)
+2018-09-20 09:55:24	-->	TViernion (~TViernion@wsip-207-162-134-107.tu.ok.cox.net) has joined #zabbix
+2018-09-20 09:56:54	-->	rhoekstra (~rhoekstra@a83-162-203-71.adsl.xs4all.nl) has joined #zabbix
+2018-09-20 09:58:39	<--	kyern (~Thunderbi@178.72.91.102) has quit (Read error: Connection reset by peer)
+2018-09-20 09:59:13	<--	natalja (~natalja@87.110.183.173) has quit
+2018-09-20 09:59:45	-->	kyern (~Thunderbi@178.72.91.102) has joined #zabbix
+2018-09-20 10:01:10	Richlv	hmm, i'm confused now. the new graphs are not in rc1 yet?
+2018-09-20 10:01:27	Richlv	will they appear in 4.0 final or something? or 4.2?
+2018-09-20 10:06:54	<--	eset (~konrad@fedora/sonic) has quit (Ping timeout: 252 seconds)
+2018-09-20 10:09:01	whosgonna	Late to the party with this thouht: I just wish FedEx's delivery estimates could be as accurate as weather predictions.... :(
+2018-09-20 10:11:02	_ikke_	Is that more or less accurate?
+2018-09-20 10:11:45	<--	buu (~buu@99-74-60-251.lightspeed.hstntx.sbcglobal.net) has quit (Read error: Connection reset by peer)
+2018-09-20 10:12:55	-->	buu (~buu@99-74-60-251.lightspeed.hstntx.sbcglobal.net) has joined #zabbix
+2018-09-20 10:15:23	-->	ar1el (~psych0del@unaffiliated/ar1el) has joined #zabbix
+2018-09-20 10:34:44	-->	LarryD (4cbac5d6@gateway/web/freenode/ip.76.186.197.214) has joined #zabbix
+2018-09-20 10:38:18	whosgonna	fedex is norrible for me.
+2018-09-20 10:38:18	<--	kyern (~Thunderbi@178.72.91.102) has quit (Read error: Connection reset by peer)
+2018-09-20 10:38:39	whosgonna	so, if they could be as accurate as the weather forcast it would be an improvement.
+2018-09-20 10:38:59	-->	kyern (~Thunderbi@178.72.91.102) has joined #zabbix
+2018-09-20 10:44:38	<--	asaveljevs (~asaveljev@159.148.48.86) has quit (Ping timeout: 245 seconds)
+2018-09-20 10:47:04	<--	wilbury (~otis@real.wilbury.sk) has left #zabbix ("so long.. and thanks for all the fish")
+2018-09-20 10:47:26	<--	vso (~Thunderbi@87.110.183.173) has quit (Quit: vso)
+2018-09-20 10:48:45	<--	rhoekstra (~rhoekstra@a83-162-203-71.adsl.xs4all.nl) has quit (Remote host closed the connection)
+2018-09-20 10:57:51	<--	zetheroo (~eb@home.meteotest.ch) has left #zabbix
+2018-09-20 11:03:38	<--	yurii_zabbix (~yurii@87.110.183.173) has quit (Quit: Konversation terminated!)
+2018-09-20 11:05:13	-->	ios_sos_ (~ios_sos@64.90.72.194) has joined #zabbix
+2018-09-20 11:15:46	-->	fordfrog (~fordfrog@gentoo/developer/fordfrog) has joined #zabbix
+2018-09-20 11:19:15	<--	Guest81098 (~tsglove@12.205.72.46) has quit (Quit: Leaving)
+2018-09-20 11:19:34	-->	tsglove (~tsglove@12.205.72.46) has joined #zabbix
+2018-09-20 11:22:29	[Leeloo]	volter: thanks for your help ;)
+2018-09-20 11:30:15	-->	Croso (4c7a48d1@gateway/web/freenode/ip.76.122.72.209) has joined #zabbix
+2018-09-20 11:30:21	phutchins	Hey all, I have a a node that is connected through a proxy. The ZBX box under Availability is grey even though it does have passive checks on it. It is not red however. It is alerting for zabbix agent unreachable. When the zabbix agent on the client starts up, it says 'cannot send list of active checks to "...": host [hostname] not found'. Connectivity between the nodes (client, proxy, server) all look good.
+2018-09-20 11:30:21	phutchins	Any suggestions where to look next?
+2018-09-20 11:30:48	troffasky	check what hostname you set for the node in zabbix
+2018-09-20 11:30:55	troffasky	[the web interface]
+2018-09-20 11:31:00	Croso	Working with phutchins on the same issue, hostnames nmatch across the board.
+2018-09-20 11:31:03	troffasky	that will be what doesn't match
+2018-09-20 11:31:35	Croso	Even did the old unix, make sure its not an O vs a 0 check lol
+2018-09-20 11:31:42	troffasky	you could cheat and create an Auto registration action
+2018-09-20 11:32:04	Croso	We also have an auto registration action
+2018-09-20 11:32:21	Croso	templates that are being used work for other systems in the same network with the same configuration and OS
+2018-09-20 11:32:30	Richlv	phutchins, passive only or active items on it?
+2018-09-20 11:32:50	Richlv	how long ago was the host added/linked to the template?
+2018-09-20 11:32:52	Croso	Poller process on the proxy are kind of maxed out if that helps
+2018-09-20 11:32:57	phutchins	It has items that are type Zabbix Agent so i believe that means that there are passive items, yes?
+2018-09-20 11:32:59	Richlv	active or passive proxy?
+2018-09-20 11:33:01	Croso	(above 75%)
+2018-09-20 11:33:15	Richlv	phutchins, ok, so let's assume no active items then
+2018-09-20 11:33:32	Richlv	Croso, it should still work ok at 75%, mostly
+2018-09-20 11:34:03	Richlv	ok, waiting for info on all questions i asked so far :)
+2018-09-20 11:34:17	Croso	Error on agent is "no active checks found for hostname" and error on Zabbix proxy is host not found
+2018-09-20 11:34:26	phutchins	Proxy mode is set to 0 so active, It was whatever the default is before but I set it to 0 at recommendation of something I read...
+2018-09-20 11:34:40	phutchins	Richlv: ^
+2018-09-20 11:35:35	phutchins	Yeah, should jsut be passive Items I think. Well, there is one UserParameter item at the bottom of the config on the client. I could remove it however for testing.
+2018-09-20 11:35:44	Croso	@Richlv host has been added and linked to template several times (we've tried removing and readding the host several times).  Timeframe passed is days to minutes.
+2018-09-20 11:36:45	<--	[Leeloo] (500ba945@gateway/web/freenode/ip.80.11.169.69) has quit (Quit: Page closed)
+2018-09-20 11:37:24	Richlv	phutchins, Croso - host assigned to that proxy in the ui?
+2018-09-20 11:37:37	Richlv	are any other hosts monitored though that proxy successfully?
+2018-09-20 11:38:00	Richlv	phutchins, active is the default, so explicitly setting that was redundant (but no harm)
+2018-09-20 11:38:12	Croso	Whats interesting is, we discovered this after the proxy was down for some time, got proxy back up and half the hosts that are configured the same fell right in no issue, and a random selection of the other half are having this issue
+2018-09-20 11:38:15	Richlv	Croso, "no active checks found for hostname" you can ignore if you have no active checks
+2018-09-20 11:38:35	<--	get (219@unaffiliated/get) has quit (Ping timeout: 268 seconds)
+2018-09-20 11:38:35	Richlv	server version, proxy version?
+2018-09-20 11:38:41	phutchins	Richlv: ok good to know.
+2018-09-20 11:40:50	Croso	agent looks to be 2.4.7 and Proxy is 3.2.3.  We dismissed this mismatch as there are quite a few of the identical systems that are working, but could be wrong? *shrug*
+2018-09-20 11:42:21	_ikke_	should be working
+2018-09-20 11:42:28	_ikke_	We've been using 2.4 for a long time on 3.x
+2018-09-20 11:42:33	_ikke_	2.4 agents
+2018-09-20 11:53:47	<--	limace255 (~limboy@178.197.231.240) has quit (Quit: Leaving.)
+2018-09-20 11:54:36	-->	rhoekstra (~rhoekstra@2001:984:3f2f:1:9dbc:7329:c0c9:a748) has joined #zabbix
+2018-09-20 11:57:25	LarryD	Croso - when you say the host names match, does that include capitalization?
+2018-09-20 11:57:37	Croso	Yessir
+2018-09-20 11:57:45	-->	forgotmynick (uid24625@gateway/web/irccloud.com/x-dfzmvyonvnbvdako) has joined #zabbix
+2018-09-20 11:57:56	phutchins	Is there something that we can do to manually check host name? Given they look identical from UI and config :-\
+2018-09-20 11:58:28	LarryD	putchins - One could go do manual queries against the DB, but I would trust Zabbix is displaying what is in the DB...
+2018-09-20 11:58:29	phutchins	The proxy also alerts "cannot send list of active checks to "10.142.X.X": host [myhost] not found"
+2018-09-20 11:58:36	phutchins	LarryD: yeah...
+2018-09-20 11:59:00	LarryD	Is selinux involved?  Have you tried turning off firewall?
+2018-09-20 11:59:09	LarryD	(just for testing)
+2018-09-20 11:59:52	phutchins	LarryD: we have done to a point but let us try it again just to be sure...
+2018-09-20 12:00:02	phutchins	We have other nodes goign through the same proxy that are green FYI
+2018-09-20 12:00:10	phutchins	and the configs between them look the same :-\
+2018-09-20 12:00:53	LarryD	I also have a questions...  stock Zabbix VMware monitoring.  The item "vmware.hv.cpu.usage" is collecting every 5 minutes, but it's getting the exact same value for hours at a time.  Looking at the graphs on vmware shows a lot of variation...  thoughts on where/how to start digging?
+2018-09-20 12:01:47	<--	OliverUK (~OliverUK@151.249.70.90) has quit (Ping timeout: 240 seconds)
+2018-09-20 12:01:49	LarryD	phutchins - have you compared the zabbix_agentd.conf on the 'bad' host to one on a 'good' host?
+2018-09-20 12:02:12	phutchins	yep
+2018-09-20 12:02:14	phutchins	identical
+2018-09-20 12:02:50	phutchins	I've also tried changing the server and ServerActive with IP address instead of DNS name
+2018-09-20 12:03:22	LarryD	Have you deleted the host out of Zabbix and set it back up?
+2018-09-20 12:04:19	phutchins	LarryD: yep. a number of times. We weren't sure if somehow it was getting stuck in the proxy however (or if thats even a thing)
+2018-09-20 12:04:39	phutchins	but it did disappear from the GUI and when we started it back up it registered against the server
+2018-09-20 12:08:39	LarryD	What testing have you done from the proxy since that is what will be talking to that host?  Can you ping that host from the proxy?  Can you ping the proxy from that host?
+2018-09-20 12:09:36	LarryD	You could also configure the host to not use a proxy temporarily to categorically implicate or absolve it...
+2018-09-20 12:10:28	phutchins	Yeah that was my thought as well to test like that. Let me check connectivity once more to confirm...
+2018-09-20 12:10:46	LarryD	troffasky - you're using vmware monitoring...  do you see the CPU values changing with each check or are you getting the same value back for long periods of time?
+2018-09-20 12:11:06	troffasky	yeah saw your Q. LarryD, just checking...
+2018-09-20 12:11:23	LarryD	My value does change, but infrequently...
+2018-09-20 12:12:11	phutchins	LarryD: so from the client, I can telnet to the proxy on port 10050 and 10051. (on 10050, it doesn't keep a connection and I get connection closed by foreign host, however that means that the firewall is open). 
+2018-09-20 12:12:15	troffasky	yeah, definitely changing on the first one i checked
+2018-09-20 12:12:26	phutchins	From the proxy I can connect to both 10050 and 10051 on the client and both connections stay open.
+2018-09-20 12:13:41	<--	rhoekstra (~rhoekstra@2001:984:3f2f:1:9dbc:7329:c0c9:a748) has quit (Remote host closed the connection)
+2018-09-20 12:14:38	Croso	tcpdump shows the proxy and agent are communicating back and forth
+2018-09-20 12:14:53	phutchins	Also, I can connect from the proxy back to the zabbix server on both 10050 and 10051.
+2018-09-20 12:15:42	phutchins	The proxy is configured in the zabbix server with an internal IP so it would only be able to reach out to the server, but not the zabbix server to proxy. Which I think should be fine with our setup.
+2018-09-20 12:16:59	-->	OliverUK (~OliverUK@151.249.70.90) has joined #zabbix
+2018-09-20 12:17:14	<--	OliverUK (~OliverUK@151.249.70.90) has left #zabbix
+2018-09-20 12:18:06	-->	OliverUK (~OliverUK@151.249.70.90) has joined #zabbix
+2018-09-20 12:18:24	phutchins	With the proxy set to active mode, it would be reaching out to the monitoring server. I confirmed that in the config it's set to 0 (active) and on the zabbix server it shows active as well.
+2018-09-20 12:21:21	phutchins	brb, food, then back on it :)
+2018-09-20 12:32:34	LarryD	troffasky - thanks for checking
+2018-09-20 12:32:53	troffasky	i can't find any that are just flat
+2018-09-20 12:33:05	troffasky	apart from one where I *know* it does very little
+2018-09-20 12:41:39	<--	Andris_zbx (~andris@87.110.183.173) has quit (Remote host closed the connection)
+2018-09-20 12:55:21	<--	Croso (4c7a48d1@gateway/web/freenode/ip.76.122.72.209) has quit (Ping timeout: 256 seconds)
+2018-09-20 13:17:28	-->	Croso (4c7a48d1@gateway/web/freenode/ip.76.122.72.209) has joined #zabbix
+2018-09-20 13:17:32	Croso	back!
+2018-09-20 13:22:00	<--	_ADN_ (~username@5.148.34.186) has quit (Ping timeout: 244 seconds)
+2018-09-20 13:30:05	_ikke_	front
+2018-09-20 13:35:16	-->	kodeine (~koen@91.177.79.194) has joined #zabbix
+2018-09-20 13:36:02	phutchins	So connecting the zabbix agent node directly to the monitoring server (going around the proxy) works and turned the box green :)
+2018-09-20 13:36:16	phutchins	So going back through the proxy now trying again with firewall rules to be sure
+2018-09-20 13:36:33	-->	jhammons (~jhammons@unaffiliated/jhammons) has joined #zabbix
+2018-09-20 13:56:58	-->	junixbr (~junixbr@201.45.61.163) has joined #zabbix
+2018-09-20 13:57:28	-->	heaje (~heaje@192.150.9.201) has joined #zabbix
+2018-09-20 13:57:41	<--	Slashman (~Slash@cosium-152-18.fib.nerim.net) has quit (Quit: Leaving)
+2018-09-20 13:59:49	<--	CrummyGummy (~CrummyGum@41.161.9.27) has quit (Read error: No route to host)
+2018-09-20 14:00:10	junixbr	hi there
+2018-09-20 14:00:14	junixbr	I've created a discovery rule to get the disk used size in a windows server following the documentation, but in latest data it doesn't appear 
+2018-09-20 14:00:21	junixbr	some tip?
+2018-09-20 14:00:24	_ikke_	how long did you wait?
+2018-09-20 14:00:33	junixbr	2 hours
+2018-09-20 14:00:40	_ikke_	Do you see it under items of the host?
+2018-09-20 14:00:45	junixbr	I've restarted the zabbix agent service
+2018-09-20 14:01:04	_ikke_	Did you check the discovery tab of the host?
+2018-09-20 14:01:06	junixbr	but even the rule is showed in my latest data
+2018-09-20 14:01:22	junixbr	yes
+2018-09-20 14:01:37	junixbr	yes, the discovery rule appear in tab of the host
+2018-09-20 14:01:47	-->	rhoekstra (~rhoekstra@2001:984:3f2f:1:3962:af84:22e9:e6bd) has joined #zabbix
+2018-09-20 14:01:53	junixbr	and is enabled
+2018-09-20 14:01:57	junixbr	all of them 
+2018-09-20 14:02:39	_ikke_	So no indicator of an error on the discovery rule?
+2018-09-20 14:02:46	junixbr	no errors
+2018-09-20 14:03:13	_ikke_	And in items, do you see any items created by the discovery rule?
+2018-09-20 14:03:38	junixbr	in latest data is showing only my regular items
+2018-09-20 14:03:51	junixbr	yes, I can see the item
+2018-09-20 14:04:22	Richlv	Croso, didn't check it all, did you resolve it?
+2018-09-20 14:04:25	_ikke_	in latest data, in the filter section, select 'show items without data' and 'show details' and click apply
+2018-09-20 14:04:39	Richlv	_ikke_, agents is a different story
+2018-09-20 14:04:46	Richlv	(talking about compat)
+2018-09-20 14:04:50	junixbr	without data is checked
+2018-09-20 14:04:58	Richlv	Croso, in any case, the version mismatch is your problem
+2018-09-20 14:04:59	-->	CrummyGummy (~CrummyGum@41.161.9.27) has joined #zabbix
+2018-09-20 14:05:11	_ikke_	Richlv: agents are backwards compattible, yes
+2018-09-20 14:05:13	junixbr	show details too
+2018-09-20 14:05:16	Richlv	history sync will work, but config sync will mostly/partially fail
+2018-09-20 14:05:22	Richlv	_ikke_, ...until 4.0 :)
+2018-09-20 14:05:24	_ikke_	he
+2018-09-20 14:05:26	_ikke_	heh
+2018-09-20 14:05:32	Richlv	!t compat
+2018-09-20 14:05:32	zabbixbot	compatibility: Zabbix server and proxies must be same major version (2.4.2 and 2.4.4 is ok), ZBXNEXT-2557 asks for proxy backward support; all older agent versions are supported down to 1.0; agents more recent than server/proxy are not supported. See https://www.zabbix.com/documentation/3.2/manual/appendix/compatibility
+2018-09-20 14:05:32	_ikke_	gonna be fun upgrading then
+2018-09-20 14:05:57	_ikke_	so 3.4 agent is not compattible with 4.0 server?
+2018-09-20 14:06:00	Richlv	_ikke_, i think 3.0 or so agents will still work (or was it 3.2?), but older might fail
+2018-09-20 14:06:04	_ikke_	ah ok
+2018-09-20 14:06:08	Richlv	3.4 is quite definitely ok
+2018-09-20 14:06:11	_ikke_	phew
+2018-09-20 14:06:16	Richlv	but 2.4, as i discovered, is not :>
+2018-09-20 14:06:26	Richlv	Croso, see above on version compatibility
+2018-09-20 14:06:36	_ikke_	We just did a push to get all agents upgraded to 3.4
+2018-09-20 14:06:45	_ikke_	(we already rolled it out, but some servers were still left behind)
+2018-09-20 14:06:46	Richlv	Croso, and upgrade your proxy, it will likely help
+2018-09-20 14:13:24	-->	Slashman (~Slash@cosium-152-18.fib.nerim.net) has joined #zabbix
+2018-09-20 14:20:00	-->	Lordn1x (~Lordn1x@unaffiliated/lordn1x) has joined #zabbix
+2018-09-20 14:21:26	-->	simbalion (~simba@45.77.108.203) has joined #zabbix
+2018-09-20 14:22:34	junixbr	_ikke_: I need to do something in agent side?
+2018-09-20 14:22:50	_ikke_	No
+2018-09-20 14:23:42	junixbr	ok, so.. thank you
+2018-09-20 14:23:53	junixbr	I have no idea what to do in this case
+2018-09-20 14:24:03	junixbr	thanks, _ikke_
+2018-09-20 14:24:12	_ikke_	How did you setup the discovery exactly?
+2018-09-20 14:25:08	junixbr	let take some pictures, just a moment
+2018-09-20 14:26:32	junixbr	first of all, I followed this manual: https://www.zabbix.com/documentation/3.4/manual/discovery/low_level_discovery
+2018-09-20 14:26:51	-->	wonderer (~quakeroat@unaffiliated/wonderer) has joined #zabbix
+2018-09-20 14:26:53	_ikke_	There is a lot in there :)
+2018-09-20 14:27:37	junixbr	yes
+2018-09-20 14:27:39	junixbr	lol
+2018-09-20 14:27:49	junixbr	I'll send the images
+2018-09-20 14:30:36	<--	ios_sos_ (~ios_sos@64.90.72.194) has quit (Ping timeout: 260 seconds)
+2018-09-20 14:30:42	-->	ios_sos (~ios_sos@64.90.72.194) has joined #zabbix
+2018-09-20 14:35:34	junixbr	_ikke_: https://24h.rip/SuaxbS30 https://24h.rip/SuaraS30 and https://24h.rip/SuarxS30
+2018-09-20 14:36:39	_ikke_	chekcing
+2018-09-20 14:36:48	junixbr	thanks
+2018-09-20 14:36:56	_ikke_	Did you try to remove the filter first?
+2018-09-20 14:37:28	junixbr	no, I didn't
+2018-09-20 14:37:36	junixbr	let me do this
+2018-09-20 14:39:00	junixbr	hey!!! it works!
+2018-09-20 14:39:04	junixbr	=-O
+2018-09-20 14:39:17	junixbr	my problem was the filter
+2018-09-20 14:40:17	_ikke_	yeah, that was most likely the issue if nothing shows and error but nothing shows up either
+2018-09-20 14:40:23	junixbr	but, is it wrong? how is the correct way to filter?
+2018-09-20 14:40:33	junixbr	ahhhh ok
+2018-09-20 14:41:08	_ikke_	Can you give an example of the key of a discovered item?
+2018-09-20 14:41:36	_ikke_	junixbr: The quotes should be removed
+2018-09-20 14:41:44	junixbr	ok
+2018-09-20 14:42:05	junixbr	I'd like to get information only C, D, F and G
+2018-09-20 14:42:18	junixbr	but it is showing to me the drive E too
+2018-09-20 14:42:23	junixbr	without filter
+2018-09-20 14:42:26	_ikke_	yes
+2018-09-20 14:42:31	_ikke_	so I see you have quotes there
+2018-09-20 14:42:49	_ikke_	they are not necessary and will not work (prevent the filter from working)
+2018-09-20 14:43:08	_ikke_	so just ^(C|D|F|G)
+2018-09-20 14:43:22	<--	rhoekstra (~rhoekstra@2001:984:3f2f:1:3962:af84:22e9:e6bd) has quit (Remote host closed the connection)
+2018-09-20 14:43:24	junixbr	ok
+2018-09-20 14:43:28	junixbr	let me try
+2018-09-20 14:43:37	_ikke_	or ^[CDFG], even shorter :P
+2018-09-20 14:46:14	junixbr	ok
+2018-09-20 14:47:55	<--	Slashman (~Slash@cosium-152-18.fib.nerim.net) has quit (Quit: Leaving)
+2018-09-20 14:48:18	<--	Fr3DBr (~Fr3DBr@freenode/sponsor/hyperfilter.com) has quit (Ping timeout: 252 seconds)
+2018-09-20 14:50:13	_ikke_	Does it work?
+2018-09-20 15:06:05	<--	junixbr (~junixbr@201.45.61.163) has quit (Remote host closed the connection)
+2018-09-20 15:16:37	<--	kyern (~Thunderbi@178.72.91.102) has quit (Remote host closed the connection)
+2018-09-20 15:16:52	-->	kyern (~Thunderbi@178.72.91.102) has joined #zabbix
+2018-09-20 15:21:23	-->	Fr3DBr (~Fr3DBr@freenode/sponsor/hyperfilter.com) has joined #zabbix
+2018-09-20 15:27:21	<--	forgotmynick (uid24625@gateway/web/irccloud.com/x-dfzmvyonvnbvdako) has quit (Quit: Connection closed for inactivity)
+2018-09-20 15:30:07	-->	junixbr (~junixbr@201.45.61.163) has joined #zabbix
+2018-09-20 15:30:17	junixbr	_ikke_: sorry my delay
+2018-09-20 15:30:23	junixbr	is working, thank you man!
+2018-09-20 15:30:55	_ikke_	\o/
+2018-09-20 15:40:27	<--	Lordn1x (~Lordn1x@unaffiliated/lordn1x) has quit (Ping timeout: 252 seconds)
+2018-09-20 15:43:29	<--	KevInNY (~KevInNY@static-96-249-40-147.syrcny.fios.verizon.net) has quit (Read error: Connection reset by peer)
+2018-09-20 15:43:52	-->	KevInNY (~KevInNY@static-96-249-40-147.syrcny.fios.verizon.net) has joined #zabbix
+2018-09-20 15:44:34	<--	theraspberry (~rasp@unaffiliated/theraspberry) has quit (Ping timeout: 240 seconds)
+2018-09-20 15:48:01	-->	theraspberry (~rasp@unaffiliated/theraspberry) has joined #zabbix
+2018-09-20 15:53:11	-->	abiscuola (~abs@host68-224-dynamic.40-79-r.retail.telecomitalia.it) has joined #zabbix
+2018-09-20 15:54:24	<--	abiscuola (~abs@host68-224-dynamic.40-79-r.retail.telecomitalia.it) has quit (Remote host closed the connection)
+2018-09-20 16:01:19	LarryD	 So I've setup one of my vmware hypervisors to be monitored identically both by my prod instance of Zabbix and my alpha instance of Zabbix.  (This is troubleshooting getting the same value repeatedly for CPU, maybe other items.)
+2018-09-20 16:01:37	LarryD	Both instances are getting repeated values, but the two instances are not getting the same repeated value...
+2018-09-20 16:01:39	LarryD	ugh
+2018-09-20 16:03:25	phutchins	Anyone know if it's OK to nuke the DB of the proxy?
+2018-09-20 16:03:57	phutchins	Even after creating our firewall rules from scratch, that host still won't turn green lol
+2018-09-20 16:05:48	LarryD	phutchins - no config data is kept in proxy db... it's all just transient data.  So... yes, you can nuke it and reload the schemas it needs.
+2018-09-20 16:06:02	LarryD	You might lose some data that is in-flight, but that should be all...
+2018-09-20 16:06:26	_ikke_	phutchins: do you get data?
+2018-09-20 16:09:57	Richlv	phutchins, did you get my messages?
+2018-09-20 16:14:26	<--	Fr3DBr (~Fr3DBr@freenode/sponsor/hyperfilter.com) has quit (Ping timeout: 260 seconds)
+2018-09-20 16:16:00	LarryD	So I've cranked up the logging on the vmware collector and it looks like it is processing data for everything on my vcenter and not just the single hypervisor I told it to monitor.  Does that seem legit?
+2018-09-20 16:18:56	Richlv	not aware of the detail. maybe the api doesn't allow selecting the info right away?
+2018-09-20 16:22:48	-->	abiscuola (~abs@host68-224-dynamic.40-79-r.retail.telecomitalia.it) has joined #zabbix
+2018-09-20 16:25:57	-->	Fr3DBr (~Fr3DBr@freenode/sponsor/hyperfilter.com) has joined #zabbix
+2018-09-20 16:26:39	phutchins	Richlv: Maybe I missed your message? What did you say? sorry.
+2018-09-20 16:27:07	phutchins	ah about upgrading the proxy?
+2018-09-20 16:27:43	_ikke_	they need to be the same major version
+2018-09-20 16:27:49	_ikke_	x.y
+2018-09-20 16:29:08	Richlv	yep
+2018-09-20 16:29:14	Richlv	no point debugging it further
+2018-09-20 16:29:20	Richlv	it's just not supported
+2018-09-20 16:29:34	Richlv	data sync might work, but beyond that it's all wacky
+2018-09-20 16:29:39	phutchins	Ok so our server is 3.4.11, proxy is 3.2.3, and the broken agent is 3.0.7 (given this agent worked when directly connecting to the zabbix server)
+2018-09-20 16:30:31	Richlv	upgfrade proxy to 3.4
+2018-09-20 16:30:33	Richlv	upgrade
+2018-09-20 16:30:55	phutchins	kk
+2018-09-20 16:31:58	<--	wonderer (~quakeroat@unaffiliated/wonderer) has quit (Quit: Famous quotes #75: "God gave men both a penis and a brain, but unfortunately not enough blood supply to run both at the same time." - Robin Williams, commenting on the Clinton/Lewinsky affair)
+2018-09-20 16:34:02	zabbixbot	[ZBX-14889] "compact view" checkbox on problems page,  dependency icon encroaches on the trigger name created by Oleksiy Zagorskyi/zalex_ua (https://support.zabbix.com/browse/ZBX-14889)
+2018-09-20 16:35:24	Richlv	zalex, double space after comma ;)
+2018-09-20 16:35:50	-->	_ADN_ (~username@2a02:c7d:5e18:200:b832:3513:3ecb:1bd2) has joined #zabbix
+2018-09-20 16:36:21	zalex	pixel hunter ;)
+2018-09-20 16:49:53	zabbixbot	[ZBX-14890] add a note about specific fields for different item types created by Oleksiy Zagorskyi/zalex_ua (https://support.zabbix.com/browse/ZBX-14890)
+2018-09-20 16:56:22	zabbixbot	[ZBX-14891] Undefined index: show_timeline [jsrpc.php:208 → CScreenSystemStatus->get() → makeSystemStatus() → makeProblemsPopup() in include/blocks.inc.php:556 created by Vladimir Ulogov/vladimir.ulogov@me.com (https://support.zabbix.com/browse/ZBX-14891)
+2018-09-20 16:59:39	-->	rhoekstra (~rhoekstra@2001:984:3f2f:1:b5a0:cc12:e64d:3298) has joined #zabbix
+2018-09-20 17:02:26	<--	junixbr (~junixbr@201.45.61.163) has quit
+2018-09-20 17:10:55	<--	Croso (4c7a48d1@gateway/web/freenode/ip.76.122.72.209) has quit (Ping timeout: 256 seconds)
+2018-09-20 17:30:11	-->	docmax1 (~docmax@x4e32f8dc.dyn.telefonica.de) has joined #zabbix
+2018-09-20 17:32:52	<--	docmax (~docmax@x5ce62a29.dyn.telefonica.de) has quit (Ping timeout: 246 seconds)
+2018-09-20 17:32:52	--	docmax1 is now known as docmax
+2018-09-20 17:39:31	--	irc: disconnected from server
+2018-09-20 17:39:53	--	#zabbix: Cannot join channel (+r) - you need to be identified with services - see https://freenode.net/kb/answer/registration
+2018-09-20 17:50:08	--	#zabbix: Cannot join channel (+r) - you need to be identified with services - see https://freenode.net/kb/answer/registration
+2018-09-20 18:02:07	phutchins	So upgrading the proxy resolved the issue! :D
+2018-09-20 18:02:07	--	#zabbix: Cannot send to nick/channel
+2018-09-20 18:02:13	-->	phutchins (~philip@c-76-122-72-209.hsd1.ga.comcast.net) has joined #zabbix
+2018-09-20 18:02:13	--	Topic for #zabbix is "2.0.21[EOL] 2.2.23 2.4.8[EOL] 3.0.20 3.2.11[EOL] 3.4.12 4.0.0beta1[DON'T USE] | bringBackSpecsZabbix++ | https://www.zabbix.com/zabbix_summit2018 | channel logs: https://www.zabbix.org/irclogs"
+2018-09-20 18:02:13	--	Topic set by Richlv (~rich@103.serveri.lv) on Tue, 11 Sep 2018 15:24:45
+2018-09-20 18:02:13	--	Channel #zabbix: 181 nicks (0 ops, 0 voices, 181 normals)
+2018-09-20 18:02:15	--	Channel created on Sun, 26 Nov 2006 01:42:46
+2018-09-20 18:02:20	phutchins	So upgrading the proxy resolved the issue! :D
+2018-09-20 18:04:16	LarryD	good deal
+2018-09-20 18:04:24	LarryD	I wish my problem were that easy... :)
+2018-09-20 18:12:36	<--	abiscuola (~abs@host68-224-dynamic.40-79-r.retail.telecomitalia.it) has quit (Quit: Leaving)
+2018-09-20 18:15:24	<--	LarryD (4cbac5d6@gateway/web/freenode/ip.76.186.197.214) has quit (Quit: Page closed)
+2018-09-20 18:26:41	zabbixbot	[ZBXNEXT-4745] Change Global regex @Network interfaces for discovery created by Vitaly Zhuravlev/vzhuravlev (https://support.zabbix.com/browse/ZBXNEXT-4745)
+2018-09-20 18:35:24	zabbixbot	[ZBXNEXT-4746] Cisco UCS server template out-of-the-box created by Vitaly Zhuravlev/vzhuravlev (https://support.zabbix.com/browse/ZBXNEXT-4746)
+2018-09-20 18:43:51	<--	hedin (~hedin@81.25.179.168) has quit (Remote host closed the connection)
+2018-09-20 19:04:03	<--	finalbeta1 (~finalbeta@dd576a726.access.telenet.be) has quit (Ping timeout: 252 seconds)
+2018-09-20 19:10:24	<--	heaje (~heaje@192.150.9.201) has quit (Remote host closed the connection)
+2018-09-20 19:43:18	<--	_ADN_ (~username@2a02:c7d:5e18:200:b832:3513:3ecb:1bd2) has quit (Ping timeout: 252 seconds)
+2018-09-20 20:22:20	--	irc: disconnected from server
+2018-09-20 21:03:04	--	#zabbix: Cannot join channel (+r) - you need to be identified with services - see https://freenode.net/kb/answer/registration
+2018-09-20 22:08:07	--	irc: disconnected from server
+2018-09-20 22:25:20	--	#zabbix: Cannot join channel (+r) - you need to be identified with services - see https://freenode.net/kb/answer/registration
+2018-09-21 08:11:43	--	irc: disconnected from server
+2018-09-21 09:19:48	--	irc: disconnected from server
+2018-09-21 09:20:11	--	#zabbix: Cannot join channel (+r) - you need to be identified with services - see https://freenode.net/kb/answer/registration

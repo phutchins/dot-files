@@ -1,0 +1,60 @@
+2017-09-08 09:35:59		New key binding (context "default"): meta-meta-OQ => /bar scroll buflist * e
+2017-09-08 09:35:59		New key binding (context "default"): meta-meta-OP => /bar scroll buflist * b
+2017-09-08 09:35:59		New key binding (context "default"): meta-OQ => /bar scroll buflist * +100%
+2017-09-08 09:35:59		New key binding (context "default"): meta-OP => /bar scroll buflist * -100%
+2017-09-08 09:36:00		Plugins loaded: alias, aspell, buflist, charset, exec, fifo, irc, logger, lua, perl, python, relay, ruby, script, tcl, trigger, xfer
+2017-09-12 10:28:12		Plugins loaded: alias, aspell, buflist, charset, exec, fifo, irc, logger, lua, perl, python, relay, ruby, script, tcl, trigger, xfer
+2017-10-20 08:56:44		Plugins loaded: alias, aspell, buflist, charset, exec, fifo, irc, logger, lua, perl, python, relay, script, tcl, trigger, xfer
+2017-10-20 11:23:08		Plugins loaded: alias, aspell, buflist, charset, exec, fifo, irc, logger, lua, perl, python, relay, script, tcl, trigger, xfer
+2017-11-01 07:57:14		Plugins loaded: alias, aspell, buflist, charset, exec, fifo, irc, logger, lua, perl, python, relay, ruby, script, tcl, trigger, xfer
+2017-11-01 07:57:20	=!=	irc: unable to add temporary server "irc.freenode.net" because the addition of temporary servers with command /connect is currently disabled
+2017-11-01 07:57:20	=!=	irc: if you want to add a standard server, use the command "/server add" (see /help server); if you really want to add a temporary server (NOT SAVED), turn on the option irc.look.temporary_servers
+2017-11-01 07:57:30		irc: server freenode added
+2018-04-25 08:52:31		Plugins loaded: alias, aspell, buflist, charset, exec, fifo, fset, irc, logger, lua, perl, python, relay, ruby, script, tcl, trigger, xfer
+2018-04-25 08:52:41	=!=	Error: unknown command "/servers" (type /help for help)
+2018-04-25 08:52:43		[core]
+2018-04-25 08:52:43		  away     buffer   command  debug    filter   history  key      mouse    plugin   proxy    reload   save     set      upgrade  version  window 
+2018-04-25 08:52:43		  bar      color    cursor   eval     help     input    layout   mute     print    quit     repeat   secure   unset    uptime   wait   
+2018-04-25 08:52:43		[relay]
+2018-04-25 08:52:43		  relay
+2018-04-25 08:52:43		[tcl]
+2018-04-25 08:52:43		  tcl
+2018-04-25 08:52:43		[xfer]
+2018-04-25 08:52:43		  me  xfer
+2018-04-25 08:52:43		[python]
+2018-04-25 08:52:43		  python
+2018-04-25 08:52:43		[charset]
+2018-04-25 08:52:43		  charset
+2018-04-25 08:52:43		[script]
+2018-04-25 08:52:43		  script
+2018-04-25 08:52:43		[buflist]
+2018-04-25 08:52:43		  buflist
+2018-04-25 08:52:43		[aspell]
+2018-04-25 08:52:43		  aspell
+2018-04-25 08:52:43		[trigger]
+2018-04-25 08:52:43		  trigger
+2018-04-25 08:52:43		[fset]
+2018-04-25 08:52:43		  fset
+2018-04-25 08:52:43		[fifo]
+2018-04-25 08:52:43		  fifo
+2018-04-25 08:52:43		[lua]
+2018-04-25 08:52:43		  lua
+2018-04-25 08:52:43		[alias]
+2018-04-25 08:52:43		  AAWAY    AME      ANICK    BYE      CHAT     CLOSE    IG       K        LEAVE    MSGBUF   N        REDRAW   SIGNOFF  UB       V        WC       WII    
+2018-04-25 08:52:43		  alias    AMSG     BEEP     C        CL       EXIT     J        KB       M        MUB      Q        SAY      T        UMODE    W        WI       WW     
+2018-04-25 08:52:43		[irc]
+2018-04-25 08:52:43		  admin       connect     devoice     invite      links       motd        op          quiet       sajoin      service     time        users       whois     
+2018-04-25 08:52:43		  allchan     ctcp        die         ison        list        msg         oper        quote       samode      servlist    topic       version     whowas    
+2018-04-25 08:52:43		  allpv       cycle       disconnect  join        lusers      names       part        reconnect   sanick      squery      trace       voice     
+2018-04-25 08:52:43		  allserv     dcc         halfop      kick        map         nick        ping        rehash      sapart      squit       unban       wallchops 
+2018-04-25 08:52:43		  ban         dehalfop    ignore      kickban     me          notice      pong        remove      saquit      stats       unquiet     wallops   
+2018-04-25 08:52:43		  cap         deop        info        kill        mode        notify      query       restart     server      summon      userhost    who       
+2018-04-25 08:52:43		[perl]
+2018-04-25 08:52:43		  perl
+2018-04-25 08:52:43		[exec]
+2018-04-25 08:52:43		  exec
+2018-04-25 08:52:43		[logger]
+2018-04-25 08:52:43		  logger
+2018-04-25 08:52:43		[ruby]
+2018-04-25 08:52:43		  ruby
+2018-09-20 09:20:19		Plugins loaded: alias, aspell, buflist, charset, exec, fifo, fset, irc, logger, lua, perl, python, relay, ruby, script, tcl, trigger, xfer

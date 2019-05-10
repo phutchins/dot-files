@@ -1,3 +1,7 @@
+# Aliases to write
+# Delete pods with sleep
+# for host in $(kubectl -n storj-staging get pods | awk '{print $1;}'); do echo $host; sleep 15; done
+
 alias ls='ls -G'
 
 alias gaa='git add . --all'
@@ -16,6 +20,7 @@ alias vi='vim'
 alias vim='/usr/local/bin/vim'
 alias gfer='git for-each-ref --sort=-committerdate refs/heads/'
 alias sbrc='source ~/.bashrc'
+alias timeout='gtimeout'
 
 # Chef & Knife
 alias ku='knife cookbook upload'
@@ -71,7 +76,9 @@ awssetenv () { source ~/.aws/$@.sh; }
 
 ## Kubernetes ##
 # Run kubectl and set the namespace by environment variable
-kube () { kubectl --namespace="$KUBECTL_NAMESPACE" $@; }
+kube () { kubectl --namespace=$KUBECTL_NAMESPACE $@; }
+# Copy files out of a container
+# ToDo later: $(kubectl exec <pod-name> [-c <container-name>] -it -- cat <file-path>) > <local-file>
 # Set the kubernetes namespace environment variable
 kns () {
   if [[ -z "$@" ]]; then
@@ -106,7 +113,7 @@ kenv () {
     echo "Kubernetes environment is currently: $CURRENT_CONTEXT";
   else
     PREVIOUS_CONTEXT=$(kubectl config current-context);
-    KUBECTL_OUTPUT=$(kubectl config use-context storj-$@_kubernetes)
+    KUBECTL_OUTPUT=$(kubectl config use-context $@.storj.io)
     CURRENT_CONTEXT=$(kubectl config current-context);
     echo "Kubernetes environment changed from $PREVIOUS_CONTEXT to $CURRENT_CONTEXT";
   fi;
