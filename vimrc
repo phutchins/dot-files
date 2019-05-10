@@ -33,9 +33,9 @@ elseif os == "Darwin"
   let g:Powerline_symbols = 'fancy'
   set rtp+=~/.git_repos/powerline/powerline/bindings/vim
   " Loads powerline from pip install
-  python from powerline.vim import setup as powerline_setup
-  python powerline_setup()
-  python del powerline_setup
+  python3 from powerline.vim import setup as powerline_setup
+  python3 powerline_setup()
+  python3 del powerline_setup
 endif
 
 " Setting up Vundle - the vim plugin bundler
