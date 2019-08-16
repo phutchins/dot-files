@@ -1,6 +1,12 @@
 set nocompatible
 filetype off
 
+" Encryption
+set cm=blowfish2
+set viminfo=
+set nobackup
+set nowritebackup
+
 let os = substitute(system("uname"), "\n", "", "")
 if os == "Linux"
   let powerlineInstalled=1

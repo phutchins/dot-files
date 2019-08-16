@@ -62,6 +62,10 @@ alias pp='python -mjson.tool'
 certinfo () { echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -issuer -subject -dates; }
 getcert () { echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -text; }
 getcertexp () { echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -dates; }
+getallcertexp () {
+  exp=`openssl x509 -noout -text -in $cert | grep "Not After" | cut -d: -f2-10`
+  echo $cert expires $exp
+}
 
 # alias awsenv='echo $AWS_ENVIRONMENT'
 awsenv () {
@@ -118,6 +122,9 @@ kenv () {
     echo "Kubernetes environment changed from $PREVIOUS_CONTEXT to $CURRENT_CONTEXT";
   fi;
 }
+
+# Patch a cronjob to sleep
+#kubectl --context prod-europe-west1 -n jupiter-satellite patch cronjob pg-backup-runner-jupiter-satellite-postgres --type json -p='[{"op": "add", "path": "/spec/jobTemplate/spec/template/spec/containers/0", "value": { "args": [{"-c", "while true; do echo hello; sleep 10; done"}], "command": "/bin/sh" } }]'
 
 # Storj SDK
 sdk-mongo () { mongo $($STORJ_SDK_DIR/scripts/get_local_db.sh); }

@@ -158,8 +158,8 @@ bind '\C-e:end-of-line'
 export AWS_CREDENTIAL_FILE=~/aws/.credentials/aws.credentials
 
 ### GCloud Credentials ###
-export GOOGLE_APPLICATION_CREDENTIALS=/Users/philip/.gcloud/StorjNonProd.json
-export CLOUDSDK_CORE_PROJECT=storj-nonprod
+export GOOGLE_APPLICATION_CREDENTIALS=/Users/philip/.gcloud/storj-prod.json
+export CLOUDSDK_CORE_PROJECT=storj-prod
 export KOPS_STATE_STORE=gs://${CLOUDSDK_CORE_PROJECT}-kops
 
 ### OWSSH ###
